@@ -345,6 +345,107 @@ Iter 20, Testing Accuracy= 0.991
 
 使用传统的神经网络我们可能只能达到 98% 点多的准确率，可以看到，使用卷积神经网络之后，我们可以达到 99% 的准确率，虽说差了百分之一，但是接近 100%，应该说算是比较大的提升。
 
+**补充内容，关于 TensorFlow 中的 CNN 卷积核和池化的计算和参数：**
+
+**（1）卷积**
+
+TensorFlow 中的卷积一般是通过`tf.nn.conv2d()`函数实现的具体可以查看官网：https://www.tensorflow.org/api_docs/python/tf/nn/conv2d
+
+如：`tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')`
+
+```xml
+# tf.nn.conv2d非常方便实现卷积层前向传播算法
+# 第一个输入为当前层的节点矩阵，这个矩阵为四维矩阵，第一维对应一个输入batch，后三维为节点矩阵
+# 例如，input[0,:,:,:]表示第一张图片，input[1,:,:,:]为第二张图片
+# 第二个输入为卷积层的权重，第三个输入为不同维度上的步长
+# 第三个输入提供的是一个长度为4的数组，但是数组第一位和第四位一定要是1，因为卷积层的步长只对矩阵的长和宽有效
+# 第四个输入时填充的方法，TensorFlow只提供两种选择，SAME为全0填充，VALID为不添加
+```
+
+定义如下：
+
+``` python
+def conv2d(input, 
+           filter, 
+           strides,
+           padding, 
+           use_cudnn_on_gpu=None,
+           data_format=None, 
+           name=None)
+```
+
+其中参数分别为： 
+
+- 第一个参数为当前层的矩阵，在卷积神经网络中它是一个四维的矩阵，即 `[batch, image.size.height, image.size.width, depth]`； 
+- 第二个参数为卷积核（滤波器），由 tf.get_variable 函数创建得到； 
+- 第三个参数为不同维度上的步长，其实对应的是第一个参数，虽然它也是四维的，但是第一维和第四维的数一定为 1，因为我们不能间隔的选择 batch 和 depth； 
+- 第四个参数为边界填充方法。
+
+补充，strides：第1，第 4 参数都为 1，中间两个参数为卷积步幅，如：`[1, 1, 1, 1]`、`[1, 2, 2, 1]`
+
+1. 使用 VALID 方式，feature map 的尺寸为       (3,3,1,32) 卷积权重
+
+   ``` xml
+   out_height=ceil(float(in_height-filter_height+1)/float(strides[1])) (28-3+1)/1= 26，(28-3+1)/2=13
+   
+   out_width=ceil(float(in_width-filter_width+1)/float(strides[2])) (28-3+1)/1 = 26，(28-3+1)/2=13
+   
+   ```
+
+2. 使用 SAME 方式，feature map 的尺寸为     (3,3,1,32)卷积权重
+
+   ``` xml
+   out_height= ceil(float(in_height)/float(strides[1]))  28/1=28，28/2=14
+   
+   out_width = ceil(float(in_width)/float(strides[2]))   28/1=28，28/2=14
+   ```
+
+**（2）池化**
+
+TensorFlow 中的池化有几种方式，举个例子，通过 tf.nn.max_pool 函数实现的具体可以查看官网：https://www.tensorflow.org/api_docs/python/tf/nn/max_pool
+
+如：`tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')`）
+
+``` xml
+# tf.nn.max_pool函数实现了平均池化层，用法与avg_pool相似
+# tf.nn.max_pool实现了最大池化层的前向传播过程，参数和conv2d类似
+# ksize提供了过滤器的尺寸，数组第一位和第四位一定要是1，比较常用的是[1,2,2,1]和【1,3,3,1】
+# strides提供了步长，数组第一位和第四位一定要是1
+# padding提供了是否全0填充
+```
+
+定义如下：
+
+``` python
+def max_pool(value, 
+             ksize, 
+             strides, 
+             padding, 
+             data_format="NHWC", 
+             name=None)
+```
+
+其中的参数：
+
+- 第一个参数 value：需要池化的输入，一般池化层接在卷积层后面，所以输入通常是 feature map，依然是[batch, height, width, channels] 这样的 shape
+- 第二个参数 ksize：池化窗口的大小，取一个四维向量，一般是 [1, height, width, 1]，因为我们不想在 batch 和 channels 上做池化，所以这两个维度设为了 1
+- 第三个参数 strides：和卷积类似，窗口在每一个维度上滑动的步长，一般也是 [1, stride,stride, 1]
+- 第四个参数 padding：和卷积类似，可以取 'VALID' 或者 'SAME'
+
+补充， 
+
+- ksize：第 1，第 4 参数都为 1，中间两个参数为池化窗口的大小，如：`[1,1,1,1]`、`[1,2,2,1]`
+
+  实验证明：对于实际的池化后的数据尺寸，ksize没有影响，只是计算的范围不同。
+
+-  strides：第 1，第 4 参数都为 1，中间两个参数为池化窗口的步幅，如：`[1,1,1,1]`、`[1,2,2,1]`
+
+  实验证明：对于实际的池化后的数据尺寸，strides 产生影响，具体的计算方式和卷积中的 strides 相同。
+
+----
+
+
+
 完成卷积神经网络，记录下准确率和 loss 率的变化，完整代码如下：（代码对应：`7-1第六周作业.py`）
 
 ``` python
