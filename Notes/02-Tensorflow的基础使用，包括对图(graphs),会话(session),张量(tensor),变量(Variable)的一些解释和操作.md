@@ -94,7 +94,7 @@ sess.close()
 
 可见，真正要进行运算还需要使用会话操作。
 
-当然也可以使用下面方法，使用该方法不需要 sess.close() 操作：
+PS：Session 最后需要关闭 `sess.close()`，以释放相关的资源。当然也可以使用`with`模块，session 在`with`模块中自动会关闭：
 
 ``` python
 with tf.Session() as sess:
@@ -109,6 +109,23 @@ with tf.Session() as sess:
 ```
 
 PS：关于 with，[Python 中 with用法及原理](https://blog.csdn.net/u012609509/article/details/72911564)
+
+补充：TensorFlow 的这些节点最终将在计算设备（CPUs、GPus）上执行运算。如果是使用 GPU，默认会在第一块 GPU 上执行，如果想在第二块多余的 GPU 上执行：
+
+``` python
+with tf.Session() as sess:
+  with tf.device("/gpu:1"):
+    matrix1 = tf.constant([[3., 3.]])
+    matrix2 = tf.constant([[2.],[2.]])
+    product = tf.matmul(matrix1, matrix2)
+    ...
+```
+
+device 中的各个字符串含义如下：
+
+- `"/cpu:0"`：你机器的 CPU；
+- `"/gpu:0"`：你机器的第一个 GPU；
+- `"/gpu:1"`：你机器的第二个 GPU；
 
 关于 tensor、operation、Session 到底该怎么去理解，我在网上找到了篇博客，值得看看：[tensorflow学习笔记（一）:基本知识之tensor，operation和Session](https://blog.csdn.net/woaidapaopao/article/details/72863591)，现摘录部分内容如下：
 
