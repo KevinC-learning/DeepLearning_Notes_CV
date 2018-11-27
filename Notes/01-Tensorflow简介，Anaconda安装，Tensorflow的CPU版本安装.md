@@ -68,7 +68,30 @@ version).
   - Python 2.7用户：`pip install tensorflow-gpu`
   - Python3.3+用户：`pip3 install tensorflow-gpu`
 
+关于 pip 和 pip3 的区别：
 
+- [python3中的pip和pip3](https://segmentfault.com/q/1010000010354189)
+- [安装python3后使用pip和pip3的区别](https://zhidao.baidu.com/question/494182519781589612.html?qbl=relate_question_1)
+
+> `pip`和`pip3`都在`Python36\Scripts\`目录下，如果同时装有 python2 和 python3，pip 默认给`python2` 用，`pip3`指定给 python3 用。如果只装有 python3，则`pip`和`pip3`是等价的。
+
+> 1、其实这两个命令效果是一样的，没有区别：
+>
+> （1）比如安装库 numpy，pip3  install  numpy 或者 pip  install  numpy：只是当一台电脑同时有多个版本的 Python 的时候，用 pip3 就可以自动区分用 Python3 来安装库。是为了避免和 Python2 发生冲突的。
+>
+> （2）如果你的电脑只安装了 Python3，那么不管用 pip 还是 pip3 都一样的。
+>
+> 2、安装了 python3 之后，会有 pip3
+>
+> （1）使用 pip install XXX ：
+>
+> 新安装的库会放在这个目录下面：python2.7/site-packages；
+>
+> （2）使用 pip3 install XXX ：
+>
+> 新安装的库会放在这个目录下面：python3.6/site-packages；
+>
+> （3）如果使用 python3 执行程序，那么就不能 import python2.7/site-packages 中的库。
 
 
 
