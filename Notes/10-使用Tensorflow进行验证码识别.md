@@ -266,7 +266,7 @@ else:
 
 最后生成：（截图自视频）
 
-![](https://img-1256179949.cos.ap-shanghai.myqcloud.com//20181012142033.png)
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181012142033.png)
 
 ##### 验证码识别
 
@@ -701,14 +701,14 @@ with tf.Session() as sess:
 
 测试结果：
 
-![](https://img-1256179949.cos.ap-shanghai.myqcloud.com//20181012142132.png)
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181012142132.png)
 
 ``` xml
 label: [5] [1] [3] [7]
 predict: [5] [0] [3] [7]
 ```
 
-![](https://img-1256179949.cos.ap-shanghai.myqcloud.com//20181012142044.jpg)
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181012142044.png)
 
 ``` xml
 label: [6] [3] [5] [0]

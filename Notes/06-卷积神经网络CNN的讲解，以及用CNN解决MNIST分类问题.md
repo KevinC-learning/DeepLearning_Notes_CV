@@ -381,7 +381,7 @@ def conv2d(input,
 - 第三个参数为不同维度上的步长，其实对应的是第一个参数，虽然它也是四维的，但是第一维和第四维的数一定为 1，因为我们不能间隔的选择 batch 和 depth； 
 - 第四个参数为边界填充方法。
 
-补充，strides：第1，第 4 参数都为 1，中间两个参数为卷积步幅，如：`[1, 1, 1, 1]`、`[1, 2, 2, 1]`
+补充，strides：第 1，第 4 参数都为 1，中间两个参数为卷积步幅，如：`[1, 1, 1, 1]`、`[1, 2, 2, 1]`
 
 1. 使用 VALID 方式，feature map 的尺寸为       (3,3,1,32) 卷积权重
 
@@ -409,7 +409,7 @@ TensorFlow 中的池化有几种方式，举个例子，通过 tf.nn.max_pool �
 ``` xml
 # tf.nn.max_pool函数实现了平均池化层，用法与avg_pool相似
 # tf.nn.max_pool实现了最大池化层的前向传播过程，参数和conv2d类似
-# ksize提供了过滤器的尺寸，数组第一位和第四位一定要是1，比较常用的是[1,2,2,1]和【1,3,3,1】
+# ksize提供了过滤器的尺寸，数组第一位和第四位一定要是1，比较常用的是[1,2,2,1]和[1,3,3,1]
 # strides提供了步长，数组第一位和第四位一定要是1
 # padding提供了是否全0填充
 ```
@@ -438,7 +438,7 @@ def max_pool(value,
 
   实验证明：对于实际的池化后的数据尺寸，ksize没有影响，只是计算的范围不同。
 
--  strides：第 1，第 4 参数都为 1，中间两个参数为池化窗口的步幅，如：`[1,1,1,1]`、`[1,2,2,1]`
+- strides：第 1，第 4 参数都为 1，中间两个参数为池化窗口的步幅，如：`[1,1,1,1]`、`[1,2,2,1]`
 
   实验证明：对于实际的池化后的数据尺寸，strides 产生影响，具体的计算方式和卷积中的 strides 相同。
 
@@ -474,6 +474,41 @@ def variable_summaries(var):
         tf.summary.histogram('histogram', var)  # 直方图
 ```
 
+关于这里的 Summary 用法补充一些内容。参考【[Tensorflow学习笔记——Summary用法](https://www.cnblogs.com/lyc-seu/p/8647792.html)】
+
+`tf.summary()` 的各类方法，能够保存训练过程以及参数分布图并在tensorboard显示。tf.summary 有诸多函数：
+
+1. tf.summary.scalar
+
+   用来显示标量信息，其格式为：`tf.summary.scalar(tags, values, collections=None, name=None)`
+
+   例如：`tf.summary.scalar('mean', mean)`，一般在画 loss，accuary 时会用到这个函数。
+
+2. tf.summary.histogram
+
+   用来显示直方图信息，其格式为：`tf.summary.histogram(tags, values, collections=None, name=None) `
+
+   例如：` tf.summary.histogram('histogram', var)`，一般用来显示训练过程中变量的分布情况
+
+3. tf.summary.distribution
+
+4. tf.summary.text
+
+5. tf.summary.image
+
+6. tf.summary.audio
+
+7. tf.summary.merge_all
+
+   merge_all 可以将所有 summary 全部保存到磁盘，以便 tensorboard 显示。如果没有特殊要求，一般用这一句就可一显示训练时的各种信息了。格式：`tf.summaries.merge_all(key='summaries')`
+
+8. tf.summary.FileWriter
+
+   指定一个文件用来保存图。格式：`tf.summary.FileWritter(path,sess.graph)`，可以调用其`add_summary()`方法将训练过程数据保存在 filewriter 指定的文件中
+
+9. tf.summary.merge
+
+   格式：`tf.summary.merge(inputs, collections=None, name=None)`，一般选择要保存的信息还需要用到tf.get_collection()函数
 
 
 ``` python
