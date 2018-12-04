@@ -185,6 +185,63 @@ Tensorboard 内容大致如下：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/18-10-8-54883213.jpg)
 
+#### 个人补充：TensorBoard可视化
+
+关于使用可视化工具 TensorBoard 的更多的学习和实践：[Tensorflow的可视化工具Tensorboard的初步使用](https://blog.csdn.net/sinat_33761963/article/details/62433234)
+
+TensorBoard 可以记录与展示以下数据形式： 
+
+（1）标量 Scalars 
+（2）图片 Images 
+（3）音频 Audio 
+（4）计算图 Graph 
+（5）数据分布 Distribution 
+（6）直方图 Histograms 
+（7）嵌入向量 Embeddings
+
+Tensorboard 的可视化过程：
+
+（1）首先肯定是先建立一个 graph，你想从这个 graph 中获取某些数据的信息
+（2）确定要在 graph 中的哪些节点放置 summary operations 以记录信息 
+
+- 使用 `tf.summary.scalar` 记录标量 
+- 使用 `tf.summary.histogram` 记录数据的直方图 
+- 使用 `tf.summary.distribution` 记录数据的分布图 
+- 使用 `tf.summary.image` 记录图像数据 
+- ….
+
+（3）operations 并不会去真的执行计算，除非你告诉他们需要去 run，或者它被其他的需要 run 的 operation 所依赖。而我们上一步创建的这些 summary operations 其实并不被其他节点依赖，因此，我们需要特地去运行所有的 summary 节点。但是呢，一份程序下来可能有超多这样的 summary 节点，要手动一个一个去启动自然是及其繁琐的，因此我们可以使用 `tf.summary.merge_all` 去将所有 summary 节点合并成一个节点，只要运行这个节点，就能产生所有我们之前设置的 summary data。
+（4）使用`tf.summary.FileWriter`将运行后输出的数据都保存到本地磁盘中
+（5）运行整个程序，并在命令行输入运行 tensorboard 的指令，之后打开 web 端可查看可视化的结果。
+
+再看下该文：[tensorboard快速上手，tensorboard可视化普及贴（代码基于tensorflow1.2以上）](http://nooverfit.com/wp/tensorboard%E4%B8%8A%E6%89%8B%EF%BC%8Ctensorboard%E5%8F%AF%E8%A7%86%E5%8C%96%E6%99%AE%E5%8F%8A%E8%B4%B4%EF%BC%88%E4%BB%A3%E7%A0%81%E5%9F%BA%E4%BA%8Etensorflow1-2%E4%BB%A5%E4%B8%8A%EF%BC%89/)
+
+总的来说就是除了可视化模型的 Graph，如果我们需要流图训练过程中动态日志 log，比如现在还没有动态scalars（标量值）数据，所以我们可以定义一些 log summary 的操作（下面是对 cost 和 accuracy 标量打 log）：
+
+``` python
+tf.summary.scalar("cost", cross_entropy)
+tf.summary.scalar("accuracy", accuracy)
+```
+
+定义完成后，我们不需要逐条执行上述操作，只需用 merge 操作一并执行：
+
+``` python
+summary_op = tf.summary.merge_all()
+```
+
+最后在流图真正流动训练的时候，记得执行，并写入上述操作到 log 中：
+
+``` python
+_, summary = sess.run([train_op, summary_op], feed_dict={x: batch_x, y_: batch_y})
+            
+# write log
+writer.add_summary(summary, epoch * batch_count+i)
+```
+
+其中，`add_summary()`方法的第二个参数是 scalar 图标坐标中的 x 轴的值，summary 对象计算出的标量是 y 轴的值，如图：
+
+![](http://nooverfit.com/wp/wp-content/uploads/2018/03/QQ%E6%88%AA%E5%9B%BE20180319163020.png)
+
 #### 手写数字识别Embeding
 
 下面进行手写数字识别 Embeding（[官网链接](https://www.tensorflow.org/guide/embedding)）可视化过程：（对应代码：`5-4tensorboard可视化.py`）

@@ -474,7 +474,7 @@ def variable_summaries(var):
         tf.summary.histogram('histogram', var)  # 直方图
 ```
 
-关于这里的 Summary 用法补充一些内容。参考【[Tensorflow学习笔记——Summary用法](https://www.cnblogs.com/lyc-seu/p/8647792.html)】
+关于这里的 Summary 用法在此顺带补充些内容，方便查阅。参考【[Tensorflow学习笔记——Summary用法](https://www.cnblogs.com/lyc-seu/p/8647792.html)】
 
 `tf.summary()` 的各类方法，能够保存训练过程以及参数分布图并在tensorboard显示。tf.summary 有诸多函数：
 
@@ -508,7 +508,7 @@ def variable_summaries(var):
 
 9. tf.summary.merge
 
-   格式：`tf.summary.merge(inputs, collections=None, name=None)`，一般选择要保存的信息还需要用到tf.get_collection()函数
+   格式：`tf.summary.merge(inputs, collections=None, name=None)`，一般选择要保存的信息还需要用到`tf.get_collection()`函数
 
 
 ``` python
@@ -673,7 +673,53 @@ with tf.Session() as sess:
             print("Iter " + str(i) + ", Testing Accuracy= " + str(test_acc) + ", Training Accuracy= " + str(train_acc))
 ```
 
-运行结果：（用的实验室电脑，显卡 GTX 1080ti 跑的）
+**!!!注：**先看下如下代码，我觉得有问题！
+
+``` python
+with tf.name_scope('softmax'):
+        # 计算输出
+        prediction = tf.nn.softmax(wx_plus_b2)
+
+# 交叉熵代价函数
+with tf.name_scope('cross_entropy'):
+    cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=prediction),name='cross_entropy')
+    tf.summary.scalar('cross_entropy', cross_entropy)
+```
+
+查看 [【TensorFlow】tf.nn.softmax_cross_entropy_with_logits的用法](https://blog.csdn.net/zj360202/article/details/78582895) 该文可以了解到 tf.nn.softmax_cross_entropy_with_logits 函数的 logits 参数为未经过 softmax 的 label 值。
+
+``` python
+import tensorflow as tf  
+
+#our NN's output  
+logits=tf.constant([[1.0,2.0,3.0],[1.0,2.0,3.0],[1.0,2.0,3.0]])  
+```
+
+``` python
+#step1:do softmax  
+y=tf.nn.softmax(logits)  
+#true label  
+y_=tf.constant([[0.0,0.0,1.0],[0.0,0.0,1.0],[0.0,0.0,1.0]])  
+#step2:do cross_entropy  
+cross_entropy = -tf.reduce_sum(y_*tf.log(y))  
+```
+
+两步可以用这一步代替：
+
+``` python
+#do cross_entropy just one step  
+cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_))#dont forget tf.reduce_sum()!!  
+```
+
+但是看到视频里该例子的程序，prediction 已经经历了一次 softmax 呢！
+
+``` python
+prediction = tf.nn.softmax(wx_plus_b2)
+```
+
+然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，这相当于经过两个 softmax 了。（我觉得可能是视频里老师没注意到这点，需要改下，虽然大的值的概率值还是越大，这点上倒是没影响。）
+
+不管那么多了，运行程序，结果如下：（用的实验室电脑，显卡 GTX 1080ti 跑的）
 
 ``` xml
 Extracting MNIST_data\train-images-idx3-ubyte.gz
