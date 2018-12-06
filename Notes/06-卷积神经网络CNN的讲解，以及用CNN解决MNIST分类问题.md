@@ -673,7 +673,7 @@ with tf.Session() as sess:
             print("Iter " + str(i) + ", Testing Accuracy= " + str(test_acc) + ", Training Accuracy= " + str(train_acc))
 ```
 
-**!!!注：**先看下如下代码，我觉得有问题！
+**!!!注：** 先来看看上面的这部分代码，我觉得有问题！
 
 ``` python
 with tf.name_scope('softmax'):
@@ -686,7 +686,7 @@ with tf.name_scope('cross_entropy'):
     tf.summary.scalar('cross_entropy', cross_entropy)
 ```
 
-查看 [【TensorFlow】tf.nn.softmax_cross_entropy_with_logits的用法](https://blog.csdn.net/zj360202/article/details/78582895) 该文可以了解到 tf.nn.softmax_cross_entropy_with_logits 函数的 logits 参数为未经过 softmax 的 label 值。
+阅读 [【TensorFlow】tf.nn.softmax_cross_entropy_with_logits的用法](https://blog.csdn.net/zj360202/article/details/78582895) 该文可以了解到 tf.nn.softmax_cross_entropy_with_logits 函数的 logits 参数传入的是未经过 softmax 的 label 值。
 
 ``` python
 import tensorflow as tf  
@@ -711,15 +711,15 @@ cross_entropy = -tf.reduce_sum(y_*tf.log(y))
 cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_))#dont forget tf.reduce_sum()!!  
 ```
 
-但是看到视频里该例子的程序，prediction 已经经历了一次 softmax 呢！
+但是视频里该例子的程序，prediction 已经经历了一次 softmax 呢！
 
 ``` python
 prediction = tf.nn.softmax(wx_plus_b2)
 ```
 
-然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，这相当于经过两个 softmax 了。（我觉得可能是视频里老师没注意到这点，需要改下，虽然大的值的概率值还是越大，这点上倒是没影响。）
+然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，**这相当于经过两个 softmax 了**。（我觉得可能是视频里老师没注意到这点问题，虽然大的值的概率值还是越大，这点上倒是没影响。）
 
-不管那么多了，运行程序，结果如下：（用的实验室电脑，显卡 GTX 1080ti 跑的）
+不管那么多，运行程序，结果如下：（用的实验室电脑，显卡 GTX 1080ti 跑的）
 
 ``` xml
 Extracting MNIST_data\train-images-idx3-ubyte.gz
