@@ -247,7 +247,7 @@ _, summary = sess.run([train_op, summary_op], feed_dict={x: batch_x, y_: batch_y
 writer.add_summary(summary, epoch * batch_count+i)
 ```
 
-其中，`add_summary()`方法的***第二个参数是 scalar 图标坐标中的 x 轴的值***，summary 对象***计算出的标量是 y 轴的值***，如图：
+其中，`add_summary()`方法的 ***第二个参数是 scalar 图标坐标中的 x 轴的值***，summary 对象 ***计算出的标量是 y 轴的值***，如图：
 
 ![](http://nooverfit.com/wp/wp-content/uploads/2018/03/QQ%E6%88%AA%E5%9B%BE20180319163020.png)
 

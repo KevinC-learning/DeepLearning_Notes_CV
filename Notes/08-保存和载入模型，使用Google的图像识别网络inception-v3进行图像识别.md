@@ -182,6 +182,285 @@ saver.restore(sess,'net/my_net.ckpt')
 
 来调用上节训练好的手写数字识别模型。代码做了个测试，一开始直接将测试集送往没有训练好的网络，得到的测试结果是 0.098，然后调用训练好的网络，测试结果为 0.9166。
 
+---
+
+顺便看下该文：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)，亲测一遍！
+
+**保存TensorFlow模型：**
+
+``` python
+import tensorflow as tf
+
+# 声明两个变量
+v1 = tf.Variable(tf.random_normal([1, 2]), name="v1")
+v2 = tf.Variable(tf.random_normal([2, 3]), name="v2")
+init_op = tf.global_variables_initializer() # 初始化全部变量
+saver = tf.train.Saver() # 声明tf.train.Saver类用于保存模型
+with tf.Session() as sess:
+    sess.run(init_op)
+    print("v1:", sess.run(v1)) # 打印v1、v2的值一会读取之后对比
+    print("v2:", sess.run(v2))
+    saver_path = saver.save(sess, "D:/save/model.ckpt")  # 将模型保存到D盘save/model.ckpt文件
+    print("Model saved in file:", saver_path)
+```
+
+运行结果：
+
+``` xml
+v1: [[-0.22841574  0.6937564 ]]
+v2: [[-0.05212444  0.29719114 -0.31847867]
+ [ 0.7853754  -1.4160358   0.5617032 ]]
+Model saved in file: D:/save/model.ckpt
+```
+
+且在 D 盘 save 文件夹下可以看到如下文件：（程序结束后，会生成四个文件：存储网络结构.meta、存储训练好的参数.data和.index、记录最新的模型checkpoint。*From：[【tensorflow】保存模型、再次加载模型等操作](https://blog.csdn.net/liuxiao214/article/details/79048136)*）
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181206175132.png)
+
+> 这段代码中，通过`saver.save`函数将 TensorFlow 模型保存到了 save/model.ckpt 文件中，这里代码中指定路径为`"D:/save/model.ckpt"`，也就是保存到了 D 盘里面的`save`文件夹中。
+>
+> TensorFlow 模型会保存在后缀为`.ckpt`的文件中。保存后在 save 这个文件夹中会出现 3 个文件，因为TensorFlow会将计算图的结构和图上参数取值分开保存。
+>
+> - checkpoint 
+>
+>   checkpoint 文件保存了一个目录下所有的模型文件列表，这个文件是 tf.train.Saver 类自动生成且自动维护的。在 checkpoint 文件中维护了由一个 tf.train.Saver 类持久化的所有 TensorFlow 模型文件的文件名。当某个保存的 TensorFlow 模型文件被删除时，这个模型所对应的文件名也会从 checkpoint 文件中删除。checkpoint 中内容的格式为 CheckpointState Protocol Buffer。
+>
+> - model.ckpt.meta 
+>
+>   model.ckpt.meta 文件保存了 TensorFlow 计算图的结构，可以理解为神经网络的网络结构。TensorFlow通过元图（MetaGraph）来记录计算图中节点的信息以及运行计算图中节点所需要的元数据。TensorFlow 中元图是由 MetaGraphDef Protocol Buffer 定义的。MetaGraphDef 中的内容构成了 TensorFlow 持久化时的第一个文件。保存 MetaGraphDef 信息的文件默认以 .meta 为后缀名，文件 model.ckpt.meta 中存储的就是元图数据。
+>
+> - model.ckpt
+>
+>   model.ckpt 文件保存了 TensorFlow 程序中每一个变量的取值，这个文件是通过 SSTable 格式存储的，可以大致理解为就是一个（key，value）列表。model.ckpt 文件中列表的第一行描述了文件的元信息，比如在这个文件中存储的变量列表。列表剩下的每一行保存了一个变量的片段，变量片段的信息是通过 SavedSlice Protocol Buffer 定义的。SavedSlice 类型中保存了变量的名称、当前片段的信息以及变量取值。TensorFlow 提供了 tf.train.NewCheckpointReader 类来查看 model.ckpt 文件中保存的变量信息。如何使用 tf.train.NewCheckpointReader 类这里不做说明，自查。
+
+**加载TensorFlow模型：**
+
+``` python
+import tensorflow as tf
+
+# 使用和保存模型代码中一样的方式来声明变量
+v1 = tf.Variable(tf.random_normal([1, 2]), name="v1")
+v2 = tf.Variable(tf.random_normal([2, 3]), name="v2")
+saver = tf.train.Saver() # 声明tf.train.Saver类用于保存模型
+with tf.Session() as sess:
+    saver.restore(sess, "save/model.ckpt") # 即将固化到硬盘中的Session从保存路径再读取出来
+    print("v1:", sess.run(v1)) # 打印v1、v2的值和之前的进行对比
+    print("v2:", sess.run(v2))
+    print("Model Restored")
+```
+
+运行结果：
+
+``` xml
+v1: [[-0.22841574  0.6937564 ]]
+v2: [[-0.05212444  0.29719114 -0.31847867]
+ [ 0.7853754  -1.4160358   0.5617032 ]]
+Model Restored
+```
+
+这段加载模型的代码基本上和保存模型的代码是一样的。也是先定义了 TensorFlow 计算图上所有的运算，并声明了一个 tf.train.Saver 类。两段唯一的不同是，在加载模型的代码中没有运行变量的初始化过程，而是将<u>**变量的值通过已经保存的模型加载进来**</u>。也就是说使用 TensorFlow 完成了一次模型的保存和读取的操作。
+
+如果不希望重复定义图上的运算，也可以直接加载已经持久化的图：
+
+``` python
+import tensorflow as tf
+# 在下面的代码中，默认加载了TensorFlow计算图上定义的全部变量
+# 直接加载持久化的图
+saver = tf.train.import_meta_graph("save/model.ckpt.meta")
+with tf.Session() as sess:
+    saver.restore(sess, "save/model.ckpt")
+    # 通过张量的名称来获取张量
+    print(sess.run(tf.get_default_graph().get_tensor_by_name("v1:0")))
+```
+
+运行结果：
+
+``` xml
+[[-0.22841574  0.6937564 ]]
+```
+
+**有时可能只需要保存或者加载部分变量。** 比如，可能有一个之前训练好的 5 层神经网络模型，但现在想写一个 6 层的神经网络，那么可以将之前 5 层神经网络中的参数直接加载到新的模型，而仅仅将最后一层神经网络重新训练。
+
+为了保存或者加载部分变量，在声明`tf.train.Saver`类时可以提供一个列表来指定需要保存或者加载的变量。比如在加载模型的代码中使用`saver = tf.train.Saver([v1])`命令来构建`tf.train.Saver`类，那么只有变量 v1 会被加载进来。
+
+另外再补充些网上博文，多了解下：*From [TensorFlow模型保存和提取方法](https://blog.csdn.net/marsjhao/article/details/72829635)*
+
+> 1. TensorFlow 通过 tf.train.Saver 类实现神经网络模型的保存和提取。tf.train.Saver 对象 saver 的 save 方法将 TensorFlow 模型保存到指定路径中，saver.save(sess,"Model/model.ckpt")，实际在这个文件目录下会生成 4 个文件。
+>
+>    ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181206194841.png)
+>
+>    checkpoint 文件保存了一个录下多有的模型文件列表，model.ckpt.meta 保存了 TensorFlow 计算图的结构信息，model.ckpt 保存每个变量的取值，此处文件名的写入方式会因不同参数的设置而不同，但加载 restore 时的文件路径名是以 checkpoint 文件中的“model_checkpoint_path”值决定的。
+>
+> 2. 加载这个已保存的 TensorFlow 模型的方法是 `saver.restore(sess,"./Model/model.ckpt")`，加载模型的代码中也要定义 TensorFlow 计算图上的所有运算并声明一个 tf.train.Saver 类，不同的是加载模型时不需要进行变量的初始化，而是将变量的取值通过保存的模型加载进来，注意加载路径的写法。若不希望重复定义计算图上的运算，可直接加载已经持久化的图，`saver =tf.train.import_meta_graph("Model/model.ckpt.meta")`。
+>
+> 3. tf.train.Saver 类也支持在保存和加载时给变量重命名，声明 Saver 类对象的时候使用一个字典 dict 重命名变量即可，{"已保存的变量的名称name": 重命名变量名}，`saver = tf.train.Saver({"v1":u1, "v2": u2})`即原来名称 name 为 v1 的变量现在加载到变量 u1（名称 name 为 other-v1）中。
+>
+> 4. 上一条做的目的之一就是方便使用变量的滑动平均值。如果在加载模型时直接将影子变量映射到变量自身，则在使用训练好的模型时就不需要再调用函数来获取变量的滑动平均值了。载入时，声明 Saver 类对象时通过一个字典将滑动平均值直接加载到新的变量中，saver = tf.train.Saver({"v/ExponentialMovingAverage": v})，另通过 tf.train.ExponentialMovingAverage 的 `variables_to_restore()` 函数获取变量重命名字典。
+>
+>    此外，通过 convert_variables_to_constants 函数将计算图中的变量及其取值通过常量的方式保存于一个文件中。
+>
+> TensorFlow程序实现
+>
+> ``` python
+> # 本文件程序为配合教材及学习进度渐进进行，请按照注释分段执行
+> # 执行时要注意IDE的当前工作过路径，最好每段重启控制器一次，输出结果更准确
+>  
+>  
+> # Part1: 通过tf.train.Saver类实现保存和载入神经网络模型
+>  
+> # 执行本段程序时注意当前的工作路径
+> import tensorflow as tf
+>  
+> v1 = tf.Variable(tf.constant(1.0, shape=[1]), name="v1")
+> v2 = tf.Variable(tf.constant(2.0, shape=[1]), name="v2")
+> result = v1 + v2
+>  
+> saver = tf.train.Saver()
+>  
+> with tf.Session() as sess:
+>     sess.run(tf.global_variables_initializer())
+>     saver.save(sess, "Model/model.ckpt")
+>  
+>  
+> # Part2: 加载TensorFlow模型的方法
+>  
+> import tensorflow as tf
+>  
+> v1 = tf.Variable(tf.constant(1.0, shape=[1]), name="v1")
+> v2 = tf.Variable(tf.constant(2.0, shape=[1]), name="v2")
+> result = v1 + v2
+>  
+> saver = tf.train.Saver()
+>  
+> with tf.Session() as sess:
+>     saver.restore(sess, "./Model/model.ckpt") # 注意此处路径前添加"./"
+>     print(sess.run(result)) # [ 3.]
+>  
+>  
+> # Part3: 若不希望重复定义计算图上的运算，可直接加载已经持久化的图
+>  
+> import tensorflow as tf
+>  
+> saver = tf.train.import_meta_graph("Model/model.ckpt.meta")
+>  
+> with tf.Session() as sess:
+>     saver.restore(sess, "./Model/model.ckpt") # 注意路径写法
+>     print(sess.run(tf.get_default_graph().get_tensor_by_name("add:0"))) # [ 3.]
+>  
+>  
+> # Part4： tf.train.Saver类也支持在保存和加载时给变量重命名
+>  
+> import tensorflow as tf
+>  
+> # 声明的变量名称name与已保存的模型中的变量名称name不一致
+> u1 = tf.Variable(tf.constant(1.0, shape=[1]), name="other-v1")
+> u2 = tf.Variable(tf.constant(2.0, shape=[1]), name="other-v2")
+> result = u1 + u2
+>  
+> # 若直接生命Saver类对象，会报错变量找不到
+> # 使用一个字典dict重命名变量即可，{"已保存的变量的名称name": 重命名变量名}
+> # 原来名称name为v1的变量现在加载到变量u1（名称name为other-v1）中
+> saver = tf.train.Saver({"v1": u1, "v2": u2})
+>  
+> with tf.Session() as sess:
+>     saver.restore(sess, "./Model/model.ckpt")
+>     print(sess.run(result)) # [ 3.]
+>  
+>  
+> # Part5: 保存滑动平均模型
+>  
+> import tensorflow as tf
+>  
+> v = tf.Variable(0, dtype=tf.float32, name="v")
+> for variables in tf.global_variables():
+>     print(variables.name) # v:0
+>  
+> ema = tf.train.ExponentialMovingAverage(0.99)
+> maintain_averages_op = ema.apply(tf.global_variables())
+> for variables in tf.global_variables():
+>     print(variables.name) # v:0
+>                           # v/ExponentialMovingAverage:0
+>  
+> saver = tf.train.Saver()
+>  
+> with tf.Session() as sess:
+>     sess.run(tf.global_variables_initializer())
+>     sess.run(tf.assign(v, 10))
+>     sess.run(maintain_averages_op)
+>     saver.save(sess, "Model/model_ema.ckpt")
+>     print(sess.run([v, ema.average(v)])) # [10.0, 0.099999905]
+>  
+>  
+> # Part6: 通过变量重命名直接读取变量的滑动平均值
+>  
+> import tensorflow as tf
+>  
+> v = tf.Variable(0, dtype=tf.float32, name="v")
+> saver = tf.train.Saver({"v/ExponentialMovingAverage": v})
+>  
+> with tf.Session() as sess:
+>     saver.restore(sess, "./Model/model_ema.ckpt")
+>     print(sess.run(v)) # 0.0999999
+>  
+>  
+> # Part7: 通过tf.train.ExponentialMovingAverage的variables_to_restore()函数获取变量重命名字典
+>  
+> import tensorflow as tf
+>  
+> v = tf.Variable(0, dtype=tf.float32, name="v")
+> # 注意此处的变量名称name一定要与已保存的变量名称一致
+> ema = tf.train.ExponentialMovingAverage(0.99)
+> print(ema.variables_to_restore())
+> # {'v/ExponentialMovingAverage': <tf.Variable 'v:0' shape=() dtype=float32_ref>}
+> # 此处的v取自上面变量v的名称name="v"
+>  
+> saver = tf.train.Saver(ema.variables_to_restore())
+>  
+> with tf.Session() as sess:
+>     saver.restore(sess, "./Model/model_ema.ckpt")
+>     print(sess.run(v)) # 0.0999999
+>  
+>  
+> # Part8: 通过convert_variables_to_constants函数将计算图中的变量及其取值通过常量的方式保存于一个文件中
+>  
+> import tensorflow as tf
+> from tensorflow.python.framework import graph_util
+>  
+> v1 = tf.Variable(tf.constant(1.0, shape=[1]), name="v1")
+> v2 = tf.Variable(tf.constant(2.0, shape=[1]), name="v2")
+> result = v1 + v2
+>  
+> with tf.Session() as sess:
+>     sess.run(tf.global_variables_initializer())
+>     # 导出当前计算图的GraphDef部分，即从输入层到输出层的计算过程部分
+>     graph_def = tf.get_default_graph().as_graph_def()
+>     output_graph_def = graph_util.convert_variables_to_constants(sess,
+>                                                         graph_def, ['add'])
+>  
+>     with tf.gfile.GFile("Model/combined_model.pb", 'wb') as f:
+>         f.write(output_graph_def.SerializeToString())
+>  
+>  
+> # Part9: 载入包含变量及其取值的模型
+>  
+> import tensorflow as tf
+> from tensorflow.python.platform import gfile
+>  
+> with tf.Session() as sess:
+>     model_filename = "Model/combined_model.pb"
+>     with gfile.FastGFile(model_filename, 'rb') as f:
+>         graph_def = tf.GraphDef()
+>         graph_def.ParseFromString(f.read())
+>  
+>     result = tf.import_graph_def(graph_def, return_elements=["add:0"])
+>     print(sess.run(result)) # [array([ 3.], dtype=float32)]
+> 
+> ```
+>
+>
+
+
+
 ### 二、使用Google的图像识别网络inception-v3进行图像识别
 
 先了解下 inception 网络模型，参考博客：
