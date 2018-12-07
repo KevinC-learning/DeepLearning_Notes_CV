@@ -1,4 +1,4 @@
-## 保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别
+##  保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别
 
 ### 一、保存和载入模型
 
@@ -182,11 +182,11 @@ saver.restore(sess,'net/my_net.ckpt')
 
 来调用上节训练好的手写数字识别模型。代码做了个测试，一开始直接将测试集送往没有训练好的网络，得到的测试结果是 0.098，然后调用训练好的网络，测试结果为 0.9166。
 
----
+#### 3、补充内容（加载预训练模型和保存模型，以及fine-tuning）
 
-顺便看下该文：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)，亲测一遍！
+先看看：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)，自己手敲一遍。
 
-**保存TensorFlow模型：**
+**保存TensorFlow模型：** 
 
 ``` python
 import tensorflow as tf
@@ -204,6 +204,44 @@ with tf.Session() as sess:
     print("Model saved in file:", saver_path)
 ```
 
+> **!!!顺便补充**：在常见的神经网络代码中，如果想要在 1000 次迭代后，再保存模型，只需设置`global_step`参数即可
+>
+> ``` python
+> saver.save(sess, './checkpoint_dir/MyModel',global_step=1000)
+> ```
+>
+> 保存的模型文件名称会在后面加`-1000`。
+>
+> 在实际训练中，我们可能会在每 1000 次迭代中保存一次模型数据，但是由于图是不变的，没必要每次都去保存，可以通过如下方式指定不保存图：
+>
+> ``` python
+> saver.save(sess, './checkpoint_dir/MyModel',global_step=step,write_meta_graph=False)
+> ```
+>
+> 另一种比较实用的是，如果你希望每 2 小时保存一次模型，并且只保存最近的 5 个模型文件：
+>
+> ``` python
+> tf.train.Saver(max_to_keep=5, keep_checkpoint_every_n_hours=2)
+> ```
+>
+> 注意：tensorflow 默认只会保存最近的 5 个模型文件，如果你希望保存更多，可以通过`max_to_keep`来指定。
+>
+> 如果我们不对 tf.train.Saver 指定任何参数，默认会保存所有变量。如果你不想保存所有变量，而只保存一部分变量，可以通过指定 variables/collections。在创建 tf.train.Saver 实例时，通过将需要保存的变量构造 list 或者 dictionary，传入到 Saver 中：
+>
+> ``` python
+> import tensorflow as tf
+> w1 = tf.Variable(tf.random_normal(shape=[2]), name='w1')
+> w2 = tf.Variable(tf.random_normal(shape=[5]), name='w2')
+> saver = tf.train.Saver([w1,w2])
+> sess = tf.Session()
+> sess.run(tf.global_variables_initializer())
+> saver.save(sess, './checkpoint_dir/MyModel',global_step=1000)
+> ```
+>
+> 更多内容阅读：[Tensorflow加载预训练模型和保存模型](https://blog.csdn.net/huachao1001/article/details/78501928)，该文还介绍了下 fine-tuning（微调） ，建议看下。
+>
+> PS：代码中 `saver.restore(sess, tf.train.latest_checkpoint('./checkpoint_dir'))` 的 latest_checkpoint 函数为用来自动获取最后一次保存的模型。
+
 运行结果：
 
 ``` xml
@@ -213,7 +251,7 @@ v2: [[-0.05212444  0.29719114 -0.31847867]
 Model saved in file: D:/save/model.ckpt
 ```
 
-且在 D 盘 save 文件夹下可以看到如下文件：（程序结束后，会生成四个文件：存储网络结构.meta、存储训练好的参数.data和.index、记录最新的模型checkpoint。*From：[【tensorflow】保存模型、再次加载模型等操作](https://blog.csdn.net/liuxiao214/article/details/79048136)*）
+且在 D 盘 save 文件夹下可以看到如下文件：（程序结束后，会生成四个文件：存储网络结构 `.meta`、存储训练好的参数 `.data` 和 `.index`、记录最新的模型 checkpoint。*From：[【tensorflow】保存模型、再次加载模型等操作](https://blog.csdn.net/liuxiao214/article/details/79048136)*）
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181206175132.png)
 
@@ -225,13 +263,24 @@ Model saved in file: D:/save/model.ckpt
 >
 >   checkpoint 文件保存了一个目录下所有的模型文件列表，这个文件是 tf.train.Saver 类自动生成且自动维护的。在 checkpoint 文件中维护了由一个 tf.train.Saver 类持久化的所有 TensorFlow 模型文件的文件名。当某个保存的 TensorFlow 模型文件被删除时，这个模型所对应的文件名也会从 checkpoint 文件中删除。checkpoint 中内容的格式为 CheckpointState Protocol Buffer。
 >
+>   **总结：**checkpoint 文件是个文本文件，里面记录了保存的最新的 checkpoint 文件以及其它 checkpoint 文件列表。在 inference 时，可以通过修改这个文件，指定使用哪个 model。
+>
 > - model.ckpt.meta 
 >
 >   model.ckpt.meta 文件保存了 TensorFlow 计算图的结构，可以理解为神经网络的网络结构。TensorFlow通过元图（MetaGraph）来记录计算图中节点的信息以及运行计算图中节点所需要的元数据。TensorFlow 中元图是由 MetaGraphDef Protocol Buffer 定义的。MetaGraphDef 中的内容构成了 TensorFlow 持久化时的第一个文件。保存 MetaGraphDef 信息的文件默认以 .meta 为后缀名，文件 model.ckpt.meta 中存储的就是元图数据。
 >
+>   **总结：**meta 文件保存的是图结构，是 pb（protocol buffer）格式文件，包含变量、op、集合等。
+>
 > - model.ckpt
 >
 >   model.ckpt 文件保存了 TensorFlow 程序中每一个变量的取值，这个文件是通过 SSTable 格式存储的，可以大致理解为就是一个（key，value）列表。model.ckpt 文件中列表的第一行描述了文件的元信息，比如在这个文件中存储的变量列表。列表剩下的每一行保存了一个变量的片段，变量片段的信息是通过 SavedSlice Protocol Buffer 定义的。SavedSlice 类型中保存了变量的名称、当前片段的信息以及变量取值。TensorFlow 提供了 tf.train.NewCheckpointReader 类来查看 model.ckpt 文件中保存的变量信息。如何使用 tf.train.NewCheckpointReader 类这里不做说明，自查。
+>
+>   **总结：**ckpt 文件是二进制文件，保存了所有的 weights、biases、gradients 等变量。在 tensorflow  0.11 之前，保存在`.ckpt`文件中。0.11 后，通过两个文件保存，如：
+>
+>   ``` xml
+>   model.ckpt.data-00000-of-00001
+>   model.ckpt.index
+>   ```
 
 **加载TensorFlow模型：**
 
