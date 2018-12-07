@@ -186,7 +186,7 @@ saver.restore(sess,'net/my_net.ckpt')
 
 先看看：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)，自己手敲一遍。
 
-**保存TensorFlow模型：** 
+**（1）保存TensorFlow模型：** 
 
 ``` python
 import tensorflow as tf
@@ -207,15 +207,49 @@ with tf.Session() as sess:
 > **!!!顺便补充**：在常见的神经网络代码中，如果想要在 1000 次迭代后，再保存模型，只需设置`global_step`参数即可
 >
 > ``` python
-> saver.save(sess, './checkpoint_dir/MyModel',global_step=1000)
+> saver.save(sess, './checkpoin t_dir/MyModel',global_step=1000)
 > ```
 >
-> 保存的模型文件名称会在后面加`-1000`。
+> 保存的模型文件名称会在后面加`-1000`。关于 global_step 的理解，一起来看下该文里的讲解：[TensorFlow学习笔记：Saver与Restore](https://www.jianshu.com/p/b0c789757df6)，在看完文章，并自己亲自实践后，以下是我的理解，先看代码：
+>
+> ``` python
+> import tensorflow as tf
+> v1 = tf.Variable(tf.random_normal([1, 2]), name="v1")
+> init_op = tf.global_variables_initializer()
+> saver = tf.train.Saver(max_to_keep=3)
+> with tf.Session() as sess:
+>     for epoch in range(1, 8):
+>         sess.run(init_op)
+>         print("v1:", sess.run(v1))
+>         saver_path = saver.save(sess, "D:/logs/model.ckpt", global_step=epoch)
+> ```
+>
+> 运行上面代码后，会自动生成最近 3 个 ckpt 文件（因为max_to_keep=3），所以你可以看到：
+>
+> ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181207215549.png)
+>
+> 然后`saver.restore(sess, "D:/11hzb/model.ckpt-6")`恢复的为 epoch 为 6 的那次的参数值，即倒数第二次的参数值。
+>
+> 然后代码改为：
+>
+> ``` python
+> saver = tf.train.Saver(max_to_keep=3)
+> with tf.Session() as sess:
+>     for epoch in range(1, 8):
+>         sess.run(init_op)
+>         print("v1:", sess.run(v1))
+>         saver_path = saver.save(sess, "D:/logs/model.ckpt", global_step=2)
+> ```
+>
+> 或是改为 global_step=3，或是 global_step=4 等等…本地只会生成对应的一个 ckpt 文件，名称为`model.ckpt-x`格式，其中 x 为 global_step 的值。
+>
+> 然后恢复`saver.restore(sess, "D:/11hzb/model.ckpt-2")`，可以看到都是打印的最后一次的模型保存的 v1 的参数值。我在理解是：每次运行到这行`saver_path = saver.save(sess, "D:/11hzb/model.ckpt", global_step=2)`，名称都是这个名称 model.ckpt-2 文件，第二次运行到这里也是这个名称，覆盖上一次；再运行到这，再去覆盖……最后实质保存的其实就是最后一次的参数值。
 >
 > 在实际训练中，我们可能会在每 1000 次迭代中保存一次模型数据，但是由于图是不变的，没必要每次都去保存，可以通过如下方式指定不保存图：
 >
 > ``` python
-> saver.save(sess, './checkpoint_dir/MyModel',global_step=step,write_meta_graph=False)
+> if step % 1000 == 0:
+>     saver.save(sess, './checkpoint_dir/MyModel',global_step=step,write_meta_graph=False)
 > ```
 >
 > 另一种比较实用的是，如果你希望每 2 小时保存一次模型，并且只保存最近的 5 个模型文件：
@@ -267,7 +301,7 @@ Model saved in file: D:/save/model.ckpt
 >
 > - model.ckpt.meta 
 >
->   model.ckpt.meta 文件保存了 TensorFlow 计算图的结构，可以理解为神经网络的网络结构。TensorFlow通过元图（MetaGraph）来记录计算图中节点的信息以及运行计算图中节点所需要的元数据。TensorFlow 中元图是由 MetaGraphDef Protocol Buffer 定义的。MetaGraphDef 中的内容构成了 TensorFlow 持久化时的第一个文件。保存 MetaGraphDef 信息的文件默认以 .meta 为后缀名，文件 model.ckpt.meta 中存储的就是元图数据。
+>   model.ckpt.meta 文件保存了 TensorFlow 计算图的结构，可以理解为神经网络的网络结构。TensorFlow 通过元图（MetaGraph）来记录计算图中节点的信息以及运行计算图中节点所需要的元数据。TensorFlow 中元图是由 MetaGraphDef Protocol Buffer 定义的。MetaGraphDef 中的内容构成了 TensorFlow 持久化时的第一个文件。保存 MetaGraphDef 信息的文件默认以 .meta 为后缀名，文件 model.ckpt.meta 中存储的就是元图数据。
 >
 >   **总结：**meta 文件保存的是图结构，是 pb（protocol buffer）格式文件，包含变量、op、集合等。
 >
@@ -282,7 +316,9 @@ Model saved in file: D:/save/model.ckpt
 >   model.ckpt.index
 >   ```
 
-**加载TensorFlow模型：**
+**（2）加载TensorFlow模型：**
+
+①方法一：
 
 ``` python
 import tensorflow as tf
@@ -308,6 +344,15 @@ Model Restored
 ```
 
 这段加载模型的代码基本上和保存模型的代码是一样的。也是先定义了 TensorFlow 计算图上所有的运算，并声明了一个 tf.train.Saver 类。两段唯一的不同是，在加载模型的代码中没有运行变量的初始化过程，而是将<u>**变量的值通过已经保存的模型加载进来**</u>。也就是说使用 TensorFlow 完成了一次模型的保存和读取的操作。
+
+> 在恢复的代码中，图中的变量什么的都差不多(和保存模型来对比)，但是这段代码中没有变量的初始化过程，这里需要注意的是，变量的值是通过已经保存的模型加载进来。变量名不需要一模一样，但是名字"name"需要一样，变量的初始值形状一样就行。也就是说，最后从保存的模型中恢复的时候，是按照 name 参数的名字来对应找的。
+> 然而这样的方式是重复定义了计算图上面的基本运算。你必须定义和原来的一 样的代码才能够得到存储的东西,使用非常受限制，在一些简单的地方使用这个方式是很好的。 
+>
+> 还有一种方法就是**不重新定义图的运算，直接加载已经持久化的图**。这种方法更加灵活，但是也有点小复杂。
+>
+> *From：[模型的保存与恢复（上）基本操作](https://blog.csdn.net/xierhacker/article/details/58637829)* 
+
+②方法二
 
 如果不希望重复定义图上的运算，也可以直接加载已经持久化的图：
 
