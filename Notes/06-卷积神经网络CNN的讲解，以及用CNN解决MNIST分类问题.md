@@ -91,7 +91,7 @@ PS：关于卷积核池化及 padding 在 TensorFlow 中的操作是怎样的，
 
 **!!!补充：** 关于 CNN 中的 padding，表示有在网上找了些博客看看，现摘入如下，以便随时查阅。
 
-**Convolution Arithmetic**
+**Convolution Arithmetic**（卷积运算）
 
 输入的尺寸为 i，卷积核大小为 k，strides 的大小为 s，padding 的大小为 p，输出的尺寸为 o，只考虑卷积核和输入的 x 和 y 相等的情况。
 
@@ -140,7 +140,17 @@ PS：关于卷积核池化及 padding 在 TensorFlow 中的操作是怎样的，
 
   > *A technical report on convolution arithmetic in the context of deep learning.*
   >
-  > PS：该项目下有卷积 Convolution、转置卷积 Transposed convolution、空洞卷积 Dilated convolution 以及不同 padding、strides 情况下的动画。
+  > PS1：该项目下有卷积 Convolution、转置卷积 Transposed convolution、空洞卷积 Dilated convolution 以及不同 padding、strides 情况下的动画。
+
+更多关于卷积和转置卷积的理解来看看这篇文章[CNN中卷积层与转置卷积层的关系（转置卷积又称反卷积、分数步长卷积）](https://blog.csdn.net/dugudaibo/article/details/83109814),其中，对于转置卷积中的输入中间有插入 0 的解释，可以看下文章 2.5 节内容，摘入部分：
+
+由于转置卷积的步长是直接卷积的倒数，因此当直接卷积的步长 s>1 的时候，那么转置卷积的步长就会是分数，这也是转置卷积又称为分数步长卷积的原因。在前面例子中，我们所处理的都是直接卷积步长为 1 的例子，所以可以认为直接卷积与转置卷积的步长相等。当转置卷积的步长小于 1 的时候，我们可以通过下面的例子有一个直接的了解：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181216142438.png)
+
+如上图是一个输入 feature map 为 5×5 ，卷积核大小为 3×3，步长 s=2 的直接卷积的转置卷积，此时的转置卷积的输入是在 2×2 的矩阵间进行插孔得到的。首先计算此时转置卷积输出的大小，我们发现与之前的计算方法是一样的：W1=S(W2−1)−2P+F=2×(2−1)−2×0+3=5，果然通过之前推导出的公式计算出了与上图相同的结果，这时我们计算下转置卷积中 padding 的大小：P^T=F−P−1=3−0−1=2。
+
+很明显 padding 的计算结果也是符合上面的公式要求的。之后就是最关键的部分了，如何体现出步长是分数步长。在原始的卷积中插入数字 0，这使得内核以比单位步幅的速度移动慢，具体的在输入的每两个元素之间插入 s−1 个 0。所以此时转置卷积的输入尺寸大小由原来的 W2 变为 W2+(W2−1)(s−1)。
 
 #### 权值共享
 
