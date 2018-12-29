@@ -251,6 +251,22 @@ writer.add_summary(summary, epoch * batch_count+i)
 
 ![](http://nooverfit.com/wp/wp-content/uploads/2018/03/QQ%E6%88%AA%E5%9B%BE20180319163020.png)
 
+关于图中 Smoothing 顺带提下，它的大小是指什么意思呢？参看该文：[tensorboard 界面smooth参数实现](https://dingguanglei.com/tensorboard-xia-smoothgong-neng-tan-jiu/)
+
+其实就是指的作图时曲线的平滑程度。调整 Smoothing 参数，控制曲线平滑处理，数值越小越接近实际值，波动大；数值越大曲线越平缓。如果不平滑处理的话，有些曲线波动很大，难以看出趋势。0 就是不平滑处理，1 就是最平滑。例如：
+
+当`smooth = 0` 时：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229213044.png)
+
+当`smooth = 0.5` 时：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229213112.png)
+
+当`smooth = 0.9` 时：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229213134.png)
+
 #### 手写数字识别Embeding
 
 下面进行手写数字识别 Embeding（[官网链接](https://www.tensorflow.org/guide/embedding)）可视化过程：（对应代码：`5-4tensorboard可视化.py`）

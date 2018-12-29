@@ -1,5 +1,7 @@
 # TensorFlow学习
 
+## 前言
+
 主要来源和参考的资料为：炼数成金视频《深度学习框架TensorFlow学习与应用》以及补充了一些网上的博文内容。
 
 视频目录：
@@ -61,7 +63,7 @@
 - [03-Tensorflow线性回归以及分类的简单使用](/Notes/03-Tensorflow线性回归以及分类的简单使用.md)
 - [04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](/Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)
 - [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](/Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)
-- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题-](/Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)
+- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](/Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)
 - [07-递归神经网络LSTM的讲解，以及LSTM网络的使用](/Notes/07-递归神经网络LSTM的讲解，以及LSTM网络的使用.md)
 - [08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](/Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)
 - [09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别](/Notes/09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别.md)
@@ -69,11 +71,73 @@
 - [11-Tensorflow在NLP中的使用(一)](/Notes/11-Tensorflow在NLP中的使用\(一\).md)
 - [12-Tensorflow在NLP中的使用(二)](/Notes/12-Tensorflow在NLP中的使用\(二\).md)
 
-----
+## 笔记说明
 
-个人补充内容：
+1、在 [03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md) 中（二）节开始以手写数字识别 MNIST 例子来讲解，关于 MNIST  的内容还可以看看该 README 下面的。
 
-①关于手写数字识别 MNIST
+2、发现了问题：在 [04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md) 中（三）节开始的代码`4-1交叉熵.py`，可以注意到如下代码：
+
+``` python
+# 创建一个简单的神经网络
+W = tf.Variable(tf.zeros([784, 10]))
+b = tf.Variable(tf.zeros([10]))
+prediction = tf.nn.softmax(tf.matmul(x, W) + b)
+
+# 二次代价函数
+# loss = tf.reduce_mean(tf.square(y-prediction))
+# 这里使用对数释然代价函数tf.nn.softmax_cross_entropy_with_logits()来表示跟softmax搭配使用的交叉熵
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=prediction))
+```
+
+我觉得这里是有问题的，问题在哪呢？先看[【TensorFlow】tf.nn.softmax_cross_entropy_with_logits的用法](https://blog.csdn.net/zj360202/article/details/78582895)该文，可以了解到 `tf.nn.softmax_cross_entropy_with_logits` 函数的 logits 参数传入的是未经过 softmax 的 label 值。
+
+``` python
+import tensorflow as tf  
+
+#our NN's output  
+logits=tf.constant([[1.0,2.0,3.0],[1.0,2.0,3.0],[1.0,2.0,3.0]])  
+```
+
+``` python
+#step1:do softmax  
+y=tf.nn.softmax(logits)  
+#true label  
+y_=tf.constant([[0.0,0.0,1.0],[0.0,0.0,1.0],[0.0,0.0,1.0]])  
+#step2:do cross_entropy  
+cross_entropy = -tf.reduce_sum(y_*tf.log(y))  
+```
+
+两步可以用这一步代替：
+
+``` python
+#do cross_entropy just one step  
+cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_))#dont forget tf.reduce_sum()!! 
+```
+
+但`prediction = tf.nn.softmax(tf.matmul(x, W) + b)`这里的 prediction 已经经历了一次 softmax，然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，这相当于经过两个 softmax 了（虽然大的值的概率值还是越大，这点上倒是没影响。）
+
+注1：好像后面的笔记中程序代码都是这样的，我觉得可能是视频讲解老师没注意到这点问题。另外，在该文 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 的笔记中，我也记录了该问题。
+
+注2：关于 softmax、softmax loss、cross entropy 的理解，请看网上该文 [卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)，讲解地非常清楚。【荐】
+
+另外，关于在 TensorFlow 中有哪些损失函数的实现呢？看看该文：[tensorflow API:tf.nn.softmax_cross_entropy_with_logits()等各种损失函数](https://blog.csdn.net/NockinOnHeavensDoor/article/details/80139685)
+
+3、在 [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](./Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md) 该文可以学习到：
+
+- 用例子演示如何使结构的可视化
+- 参数细节的可视化，绘制各个参数变化情况
+- 补充内容：可视化工具 TensorBoard 更多使用和细节★（这部分会不断补充和更新的…）
+
+4、在 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 该文可以学习到：
+
+- 卷积神经网络 CNN（包括局部感受野、权值共享、卷积、池化）
+- 补充内容：参数数量的计算（以 LeNet-5 为例子）
+- 补充内容：TensorFlow 中的 Padding 到底是怎样的？★ （这个认真看下~）
+- 补充内容：TensorFlow 中的 Summary 的用法
+
+
+
+## 手写数字识别 MNIST
 
 - [MNIST数据集二进制格式转换为图片](other/MNIST数据集二进制格式转换为图片.md)
 - [CNN实现MNIST手写数字识别](https://blog.csdn.net/lijiecao0226/article/details/78379110)
