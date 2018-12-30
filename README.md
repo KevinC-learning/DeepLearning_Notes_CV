@@ -58,18 +58,18 @@
 
 《深度学习框架Tensorflow学习与应用》笔记：
 
-- [01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装](/Notes/01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装.md)
-- [02-Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作](/Notes/02-Tensorflow的基础使用，包括对图\(graphs\),会话\(session\),张量\(tensor\),变量\(Variable\)的一些解释和操作.md)
-- [03-Tensorflow线性回归以及分类的简单使用](/Notes/03-Tensorflow线性回归以及分类的简单使用.md)
-- [04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](/Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)
-- [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](/Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)
-- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](/Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)
-- [07-递归神经网络LSTM的讲解，以及LSTM网络的使用](/Notes/07-递归神经网络LSTM的讲解，以及LSTM网络的使用.md)
-- [08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](/Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)
-- [09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别](/Notes/09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别.md)
-- [10-使用Tensorflow进行验证码识别](/Notes/10-使用Tensorflow进行验证码识别.md)
-- [11-Tensorflow在NLP中的使用(一)](/Notes/11-Tensorflow在NLP中的使用\(一\).md)
-- [12-Tensorflow在NLP中的使用(二)](/Notes/12-Tensorflow在NLP中的使用\(二\).md)
+- [01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装](./Notes/01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装.md)
+- [02-Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作](./Notes/02-Tensorflow的基础使用，包括对图\(graphs\),会话\(session\),张量\(tensor\),变量\(Variable\)的一些解释和操作.md)
+- [03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)
+- [04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)
+- [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](./Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)
+- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)
+- [07-递归神经网络LSTM的讲解，以及LSTM网络的使用](./Notes/07-递归神经网络LSTM的讲解，以及LSTM网络的使用.md)
+- [08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](./Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)
+- [09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别](./Notes/09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别.md)
+- [10-使用Tensorflow进行验证码识别](./Notes/10-使用Tensorflow进行验证码识别.md)
+- [11-Tensorflow在NLP中的使用(一)](./Notes/11-Tensorflow在NLP中的使用\(一\).md)
+- [12-Tensorflow在NLP中的使用(二)](./Notes/12-Tensorflow在NLP中的使用\(二\).md)
 
 ## 笔记说明
 
@@ -116,7 +116,7 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 但`prediction = tf.nn.softmax(tf.matmul(x, W) + b)`这里的 prediction 已经经历了一次 softmax，然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，这相当于经过两个 softmax 了（虽然大的值的概率值还是越大，这点上倒是没影响。）
 
-注1：好像后面的笔记中程序代码都是这样的，我觉得可能是视频讲解老师没注意到这点问题。另外，在该文 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 的笔记中，我也记录了该问题。
+注1：好像后面的笔记中程序代码都是这样的，我觉得可能视频讲解老师没注意到这点问题。另外，在该文 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 的笔记中，我也记录了该问题。
 
 注2：关于 softmax、softmax loss、cross entropy 的理解，请看网上该文 [卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)，讲解地非常清楚。【荐】
 
@@ -206,3 +206,8 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 - [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
 - [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
 
+## 公众号
+
+欢迎关注公众号：一个程序员的随想
+
+![](./wechat.jpg)
