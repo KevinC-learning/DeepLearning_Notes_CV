@@ -1,5 +1,8 @@
 # TensorFlow学习
 
+[![license](https://img.shields.io/badge/license-Attribution--NonCommercial%204.0%20-brightgreen.svg)](https://github.com/doocs/advanced-java/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](http://makeapullrequest.com)
+
 ## 前言
 
 主要来源和参考的资料为：炼数成金视频《深度学习框架TensorFlow学习与应用》以及补充了一些网上的博文内容。
@@ -206,8 +209,18 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 - [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
 - [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
 
-## 公众号
+## License
+
+本作品采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/) 进行许可。使用者可以对本创作进行转载、节选、混编、二次创作，但不得运用于商业目的，且使用时须进行署名，采用本创作的内容必须同样采用本协议进行授权。
+
+[![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+## 关于我
 
 欢迎关注公众号：一个程序员的随想
 
 ![](./wechat.jpg)
+
+<div align="right">
+        <a href="#Tensorflow学习">回到顶部</a>
+</div>
