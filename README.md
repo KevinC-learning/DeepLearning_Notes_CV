@@ -24,14 +24,14 @@
 第12周 Tensorflow在NLP中的使用(二)
 ```
 
-—— 说明：实际第 5 周讲的是 Tensorborad 结构可视化，第 6 周讲的是 CNN。修正：下载链接里的文件夹顺序，我已修正。
+说明：实际第 5 周讲的是 Tensorborad 结构可视化，第 6 周讲的是 CNN。修正：下载链接里的文件夹顺序，我已修正。
 
-1）在线观看：
+(1) 在线观看：
 
 - YouTube：[tensorflow教程（十课）](https://www.youtube.com/watch?v=eAtGqz8ytOI&list=PLjSwXXbVlK6IHzhLOMpwHHLjYmINRstrk&index=2&t=0s)
 - 或 B 站：[《深度学习框架TensorFlow学习与应用》](https://www.bilibili.com/video/av20542427/)
 
-2）下载：
+(2) 下载：
 
 - 《深度学习框架Tensorflow学习与应用》（含视频+代码+课件，视频总时长：13小时31分钟）
 
@@ -119,9 +119,13 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 但`prediction = tf.nn.softmax(tf.matmul(x, W) + b)`这里的 prediction 已经经历了一次 softmax，然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，这相当于经过两个 softmax 了（虽然大的值的概率值还是越大，这点上倒是没影响。）
 
+关于 softmax_cross_entropy_with_logits，这篇文章也有提到【[TensorFlow入门](https://statusrank.xyz/2018/08/16/TensorFlow%E5%85%A5%E9%97%A8/)】：
+
+> 这个函数内部自动计算 softmax 函数，然后在计算代价损失,所以logits必须是未经 softmax 处理过的函数，否则会造成错误。
+
 注1：好像后面的笔记中程序代码都是这样的，我觉得可能视频讲解老师没注意到这点问题。另外，在该文 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 的笔记中，我也记录了该问题。
 
-注2：关于 softmax、softmax loss、cross entropy 的理解，请看网上该文 [卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)，讲解地非常清楚。【荐】
+注2：对 softmax、softmax loss、cross entropy 不了解，可以看下网上该文 [卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)，讲解地非常清楚。【荐】
 
 另外，关于在 TensorFlow 中有哪些损失函数的实现呢？看看该文：[tensorflow API:tf.nn.softmax_cross_entropy_with_logits()等各种损失函数](https://blog.csdn.net/NockinOnHeavensDoor/article/details/80139685)
 
