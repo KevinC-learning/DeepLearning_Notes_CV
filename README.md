@@ -119,7 +119,7 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 但`prediction = tf.nn.softmax(tf.matmul(x, W) + b)`这里的 prediction 已经经历了一次 softmax，然后又经过了 tf.nn.softmax_cross_entropy_with_logits 函数，这相当于经过两个 softmax 了（虽然大的值的概率值还是越大，这点上倒是没影响。）
 
-关于 softmax_cross_entropy_with_logits，这篇文章也有提到【[TensorFlow入门](https://statusrank.xyz/2018/08/16/TensorFlow%E5%85%A5%E9%97%A8/)】：
+关于 softmax_cross_entropy_with_logits，这篇文章也有提到【[TensorFlow入门](https://statusrank.xyz/articles/31693f5f.html)】：
 
 > 这个函数内部自动计算 softmax 函数，然后在计算代价损失,所以logits必须是未经 softmax 处理过的函数，否则会造成错误。
 
