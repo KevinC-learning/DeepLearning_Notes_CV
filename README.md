@@ -146,7 +146,7 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 ## 手写数字识别 MNIST
 
-- [MNIST数据集二进制格式转换为图片](other/MNIST数据集二进制格式转换为图片.md)
+- [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [CNN实现MNIST手写数字识别](https://blog.csdn.net/lijiecao0226/article/details/78379110)
 
   > 通过该文重点体会下网络结构卷积、池化过程，feature map 以及深度的变化。
