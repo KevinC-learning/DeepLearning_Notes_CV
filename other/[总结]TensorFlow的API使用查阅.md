@@ -22,60 +22,33 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 
 ### (0) 快速查阅API
 
-[(1) tf.placeholder函数](#(1) tf.placeholder函数)
-
-[(2) tf.nn.conv2d是怎样实现卷积的](#(2) tf.nn.conv2d是怎样实现卷积的)
-
-[(3) tf.nn.max_pool实现池化操作](#(3) tf.nn.max_pool实现池化操作)
-
-[(4) tf.nn.relu函数](#(4) tf.nn.relu函数)
-
-[(5) tf.reshape、tf.get_shape和set_shape函数](#(5) tf.reshape、tf.get_shape和set_shape函数)
-
-[(6) tf.nn.dropout函数](#(6) tf.nn.dropout函数)
-
-[(7) tf.argmax函数](#(7) tf.argmax函数)
-
-[(8) tf.cast类型转换函数](#(8) tf.cast类型转换函数)
-
-[(9) tf.train.AdamOptimizer函数](#(9) tf.train.AdamOptimizer函数)
-
-[(10) tf.Graph()函数](#(10) tf.Graph()函数)
-
-[(11) tf.nn.softmax_cross_entropy_with_logits的用法](#(11) tf.nn.softmax_cross_entropy_with_logits的用法)
-
-[(12) tf.dynamic_partition函数，分拆数组](#(12) tf.dynamic_partition函数，分拆数组)
-
-[(13) tf.reduce_mean等函数](#(13) tf.reduce_mean等函数)
-
-[(14) apply_gradients 和 compute_gradients](#(14) apply_gradients 和 compute_gradients)
-
-[(15) tf.trainable_variables和tf.all_variables的对比](#(15) tf.trainable_variables和tf.all_variables的对比)
-
-[(16) tf.control_dependencies](#(16) tf.control_dependencies)
-
-[(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别](#(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别)
-
-[(18) tf.InteractiveSession()与tf.Session()的区别](#(18) tf.InteractiveSession()与tf.Session()的区别)
-
-[(19) tf.get_variable和tf.Variable区别](#(19) tf.get_variable和tf.Variable区别)
-
-[(20) tf.where()用法](#(20) tf.where()用法)
-
-[(21) tf.less()用法](#(21) tf.less()用法)
-
-[(22) tf.app.run()](#(22) tf.app.run())
-
-[(23) tensorflow中的参数初始化方法](#(23) tensorflow中的参数初始化方法)
-
-[(24) 优化器](#(24) 优化器)
-
-[(25) 损失函数(或代价函数)](#(25) 损失函数(或代价函数))
-
-[(26) 设置自动衰减的学习率](#(26) 设置自动衰减的学习率)
-
-[(27) 命令行参数](#(27) 命令行参数)
-
+- [(1) tf.placeholder函数](#(1)-tf.placeholder函数)
+- [(2) tf.nn.conv2d是怎样实现卷积的](#(2)-tf.nn.conv2d是怎样实现卷积的)
+- [(3) tf.nn.max_pool实现池化操作](#(3)-tf.nn.max_pool实现池化操作)
+- [(4) tf.nn.relu函数](#(4) tf.nn.relu函数)
+- [(5) tf.reshape、tf.get_shape和set_shape函数](#(5) tf.reshape、tf.get_shape和set_shape函数)
+- [(6) tf.nn.dropout函数](#(6) tf.nn.dropout函数)
+- [(7) tf.argmax函数](#(7) tf.argmax函数)
+- [(8) tf.cast类型转换函数](#(8) tf.cast类型转换函数)
+- [(9) tf.train.AdamOptimizer函数](#(9) tf.train.AdamOptimizer函数)
+- [(10) tf.Graph()函数](#(10) tf.Graph()函数)
+- [(11) tf.nn.softmax_cross_entropy_with_logits的用法](#(11) tf.nn.softmax_cross_entropy_with_logits的用法)
+- [(12) tf.dynamic_partition函数，分拆数组](#(12) tf.dynamic_partition函数，分拆数组)
+- [(13) tf.reduce_mean等函数](#(13) tf.reduce_mean等函数)
+- [(14) apply_gradients 和 compute_gradients](#(14) apply_gradients 和 compute_gradients)
+- [(15) tf.trainable_variables和tf.all_variables的对比](#(15) tf.trainable_variables和tf.all_variables的对比)
+- [(16) tf.control_dependencies](#(16) tf.control_dependencies)
+- [(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别](#(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别)
+- [(18) tf.InteractiveSession()与tf.Session()的区别](#(18) tf.InteractiveSession()与tf.Session()的区别)
+- [(19) tf.get_variable和tf.Variable区别](#(19) tf.get_variable和tf.Variable区别)
+- [(20) tf.where()用法](#(20) tf.where()用法)
+- [(21) tf.less()用法](#(21) tf.less()用法)
+- [(22) tf.app.run()](#(22) tf.app.run())
+- [(23) tensorflow中的参数初始化方法](#(23) tensorflow中的参数初始化方法)
+- [(24) 优化器](#(24)-优化器)
+- [(25) 损失函数(或代价函数)](#(25)-损失函数(或代价函数))
+- [(26) 设置自动衰减的学习率](#(26)-设置自动衰减的学习率)
+- [(27) 命令行参数](#(27) 命令行参数)
 
 > *参考来源：CSDN 博主[zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
 
