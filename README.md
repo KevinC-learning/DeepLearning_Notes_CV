@@ -70,7 +70,8 @@
 - [12-Tensorflow在NLP中的使用(二)](./Notes/12-Tensorflow在NLP中的使用\(二\).md)
 
 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结.md](./other/[转]TensorFlow的理解和总结.md)
-TensorFlow 的 API 使用记录，方便查阅：[TensorFlow的API使用查阅](./other/[总结]TensorFlow的API使用查阅.md)
+
+对 TensorFlow 的 API 使用记录下来，方便查阅：[TensorFlow的API使用查阅](./other/[总结]TensorFlow的API使用查阅.md) 
 
 ## 笔记说明
 
@@ -147,7 +148,6 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
 
----
 
 ## TensorFlow快速入门总结
 
@@ -166,7 +166,7 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 欢迎关注公众号：一个程序员的随想
 
-![](./wechat4.jpg)
+![](./wechat.jpg)
 
 <div align="right">
         <a href="#Tensorflow学习">回到顶部</a>
