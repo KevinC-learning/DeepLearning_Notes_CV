@@ -22,7 +22,8 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 
 ### (0) 快速查阅API
 
-- [(1) tf.placeholder函数](#(1)-tf.placeholder函数)
+<!-- GFM-TOC -->
+- [(1) tf.placeholder函数](#(1)-tf-placeholder函数)
 - [(2) tf.nn.conv2d是怎样实现卷积的](#(2)-tf.nn.conv2d是怎样实现卷积的)
 - [(3) tf.nn.max_pool实现池化操作](#(3)-tf.nn.max_pool实现池化操作)
 - [(4) tf.nn.relu函数](#(4) tf.nn.relu函数)
@@ -50,6 +51,7 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 - [(26) 设置自动衰减的学习率](#(26)-设置自动衰减的学习率)
 - [(27) 命令行参数](#(27) 命令行参数)
 
+<!-- /GFM-TOC -->
 > *参考来源：CSDN 博主[zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
 
 
