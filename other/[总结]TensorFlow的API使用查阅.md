@@ -34,7 +34,7 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 - [(9) tf.train.AdamOptimizer函数](#9-tftrainAdamOptimizer函数)
 - [(10) tf.Graph()函数](#10-tfGraph函数)
 - [(11) tf.nn.softmax_cross_entropy_with_logits的用法](#11-tfnnsoftmax_cross_entropy_with_logits的用法)
-- [(12) tf.dynamic_partition函数，分拆数组](#12-tfdynamic_partition函数，分拆数组)
+- [(12) tf.dynamic_partition函数，分拆数组](#12-tfdynamic_partition函数分拆数组)
 - [(13) tf.reduce_mean等函数](#13-tfreduce_mean等函数)
 - [(14) apply_gradients 和 compute_gradients](#14-apply_gradients-和-compute_gradients)
 - [(15) tf.trainable_variables和tf.all_variables的对比](#15-tftrainable_variables和tfall_variables的对比)
