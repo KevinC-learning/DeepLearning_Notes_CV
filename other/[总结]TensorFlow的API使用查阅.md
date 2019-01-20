@@ -22,9 +22,37 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 
 ### (0) 快速查阅API
 
-[(1) tf.placeholder函数](#(1) tf.placeholder函数)
-[(1) tf.placeholder函数](#(1) tf.placeholder函数)
+- [(1) tf.placeholder函数](#(1) tf.placeholder函数)
+- [(2) tf.nn.conv2d是怎样实现卷积的](#(2) tf.nn.conv2d是怎样实现卷积的)
+- [(3) tf.nn.max_pool实现池化操作](#(3) tf.nn.max_pool实现池化操作)
+- [(4) tf.nn.relu函数](#(4) tf.nn.relu函数)
+- [(5) tf.reshape、tf.get_shape和set_shape函数](#(5) tf.reshape、tf.get_shape和set_shape函数)
+- [(6) tf.nn.dropout函数](#(6) tf.nn.dropout函数)
+- [(7) tf.argmax函数](#(7) tf.argmax函数)
+- [(8) tf.cast类型转换函数](#(8) tf.cast类型转换函数)
+- [(9) tf.train.AdamOptimizer函数](#(9) tf.train.AdamOptimizer函数)
+- [(10) tf.Graph()函数](#(10) tf.Graph()函数)
+- [(11) tf.nn.softmax_cross_entropy_with_logits的用法](#(11) tf.nn.softmax_cross_entropy_with_logits的用法)
+- [(12) tf.dynamic_partition函数，分拆数组](#(12) tf.dynamic_partition函数，分拆数组)
+- [(13) tf.reduce_mean等函数](#(13) tf.reduce_mean等函数)
+- [(14) apply_gradients 和 compute_gradients](#(14) apply_gradients 和 compute_gradients)
+- [(15) tf.trainable_variables和tf.all_variables的对比](#(15) tf.trainable_variables和tf.all_variables的对比)
+- [(16) tf.control_dependencies](#(16) tf.control_dependencies)
+- [(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别](#(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别)
+- [(18) tf.InteractiveSession()与tf.Session()的区别](#(18) tf.InteractiveSession()与tf.Session()的区别)
+- [(19) tf.get_variable和tf.Variable区别](#(19) tf.get_variable和tf.Variable区别)
+- [(20) tf.where()用法](#(20) tf.where()用法)
+- [(21) tf.less()用法](#(21) tf.less()用法)
+- [(22) tf.app.run()](#(22) tf.app.run())
+- [(23) tensorflow中的参数初始化方法](#(23) tensorflow中的参数初始化方法)
+- [(24) 优化器](#(24) 优化器)
+- [(25) 损失函数(或代价函数)](#(25) 损失函数(或代价函数))
+- [(26) 设置自动衰减的学习率](#(26) 设置自动衰减的学习率)
+- [(27) 命令行参数](#(27) 命令行参数)
 
+---
+
+> *参考来源：CSDN 博主[zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
 
 
 ### (1) tf.placeholder函数
@@ -856,61 +884,7 @@ train()
 参考：[Tensorflow 学习笔记（六）—— Optimizer](https://applenob.github.io/tf_6.html#1.-%E4%BD%BF%E7%94%A8minimize)
 
 
-
-### tensorflow中的参数初始化方法
-
-参考：[tensorflow中的参数初始化方法](https://blog.csdn.net/dcrmg/article/details/80034075)
-
-- 初始化为常量，tf.zeros_initializer() 和 tf.ones_initializer() 类，分别用来初始化全 0 和全 1 的tensor对象。
-
-- 初始化为正太分布
-
-  - tf中使用 tf.random_normal_initializer() 类来生成一组符合**标准正太分布**的tensor。
-  - tf中使用 tf.truncated_normal_initializer() 类来生成一组符合**截断正太分布**的tensor。
-
-- 初始化为均匀分布，tf 中使用 tf.random_uniform_initializer 类来生成一组符合均匀分布的 tensor。
-
-  > 从输出可以看到，均匀分布生成的随机数并不是从小到大或者从大到小均匀分布的，这里均匀分布的意义是每次从一组服从均匀分布的数里边随机抽取一个数。
-  >
-  > tf中另一个生成均匀分布的类是 tf.uniform_unit_scaling_initializer()，同样都是生成均匀分布，tf.uniform_unit_scaling_initializer 跟 tf.random_uniform_initializer 不同的地方是前者不需要指定最大最小值，是通过公式计算出来的：
-  >
-  > ``` xml
-  > max_val = math.sqrt(3 / input_size) * factor
-  > min_val = -max_val
-  > ```
-
-- 初始化为变尺度正太、均匀分布，tf 中 tf.variance_scaling_initializer() 类可以生成截断正太分布和均匀分布的 tensor，增加了更多的控制参数。
-
-- 其他初始化方式
-
-  - tf.orthogonal_initializer() 初始化为正交矩阵的随机数，形状最少需要是二维的
-  - tf.glorot_uniform_initializer() 初始化为与输入输出节点数相关的均匀分布随机数
-  - tf.glorot_normal_initializer（） 初始化为与输入输出节点数相关的截断正太分布随机数
-
-#### tf.truncated_normal的用法
-
-
-
-#### tf.truncated_normal(shape, mean, stddev) 
-
-shape 表示生成张量的维度，mean 是均值，stddev 是标准差。这个函数产生正太分布，均值和标准差自己设定。这是一个截断的产生正太分布的函数，就是说产生正太分布的值如果与均值的差值大于两倍的标准差，那就重新生成。和一般的正太分布的产生随机数据比起来，这个函数产生的随机数与均值的差距不会超过两倍的标准差，但是一般的别的函数是可能的。注：关于什么是标准差推荐阅读该文【[标准差和方差](https://www.shuxuele.com/data/standard-deviation.html)】。
-
-代码：
-
-``` python
-import tensorflow as tf;
-import numpy as np;
-import matplotlib.pyplot as plt;
- 
-c = tf.truncated_normal(shape=[10,10], mean=0, stddev=1)
- 
-with tf.Session() as sess:
-	print sess.run(c)
-```
-
-参考：[tf.truncated_normal的用法](https://blog.csdn.net/UESTC_C2_403/article/details/72235565)
-
-### tf.trainable_variables和tf.all_variables的对比
+### (15) tf.trainable_variables和tf.all_variables的对比
 
 tf.trainable_variables 返回的是需要训练的变量列表。
 
@@ -948,7 +922,7 @@ global_step:0
 
 分析：上面得到两个变量，后面的一个得到上三个变量，因为 global_step 在声明的时候**说明不是训练变量，用来关键字 trainable=False。** 
 
-### tf.control_dependencies
+### (16) tf.control_dependencies
 
 `tf.control_dependencies(self, control_inputs)`：
 
@@ -969,7 +943,7 @@ with tf.Session() as sess:
 
 参考：[TensorFlow笔记——（1）理解tf.control_dependencies与control_flow_ops.with_dependencies](https://blog.csdn.net/liuweiyuxiang/article/details/79952493)
 
-### tf.global_variables_initializer()和tf.local_variables_initializer()区别
+### (17) tf.global_variables_initializer()和tf.local_variables_initializer()区别
 
 tf.global_variables_initializer() 添加节点用于初始化所有的变量(GraphKeys.VARIABLES)。返回一个初始化所有全局变量的操作（Op）。在你构建完整个模型并在会话中加载模型后，运行这个节点。
 
@@ -993,7 +967,7 @@ feed_dict={
 
 tf.local_variables_initializer() 返回一个初始化所有局部变量的操作（Op）。初始化局部变量（GraphKeys.LOCAL_VARIABLE）。GraphKeys.LOCAL_VARIABLE 中的变量指的是被添加入图中，但是未被储存的变量。关于储存，请了解 tf.train.Saver 相关内容，在此处不详述，敬请原谅。
 
-### tf.InteractiveSession()与tf.Session()的区别
+### (18) tf.InteractiveSession()与tf.Session()的区别
 
 tf.InteractiveSession()：它能让你在运行图的时候，插入一些计算图，这些计算图是由某些操作（operations）构成的。这对于工作在交互式环境中的人们来说非常便利，比如使用 IPython。tf.InteractiveSession() 是一种交互式的 session 方式，它**让自己成为了默认的 session**，也就是说用户在不需要指明用哪个 session 运行的情况下，就可以运行起来，这就是默认的好处。这样的话就是 run() 和 eval() 函数可以不指明 session。
 
@@ -1056,11 +1030,11 @@ print(c.eval())
 - [tf.InteractiveSession()与tf.Session()](https://blog.csdn.net/qq_14839543/article/details/77822916)
 - [TensorFlow（笔记）：tf.Session()和tf.InteractiveSession()的区别](https://blog.csdn.net/u010513327/article/details/81023698)
 
-### tf.get_variable和tf.Variable区别
+### (19) tf.get_variable和tf.Variable区别
 
 之所以会出现这两种类型的 scope，主要是后者（variable scope）为了实现 tensorflow 中的变量共享机制：即为了使得在代码的任何部分可以使用某一个已经创建的变量，TF引入了变量共享机制，使得可以轻松的共享变量，而不用传一个变量的引用。具体解释如下：
 
-**(1) tensorflow中创建variable的2种方式：**
+**1) tensorflow中创建variable的2种方式：**
 
 ①tf.Variable()：只要使用该函数，一律创建新的variable，如果出现重名，变量名后面会自动加上后缀1，2….
 
@@ -1108,7 +1082,7 @@ with tf.Session() as sess:
 
 如果想要达到重复利用变量的效果, 我们就要使用 tf.variable_scope()，并搭配 tf.get_variable() 这种方式产生和提取变量. 不像 tf.Variable() 每次都会产生新的变量，tf.get_variable() **如果遇到了同样名字的变量时, 它会单纯的提取这个同样名字的变量(避免产生新变量)。** 而在重复使用的时候, 一定要在代码中强调 scope.reuse_variables()，否则系统将会报错，以为你只是单纯的不小心重复使用到了一个变量。来源：[TensorFlow之scope命名方式](https://blog.csdn.net/buddhistmonk/article/details/79769828)
 
-**(2) tensorflow中的两种作用域** 
+**2) tensorflow中的两种作用域** 
 
 1. 命名域(name scope)：通过 tf.name_scope() 来实现；
 
@@ -1141,7 +1115,7 @@ with tf.Session() as sess:
    aaa/var_4:0
    ```
 
-**(3) tensorflow中变量共享机制的实现**
+**3) tensorflow中变量共享机制的实现**
 
 在 tensorflow 中变量共享机制是通过 tf.get_variable() 和 tf.variable_scope() 两者搭配使用来实现的。如下代码所示：
 
@@ -1179,7 +1153,7 @@ with tf.variable_scope('cltdevelop', reuse=True):
 ValueErrorL Variable cltdevelop/v1 doesnot exist, or was not created with tf.get_variable()
 ```
 
-### tf.where()用法
+### (20) tf.where()用法
 
 `where(condition, x=None, y=None, name=None)`的用法：
 
@@ -1204,7 +1178,7 @@ with tf.Session() as sess:
 
 参考：[tenflow 入门 tf.where(）用法](https://blog.csdn.net/ustbbsy/article/details/79564828)
 
-### tf.less()用法
+### (21) tf.less()用法
 
 `less(x, y, name=None)`：以元素方式返回（x <y）的真值。
 
@@ -1218,7 +1192,7 @@ with tf.Session() as sess:
 
 参考：[TensorFlow函数：tf.less](https://www.w3cschool.cn/tensorflow_python/tensorflow_python-fw182f4x.html)
 
-### tf.app.run()
+### (22) tf.app.run()
 
 [tf.app.run()](https://blog.csdn.net/helei001/article/details/51859423) ：处理 flag 解析，然后执行 main 函数，那么 flag 解析是什么意思呢？诸如这样的：
 
@@ -1244,7 +1218,60 @@ if __name__ == '__main__':
     tf.app.run()  #执行main函数  
 ```
 
-### 优化器
+### (23) tensorflow中的参数初始化方法
+
+参考：[tensorflow中的参数初始化方法](https://blog.csdn.net/dcrmg/article/details/80034075)
+
+- 初始化为常量，tf.zeros_initializer() 和 tf.ones_initializer() 类，分别用来初始化全 0 和全 1 的tensor对象。
+
+- 初始化为正太分布
+
+  - tf中使用 tf.random_normal_initializer() 类来生成一组符合**标准正太分布**的tensor。
+  - tf中使用 tf.truncated_normal_initializer() 类来生成一组符合**截断正太分布**的tensor。
+
+- 初始化为均匀分布，tf 中使用 tf.random_uniform_initializer 类来生成一组符合均匀分布的 tensor。
+
+  > 从输出可以看到，均匀分布生成的随机数并不是从小到大或者从大到小均匀分布的，这里均匀分布的意义是每次从一组服从均匀分布的数里边随机抽取一个数。
+  >
+  > tf中另一个生成均匀分布的类是 tf.uniform_unit_scaling_initializer()，同样都是生成均匀分布，tf.uniform_unit_scaling_initializer 跟 tf.random_uniform_initializer 不同的地方是前者不需要指定最大最小值，是通过公式计算出来的：
+  >
+  > ``` xml
+  > max_val = math.sqrt(3 / input_size) * factor
+  > min_val = -max_val
+  > ```
+
+- 初始化为变尺度正太、均匀分布，tf 中 tf.variance_scaling_initializer() 类可以生成截断正太分布和均匀分布的 tensor，增加了更多的控制参数。
+
+- 其他初始化方式
+
+  - tf.orthogonal_initializer() 初始化为正交矩阵的随机数，形状最少需要是二维的
+  - tf.glorot_uniform_initializer() 初始化为与输入输出节点数相关的均匀分布随机数
+  - tf.glorot_normal_initializer（） 初始化为与输入输出节点数相关的截断正太分布随机数
+
+#### tf.truncated_normal的用法
+
+
+
+#### tf.truncated_normal(shape, mean, stddev) 
+
+shape 表示生成张量的维度，mean 是均值，stddev 是标准差。这个函数产生正太分布，均值和标准差自己设定。这是一个截断的产生正太分布的函数，就是说产生正太分布的值如果与均值的差值大于两倍的标准差，那就重新生成。和一般的正太分布的产生随机数据比起来，这个函数产生的随机数与均值的差距不会超过两倍的标准差，但是一般的别的函数是可能的。注：关于什么是标准差推荐阅读该文【[标准差和方差](https://www.shuxuele.com/data/standard-deviation.html)】。
+
+代码：
+
+``` python
+import tensorflow as tf;
+import numpy as np;
+import matplotlib.pyplot as plt;
+ 
+c = tf.truncated_normal(shape=[10,10], mean=0, stddev=1)
+ 
+with tf.Session() as sess:
+	print sess.run(c)
+```
+
+参考：[tf.truncated_normal的用法](https://blog.csdn.net/UESTC_C2_403/article/details/72235565)
+
+### (24) 优化器
 
 Tensorflow 提供了下面这些种优化器：
 
@@ -1290,7 +1317,7 @@ Tensorflow 提供了下面这些种优化器：
 - [AI学习笔记——Tensorflow中的Optimizer(优化器)](https://www.afenxi.com/59457.html)
 - [TensorFlow 学习摘要（三） 深度学习 - TensorFlow 优化器](http://blog.720ui.com/2018/tensorflow_03_dl_tensorflow_optimizer/)
 
-### 损失函数(或代价函数)
+### (25) 损失函数(或代价函数)
 
 在机器学习中，loss function（损失函数）也称 cost function（代价函数），是用来计算预测值和真实值的差距。 然后以 loss function 的最小值作为目标函数进行反向传播迭代计算模型中的参数，这个让 loss function 的值不断变小的过程称为优化。 
 
@@ -1320,7 +1347,7 @@ sigmoid_cross_entropy_with_logits 是 TensorFlow 最早实现的交叉熵算法�
 
 weighted_sigmoid_cross_entropy_with_logits 是 sigmoid_cross_entropy_with_logits 的拓展版，多支持一个 pos_weight 参数，在传统基于 sigmoid 的交叉熵算法上，正样本算出的值乘以某个系数。
 
-### 设置自动衰减的学习率
+### (26) 设置自动衰减的学习率
 
 在训练神经网络的过程中，合理的设置学习率是一个非常重要的事情。对于训练一开始的时候，设置一个大的学习率，可以快速进行迭代，在训练后期，设置小的学习率有利于模型收敛和稳定性。
 
@@ -1374,7 +1401,7 @@ plt.show()
 - [设置自动衰减的学习率](https://blog.csdn.net/TwT520Ly/article/details/80402803)
 - [Tensorflow实现学习率衰减](https://blog.csdn.net/u013555719/article/details/79334359)
 
-### 命令行参数
+### (27) 命令行参数
 
 第一种：利用 python 的 argparse 包
 
