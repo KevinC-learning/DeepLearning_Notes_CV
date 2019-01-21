@@ -20,9 +20,10 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 
 ## 二、TensorFlow常见API的使用
 
-### (0) 快速查阅API
+### (0) API查询索引
 
 <!-- GFM-TOC -->
+
 - [(1) tf.placeholder函数](#1-tfplaceholder函数)
 - [(2) tf.nn.conv2d是怎样实现卷积的](#2-tfnnconv2d是怎样实现卷积的)
 - [(3) tf.nn.max_pool实现池化操作](#3-tfnnmax_pool实现池化操作)
@@ -52,8 +53,8 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 - [(25) 损失函数(或代价函数)](#25-损失函数或代价函数)
   - [tf.nn.softmax_cross_entropy_with_logits](#tfnnsoftmax_cross_entropy_with_logits)
   - [tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)](#tfnnsparse_softmax_cross_entropy_with_logitslogits-labels-namenone)
-  - [tf.nn.sigmoid_cross_entropy_with_logits(logits, targets, name=None)](#tfnnsigmoid_cross_entropy_with_logitslogits-targets-name=None)
-  - [tf.nn.weighted_cross_entropy_with_logits(logits, targets, pos_weight, name=None)](#tfnnweighted_cross_entropy_with_logitslogits-targets-pos_weight-name=None)
+  - [tf.nn.sigmoid_cross_entropy_with_logits(logits, targets, name=None)](#tfnnsigmoid_cross_entropy_with_logitslogits-targets-nameNone)
+  - [tf.nn.weighted_cross_entropy_with_logits(logits, targets, pos_weight, name=None)](#tfnnweighted_cross_entropy_with_logitslogits-targets-pos_weight-nameNone)
 - [(26) 设置自动衰减的学习率](#26-设置自动衰减的学习率)
 - [(27) 命令行参数](#27-命令行参数)
 
