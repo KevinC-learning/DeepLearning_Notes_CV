@@ -46,12 +46,19 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 - [(21) tf.less()用法](#21-tfless用法)
 - [(22) tf.app.run()](#22-tfapprun)
 - [(23) tensorflow中的参数初始化方法](#23-tensorflow中的参数初始化方法)
+  - [tf.truncated_normal的用法](#tftruncated_normal的用法)
+  - [tf.truncated_normal(shape, mean, stddev) ](#tftruncated_normalshape-mean-stddev)
 - [(24) 优化器](#24-优化器)
 - [(25) 损失函数(或代价函数)](#25-损失函数或代价函数)
+  - [tf.nn.softmax_cross_entropy_with_logits](#tfnnsoftmax_cross_entropy_with_logits)
+  - [tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)](#tfnnsparse_softmax_cross_entropy_with_logitslogits-labels-namenone)
+  - [tf.nn.sigmoid_cross_entropy_with_logits(logits, targets, name=None)](#tfnnsigmoid_cross_entropy_with_logitslogits-targets-name=None)
+  - [tf.nn.weighted_cross_entropy_with_logits(logits, targets, pos_weight, name=None)](#tfnnweighted_cross_entropy_with_logitslogits-targets-pos_weight-name=None)
 - [(26) 设置自动衰减的学习率](#26-设置自动衰减的学习率)
 - [(27) 命令行参数](#27-命令行参数)
 
 <!-- /GFM-TOC -->
+
 > *参考来源：CSDN 博主[zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
 
 
@@ -1285,7 +1292,7 @@ Tensorflow 提供了下面这些种优化器：
 
 - tf.train.MomentumOptimizer
 
-- tf.train.AdamOptimizer
+- tf.train.AdamOptimizer（用法见：【[(9) tf.train.AdamOptimizer函数](#9-tftrainAdamOptimizer函数)】）
 
   > AdamOptimizer 通过使用动量（参数的移动平均数）来改善传统梯度下降，促进超参数动态调整。
   >
@@ -1329,7 +1336,7 @@ Tensorflow 提供了下面这些种优化器：
 
 #### tf.nn.softmax_cross_entropy_with_logits
 
-[见(11) tf.nn.softmax_cross_entropy_with_logits的用法](#(11) tf.nn.softmax_cross_entropy_with_logits的用法)
+用法见：【[(11) tf.nn.softmax_cross_entropy_with_logits的用法](#(11) tf.nn.softmax_cross_entropy_with_logits的用法)】
 
 #### tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)
 
@@ -1410,5 +1417,5 @@ plt.show()
 参考：[[干货|实践] Tensorflow学习 - 使用flags定义命令行参数](https://zhuanlan.zhihu.com/p/33249875)
 
 <div align="right">
-    <a href="#一、TensorFlow的API查阅">回到顶部</a>
+    <a href="#一TensorFlow的API查阅">回到顶部</a>
 </div>

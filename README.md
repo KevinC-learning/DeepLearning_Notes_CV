@@ -71,7 +71,7 @@
 
 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
 
-对 TensorFlow 的 API 使用记录下来，方便查阅：[TensorFlow的API使用查阅](./other/[总结]TensorFlow的API使用查阅.md) 
+对 TensorFlow 的 API 使用记录下来，方便查阅​ :mag_right:：[TensorFlow的API使用查阅](./other/[总结]TensorFlow的API使用查阅.md) 
 
 ## 笔记说明
 
