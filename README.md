@@ -156,11 +156,7 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 - [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
 - [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
 
-## 关于我
 
-欢迎关注公众号：一个程序员的随想
-
-![](./wechat.jpg)
 
 <div align="right">
         <a href="#Tensorflow学习">回到顶部</a>
