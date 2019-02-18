@@ -1,7 +1,7 @@
+<a name="top"></a>
+
 # TensorFlow学习记录
 
-[![license](https://img.shields.io/badge/license-Attribution--NonCommercial%204.0%20-brightgreen.svg)](https://github.com/doocs/advanced-java/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 ## (1) 前言
 
@@ -163,5 +163,5 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 ![](./wechat.jpg)
 
 <div align="right">
-        <a href="#Tensorflow学习">回到顶部</a>
+        <a href="#top">回到顶部</a>
 </div>
