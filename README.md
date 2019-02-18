@@ -1,9 +1,9 @@
-# TensorFlow学习
+# TensorFlow学习记录
 
 [![license](https://img.shields.io/badge/license-Attribution--NonCommercial%204.0%20-brightgreen.svg)](https://github.com/doocs/advanced-java/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-## 前言
+## (1) 前言
 
 主要来源和参考的资料为：炼数成金视频《深度学习框架TensorFlow学习与应用》以及补充了一些网上的博文内容。
 
@@ -52,7 +52,7 @@
 - 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
 - [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
 
-## 笔记索引
+## (2) 笔记索引
 
 《深度学习框架Tensorflow学习与应用》笔记：
 
@@ -73,7 +73,7 @@
 
 对 TensorFlow 的 API 使用记录下来，方便查阅​ :mag_right:：[TensorFlow的API使用查阅](./other/[总结]TensorFlow的API使用查阅.md) 
 
-## 笔记说明
+## (3) 笔记说明
 
 (1) 在【[03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)】中（二）节开始以手写数字识别 MNIST 例子来讲解，关于 MNIST  的内容还可以看看该 README 下面的。
 
@@ -143,13 +143,13 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 
 
-## 手写数字识别MNIST
+## (4) 深度学习版「Hello World」MNIST学习
 
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
 
 
-## TensorFlow快速入门总结
+## (5) TensorFlow快速入门总结
 
 参考「机器之心」编译文章：
 
