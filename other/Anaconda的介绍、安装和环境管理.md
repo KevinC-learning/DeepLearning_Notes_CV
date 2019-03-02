@@ -160,7 +160,7 @@ pip install <package_name>
 
 ③ 提示：当执行退出当前环境，回到root环境命令后，原本行首以“(env_name)”或“[env_name]”开头的字符将不再显示。
 
-**（4）显示已创建环境**：`conda info --envs` 或 `conda info --envs` 或 `conda env list`
+**（4）显示已创建环境**：`conda info --envs` 或 `conda env list`
 
 **（5）复制环境**：`conda create --name <new_env_name> --clone <copied_env_name>`
 
