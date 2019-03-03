@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 <a id="top"></a>
 
 # TensorFlow学习记录
 
+=======
+<a name="top"></a>
+
+# TensorFlow学习记录
+
+
+>>>>>>> master
 ## (1) 前言
 
 主要来源和参考的资料为：炼数成金视频《深度学习框架TensorFlow学习与应用》以及补充了一些网上的博文内容。
@@ -51,9 +59,21 @@
 - 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
 - [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
 
+<<<<<<< HEAD
 ## (2) 笔记索引
+=======
+## (2) 笔记
 
-《深度学习框架Tensorflow学习与应用》笔记：
+学习 TensorFlow 之前，先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
+
+- [Python基础入门笔记（一）](./other/Python/Python基础入门笔记（一）.md)
+- [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
+- [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
+- [TensorFlow的Windows、Ubuntu、Mac的安装教程](./other/TensorFlow的Windows、Ubuntu、Mac的安装教程.md)
+- ……
+>>>>>>> master
+
+《深度学习框架Tensorflow学习与应用》笔记索引：
 
 - [01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装](./Notes/01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装.md)
 - [02-Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作](./Notes/02-Tensorflow的基础使用，包括对图\(graphs\),会话\(session\),张量\(tensor\),变量\(Variable\)的一些解释和操作.md)
@@ -68,11 +88,21 @@
 - [11-Tensorflow在NLP中的使用(一)](./Notes/11-Tensorflow在NLP中的使用\(一\).md)
 - [12-Tensorflow在NLP中的使用(二)](./Notes/12-Tensorflow在NLP中的使用\(二\).md)
 
-对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
+补充笔记：
 
-对 TensorFlow 的 API 使用记录下来，方便查阅​ :mag_right:：[TensorFlow的API使用查阅](./other/[总结]TensorFlow的API使用查阅.md) 
+- 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
+- 对 TensorFlow 的 API 使用记录下来，方便查阅 :mag_right:：[TensorFlow的API详解和记录](./other/[总结]TensorFlow的API详解和记录.md)  
+- TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
+<<<<<<< HEAD
 ## (3) 笔记说明
+=======
+网上博文：
+
+- 关于 tensorflow 中优化器当：[第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132)
+
+## (3) 说明
+>>>>>>> master
 
 (1) 在【[03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)】中（二）节开始以手写数字识别 MNIST 例子来讲解，关于 MNIST  的内容还可以看看该 README 下面的。
 
@@ -142,13 +172,21 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 
 
+<<<<<<< HEAD
 ## (4) 深度学习版「Hello World」MNIST学习
+=======
+## (4) MNIST
+>>>>>>> master
 
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
 
 
+<<<<<<< HEAD
 ## (5) TensorFlow快速入门总结
+=======
+## (5) TF快速入门总结
+>>>>>>> master
 
 参考「机器之心」编译文章：
 
@@ -156,6 +194,11 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 - [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 
 <div align="right">
         <a href="#top">回到顶部</a>

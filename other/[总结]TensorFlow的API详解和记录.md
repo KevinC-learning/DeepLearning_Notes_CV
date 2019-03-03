@@ -4,19 +4,19 @@ TensorFlow官方文档_w3cschool：https://www.w3cschool.cn/tensorflow_python/
 
 (1) 关于《TensorFlow官方文档》
 
-《TensorFlow官方文档》原文地址：http://devdocs.io/tensorflow~python/，本次经过W3Cschool.cn进行翻译整理，让大家能更好的认识机器学习。机器学习可能是未来新品和新技术的一个关键部分。
+《TensorFlow官方文档》原文地址：<http://devdocs.io/tensorflow~python/>，本次经过 W3Cschool.cn 进行翻译整理，让大家能更好的认识机器学习。机器学习可能是未来新品和新技术的一个关键部分。
 
-TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，而谷歌的工程师们也正在使用TensorFlow作为内部的机器学习系统。现在，谷歌已经将其开源，并将他们使用TensorFlow的效果分享在许多的科研文章中。
+TensorFlow 是谷歌基于 DistBelief 进行研发的第二代人工智能学习系统，而谷歌的工程师们也正在使用TensorFlow 作为内部的机器学习系统。现在，谷歌已经将其开源，并将他们使用 TensorFlow 的效果分享在许多的科研文章中。
 
-机器学习行业的发展速度很快，为了能够让更多技术人员有效的学习到这一先进的人工智能学习系统，W3Cschool对TensorFlow官方文档进行中文翻译，其中有纰漏之处希望各位能够提出。
+机器学习行业的发展速度很快，为了能够让更多技术人员有效的学习到这一先进的人工智能学习系统， W3Cschool 对 TensorFlow 官方文档进行中文翻译，其中有纰漏之处希望各位能够提出。
 
 (2) 谁可以用 TensorFlow?
 
-Tensorflow是属于任何人的，不管你的身份是学生、研究员、工程师、开发者、创业者或者等等都可以在Apache 2.0 开源协议下使用Tensorflow，只要您对Tensorflow感兴趣。
+Tensorflow 是属于任何人的，不管你的身份是学生、研究员、工程师、开发者、创业者或者等等都可以在 Apache 2.0 开源协议下使用 Tensorflow，只要您对 Tensorflow 感兴趣。
 
 (3) 一起了解TensorFlow
 
-TensorFlow是一个采用数据流图（data flow graphs），用于数值计算的开源软件库。节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）。它灵活的架构让你可以在多种平台上展开计算，例如台式计算机中的一个或多个CPU（或GPU），服务器，移动设备等等。TensorFlow 最初由Google大脑小组（隶属于Google机器智能研究机构）的研究员和工程师们开发出来，用于机器学习和深度神经网络方面的研究，但这个系统的通用性使其也可广泛用于其他计算领域。
+TensorFlow 是一个采用数据流图（data flow graphs），用于数值计算的开源软件库。节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）。它灵活的架构让你可以在多种平台上展开计算，例如台式计算机中的一个或多个CPU（或GPU），服务器，移动设备等等。TensorFlow 最初由 Google 大脑小组（隶属于 Google 机器智能研究机构）的研究员和工程师们开发出来，用于机器学习和深度神经网络方面的研究，但这个系统的通用性使其也可广泛用于其他计算领域。
 
 ## 二、TensorFlow常见API的使用
 
@@ -60,7 +60,7 @@ TensorFlow是一个采用数据流图（data flow graphs），用于数值计算
 
 <!-- /GFM-TOC -->
 
-> *参考来源：CSDN 博主[zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
+> *参考来源：CSDN博主 [zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
 
 
 ### (1) tf.placeholder函数
@@ -1337,7 +1337,7 @@ Tensorflow 提供了下面这些种优化器：
 
 #### tf.nn.softmax_cross_entropy_with_logits
 
-用法见：【[(11) tf.nn.softmax_cross_entropy_with_logits的用法](#(11) tf.nn.softmax_cross_entropy_with_logits的用法)】
+用法见：【[(11) tf.nn.softmax_cross_entropy_with_logits的用法](#11-tfnnsoftmax_cross_entropy_with_logits的用法)】
 
 #### tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)
 
@@ -1349,7 +1349,7 @@ Tensorflow 提供了下面这些种优化器：
 
 #### tf.nn.sigmoid_cross_entropy_with_logits(logits, targets, name=None)
 
-sigmoid_cross_entropy_with_logits 是 TensorFlow 最早实现的交叉熵算法。这个函数的输入是 logits 和 labels，logits 就是神经网络模型中的`W*X`矩阵，注意不需要经过 sigmoid ，而 labels 的 shape 和 logits 相同，就是正确的标签值，例如这个模型一次要判断 100 张图是否包含 10 种动物，这两个输入的 shape 都是 [100, 10]。**注释中还提到这10个分类之间是独立的、不要求是互斥，这种问题我们称为多目标（多标签）分类，例如判断图片中是否包含10种动物中的一种或几种，标签值可以包含多个 1 或 0 个 1**。
+sigmoid_cross_entropy_with_logits 是 TensorFlow 最早实现的交叉熵算法。这个函数的输入是 logits 和 labels，logits 就是神经网络模型中的 `W*X` 矩阵，注意不需要经过 sigmoid ，而 labels 的 shape 和 logits 相同，就是正确的标签值，例如这个模型一次要判断 100 张图是否包含 10 种动物，这两个输入的 shape 都是 [100, 10]。**注释中还提到这10个分类之间是独立的、不要求是互斥，这种问题我们称为多目标（多标签）分类，例如判断图片中是否包含10种动物中的一种或几种，标签值可以包含多个 1 或 0 个 1**。
 
 #### tf.nn.weighted_cross_entropy_with_logits(logits, targets, pos_weight, name=None)
 
