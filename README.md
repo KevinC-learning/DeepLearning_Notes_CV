@@ -80,7 +80,7 @@
 补充笔记：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[总结]TensorFlow的API详解和记录.md)  这里没记录的没记全的内容可以下面「网上博文」找一找文章看~
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[总结]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面「网上博文」找找看~
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
 :name_badge: 网上博文：
