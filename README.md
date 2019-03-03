@@ -62,7 +62,7 @@
 - [TensorFlow的Windows、Ubuntu、Mac的安装教程](./other/TensorFlow的Windows、Ubuntu、Mac的安装教程.md)
 - ……
 
-《深度学习框架Tensorflow学习与应用》笔记索引：
+《深度学习框架Tensorflow学习与应用》笔记索引（其中也有补充一些其他地方学习到的内容）：
 
 - [01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装](./Notes/01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装.md)
 - [02-Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作](./Notes/02-Tensorflow的基础使用，包括对图\(graphs\),会话\(session\),张量\(tensor\),变量\(Variable\)的一些解释和操作.md)
