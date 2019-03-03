@@ -864,4 +864,3 @@ fc2 内部：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181012210012.png)
 
-[#补充内容：关于TensorFlow中的CNN卷积和池化的操作]: 
