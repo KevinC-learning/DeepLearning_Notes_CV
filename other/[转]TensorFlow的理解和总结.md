@@ -403,3 +403,14 @@ with tf.variable_scope('layer2',resue=False):
 ---
 
 *注：全文来源于 CSDN 博主[promisejia](https://blog.csdn.net/promisejia)文章。*
+
+
+
+## 其他阅读：
+
+- [【TensorFlow动手玩】基本概念: Tensor, Operation, Graph](https://blog.csdn.net/shenxiaolu1984/article/details/52813962)
+- [TensorFlow基础（一）: tensor and operation](https://www.jianshu.com/p/6fec37e6ccc1)
+- [tensorflow-基础知识 - 执剑长老 - 博客园](https://www.cnblogs.com/qjoanven/p/7736025.html)
+- [TensorFlow学习（二）：变量常量类型](https://blog.csdn.net/xierhacker/article/details/53103979)
+- ……
+
