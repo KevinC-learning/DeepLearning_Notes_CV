@@ -86,6 +86,7 @@
 :name_badge: 网上博文：
 
 - 关于 tensorflow 中优化器：[第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132)
+- 学习使用 TensorBoard 可视化：[详解 TensorBoard－如何调参](https://blog.csdn.net/aliceyangxi1987/article/details/71716596)
 - ……
 
 ## (3) 说明
