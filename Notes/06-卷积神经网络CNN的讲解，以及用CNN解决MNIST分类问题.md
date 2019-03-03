@@ -87,7 +87,7 @@ VALID PADDING：不会超出平面外部，卷积窗口采样后得到一个比�
 - 使用 SAME PADDING 的方式，得到`1x2`的平面
 - 使用 VALID PADDING 的方式，得到`1x1`的平面
 
-①补充1：以上关于 padding 的解释看看就好，不要深究！还是看看在 TensorFlow 中 padding 的实现。——**关于卷积核池化及 padding 在 TensorFlow 中的操作是怎样的**，请阅读本文 【[补充内容：关于TensorFlow中的CNN卷积和池化的操作](#补充内容关于tensorflow中的cnn卷积和池化的操作)】小节以及 [TensorFlow的API详解和记录.md](…/other/[总结]TensorFlow的API详解和记录.md#2-tfnnconv2d是怎样实现卷积的) 中的内容。
+①补充1：以上关于 padding 的解释看看就好，不要深究！还是看看在 TensorFlow 中 padding 的实现。——**关于卷积核池化及 padding 在 TensorFlow 中的操作是怎样的**，请阅读本文 【[补充内容：关于TensorFlow中的CNN卷积和池化的操作](#补充内容关于tensorflow中的cnn卷积和池化的操作)】小节以及 [TensorFlow的API详解和记录.md](…/other/[总结]TensorFlow的API详解和记录.md) 中的内容。
 
 ②补充2： 关于 CNN 中的 padding，表示有在网上找了些博客看看，现摘入如下，以便随时查阅。
 
