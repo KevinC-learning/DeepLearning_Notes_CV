@@ -1,6 +1,6 @@
 ## 使用指定的 GPU
 
-1. 查看 GPU：nvidia-smi -L
+1. 查看 GPU：nvidia-smi -L 
 2. 查看 7 号 GPU：nvidia-smi -q -i 7
 
   - 如果只看 memory 情况，可以用：nvidia-smi -q -i 7 -d MEMORY
