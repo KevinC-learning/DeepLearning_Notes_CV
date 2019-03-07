@@ -60,6 +60,7 @@
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [TensorFlow的Windows、Ubuntu、Mac的安装教程](./other/TensorFlow的Windows、Ubuntu、Mac的安装教程.md)
+- [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)
 - ……
 
 《深度学习框架Tensorflow学习与应用》笔记索引（其中也有补充一些其他地方学习到的内容）：
