@@ -709,6 +709,8 @@ Function(softmax_cross_entropy_with_logits) result=
 
 参考：[tf.nn.softmax_cross_entropy_with_logits的用法](https://blog.csdn.net/zj360202/article/details/78582895)
 
+关于 softmax、softmax loss、cross entropy，推荐该文，可以说讲解的非常好：**[卷积神经网络系列之softmax，softmax loss和cross entropy的讲解 - AI之路 - CSDN博客](https://blog.csdn.net/u014380165/article/details/77284921)**
+
 ### (12) tf.dynamic_partition函数，分拆数组
 
 拆分 Tensor：`dynamic_partition(data, partitions, num_partition, name=None)`
@@ -1341,11 +1343,28 @@ Tensorflow 提供了下面这些种优化器：
 
 #### tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)
 
-该函数与 tf.nn.softmax_cross_entropy_with_logits() 函数十分相似，**唯一的区别在于labels的shape，该函数的labels要求是排他性的即只有一个正确的类别，**如果 labels 的每一行不需要进行 one_hot 表示，可以使用 tf.nn.sparse_softmax_cross_entropy_with_logits( )。
+该函数与 tf.nn.softmax_cross_entropy_with_logits() 函数十分相似，**唯一的区别在于 labels 的 shape，该函数的labels要求是排他性的即只有一个正确的类别，** 如果 labels 的每一行不需要进行 one_hot 表示，可以使用 tf.nn.sparse_softmax_cross_entropy_with_logits( )。
 
-> 这个函数和 tf.nn.softmax_cross_entropy_with_logits 函数比较明显的区别在于它的参数 labels 的不同，这里的参数 label 是非稀疏表示的，比如表示一个 3 分类的一个样本的标签，稀疏表示的形式为 [0, 0, 1] 这个表示这个样本为第 3 个分类，而非稀疏表示就表示为 2（因为从 0 开始算，0,1,2, 就能表示三类），同理[0,1,0]就表示样本属于第二个分类，而其非稀疏表示为 1。tf.nn.sparse_softmax_cross_entropy_with_logits() 比 tf.nn.softmax_cross_entropy_with_logits 多了一步将 labels 稀疏化的操作。因为深度学习中，图片一般是用非稀疏的标签的，所以用 tf.nn.sparse_softmax_cross_entropy_with_logits() 的频率比 tf.nn.softmax_cross_entropy_with_logits 高。
+> （1）
 >
-> 参考：[tf.nn.sparse_softmax_cross_entropy_with_logits（）](https://blog.csdn.net/m0_37041325/article/details/77043598)
+> 这个函数和 tf.nn.softmax_cross_entropy_with_logits 函数比较明显的区别在于它的参数 labels 的不同，这里的参数 label 是非稀疏表示的，比如表示一个 3 分类的一个样本的标签，稀疏表示的形式为 [0, 0, 1] 这个表示这个样本为第 3 个分类，而非稀疏表示就表示为 2（因为从 0 开始算，0,1,2, 就能表示三类），同理[0,1,0]就表示样本属于第二个分类，而其非稀疏表示为 1。tf.nn.sparse_softmax_cross_entropy_with_logits() 比 tf.nn.softmax_cross_entropy_with_logits 多了一步将 labels 稀疏化的操作。因为深度学习中，图片一般是用非稀疏的标签的，所以用 tf.nn.sparse_softmax_cross_entropy_with_logits() 的频率比 tf.nn.softmax_cross_entropy_with_logits 高。*——form：[tf.nn.sparse_softmax_cross_entropy_with_logits（）](https://blog.csdn.net/m0_37041325/article/details/77043598)*
+>
+> （2）
+>
+> 相同点：tf.nn.sparse_softmax_cross_entropy_with_logits() 与 tf.nn.softmax_cross_entropy_with_logits() 这两个函数都是对输出的预测结果（logits）进行 softmax 操作然后再计算与真实值（labels）的交叉熵。
+>
+> 不同点：输入有一处不同，tf.nn.sparse_softmax_cross_entropy_with_logits() 的真实值（labels）要求是一个数，而 tf.nn.softmax_cross_entropy_with_logits() 的真实值（labels）要求是一个列表。
+>
+> 例如，对于手写字体分类问题，并假设这张图片所代表的的数字是 8，那么在使用 tf.nn.sparse_softmax_cross_entropy_with_logits() 时，labels 参数要赋值为 8，而若使用 tf.nn.softmax_cross_entropy_with_logits()，labels 参数要赋值为 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0]。如果要使用 tf.nn.sparse_softmax_cross_entropy_with_logits()，但数据集给的是 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0] 这种形式，那么可以使用 tf.argmax() 这个函数来取得 8 这个值。*——from：https://zhuanlan.zhihu.com/p/37709869*
+>
+> （3）
+>
+> 如果看 tensorflow 源码，比较容易能看出来这两者的区别。以基本的 mnist 分类场景有例，mnist 有 10 类，训练时的 batch size 为 batch_num
+>
+> 1. 则若使用 softmax_cross_entropy_with_logits， 则其 labels 参数需要是一个`[batch_size, 10]`的矩阵，其中每行代表一个 instance, 是 one hot 的形式，其非0 index代表属于哪一类。
+> 2. 若使用 sparse_softmax_cross_entropy_with_logits， 则其 labels 参数是一个`[batch_size]`的列，里面每个属于 0 到 9 中间的整数，代表类别，所以函数名称加了 sparse，类似稀疏表示。
+>
+> *——from：http://www.voidcn.com/article/p-pzyqrilr-bqd.html* 
 
 #### tf.nn.sigmoid_cross_entropy_with_logits(logits, targets, name=None)
 

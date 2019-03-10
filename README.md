@@ -92,9 +92,13 @@
 
 ## (3) 说明
 
-(1) 在【[03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)】中（二）节开始以手写数字识别 MNIST 例子来讲解，关于 MNIST  的内容还可以看看该 README 下面的。
+（1）
 
-(2) 发现了问题：在【[04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)】中（三）节开始的代码`4-1交叉熵.py`，可以注意到如下代码：
+在【[03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)】中（二）节开始以手写数字识别 MNIST 例子来讲解，关于 MNIST  的内容还可以看看该 README 下面的。
+
+（2）
+
+发现了问题：在【[04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)】中（三）节开始的代码`4-1交叉熵.py`，可以注意到如下代码：
 
 ``` python
 # 创建一个简单的神经网络
@@ -141,17 +145,21 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 注1：好像后面的笔记中程序代码都是这样的，我觉得可能视频讲解老师没注意到这点问题。另外，在该文 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 的笔记中，我也记录了该问题。
 
-注2：对 softmax、softmax loss、cross entropy 不了解，可以看下网上该文 [卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)，讲解地非常清楚。【荐】
+注2：对 softmax、softmax loss、cross entropy 不了解，推荐看改完：**[卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)**，可以说讲解的非常好。【荐】
 
 另外，关于在 TensorFlow 中有哪些损失函数的实现呢？看看该文：[tensorflow API:tf.nn.softmax_cross_entropy_with_logits()等各种损失函数](https://blog.csdn.net/NockinOnHeavensDoor/article/details/80139685)
 
-(3) 在【 [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](./Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)】该文可以学习到：
+（3）
+
+在【 [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](./Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)】该文可以学习到：
 
 - 用例子演示如何使结构的可视化
 - 参数细节的可视化，绘制各个参数变化情况
 - 补充内容：可视化工具 TensorBoard 更多使用和细节★（这部分会不断补充和更新的…）
 
-(4) 在【[06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)】该文可以学习到：
+（4）
+
+在【[06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)】该文可以学习到：
 
 - 卷积神经网络 CNN（包括局部感受野、权值共享、卷积、池化）
 - 补充内容：参数数量的计算（以 LeNet-5 为例子）
