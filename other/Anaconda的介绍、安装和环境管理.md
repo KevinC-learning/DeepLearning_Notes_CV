@@ -6,6 +6,8 @@
 
 - [Anaconda介绍、安装及使用教程](https://zhuanlan.zhihu.com/p/32925500)
 - [Python，Pycharm，Anaconda等的关系与安装过程~为初学者跳过各种坑](https://www.cnblogs.com/tq007/p/7281105.html)
+- [致Python初学者：Anaconda入门使用指南](http://python.jobbole.com/87522/)
+- [Windows下Anaconda的安装和简单使用](https://blog.csdn.net/DQ_DM/article/details/47065323)
 
 简单总结下：
 
@@ -31,13 +33,37 @@
 
 （2）假设 Anaconda 安装目录为 `D:\Anaconda3` ，则把 `D:\Anaconda3;`、 `D:\Anaconda3\Scripts;`、 `D:\Anaconda3\Library\bin;`，把它们添加到 PATH 中。
 
-### 1.2 源配置
+### 1.2 源更改
 
-使用 Anaconda 管理，安装 Python 库的时候默认是使用国外的源，这时候下载速度会很慢，国内的源下载速度要好很多。参考：[在pycharm中配置Anaconda以及pip源配置](https://blog.csdn.net/u012513525/article/details/54947398)
+使用 Anaconda 管理，安装 Python 库的时候默认是使用国外的源，这时候下载速度会很慢，国内的源下载速度要好很多。参考：
 
-#### (1) pip 源配置
+- [在pycharm中配置Anaconda以及pip源配置](https://blog.csdn.net/u012513525/article/details/54947398)
+- [pip和conda安装源更改](https://blog.csdn.net/sxf1061926959/article/details/54091748)
+
+#### (1) pip 源更改
 
 配置环境：Windows7 （64位），Python3.6
+
+（1）临时使用
+
+pip 后加参数：`-i https://pypi.tuna.tsinghua.edu.cn/simple`，例如：
+
+``` xml
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas 
+```
+
+（2）永久使用
+
+Linux 下：
+
+修改 ~/.pip/pip.conf (没有就创建一个)， 修改 index-url至tuna，内容如下：
+
+``` xml
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+Windows 下：
 
 1. 在 Windows 文件管理器中，输入 `%APPDATA%` 回车
 
@@ -50,7 +76,7 @@
    index-url = https://pypi.tuna.tsinghua.edu.cn/simple
    ```
 
-#### (2) Anaconda 源配置
+#### (2) conda 源更改
 
 在安装了 Anaconda 后，我们也可以使用 Anaconda 来进行 Python 库的安装，同样的也需要进行源的配置。
 
@@ -58,11 +84,31 @@
 
 ``` xml
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-
 conda config --set show_channel_urls yes
 ```
 
-好了，源的配置到此就完成了。大家有兴趣可以去清华大学的 [开源镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/) 看看，会有很多惊喜的。
+此时，目录 `C:\Users<你的用户名>` 下就会生成配置文件 `.condarc`，内容如下：
+
+``` xml
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - defaults
+show_channel_urls: true
+```
+
+好了，源的更改到此就完成了。大家有兴趣可以去清华大学的 [开源镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/) 看看，会有很多惊喜的。
+
+查看当前配置信息 `conda info`，容如下，即修改成功，关注 channel URLs 字段内容：
+
+``` xml
+ 			   platform : win-32
+          conda version : 4.3.22
+       conda is private : False
+      conda-env version : 4.3.22
+       requests version : 2.12.4
+           channel URLs : https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/win-32
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/noarch
+```
 
 
 
@@ -196,6 +242,32 @@ pip install <package_name>
    创建了一个名为 `myproject` 的文件夹，然后这里边创建虚拟环境 `venv`。参考：[Anacodna之conda VS Virtualenv VS Python 3 venv 对比使用教程，创建虚拟环境](https://segmentfault.com/a/1190000005828284)
 
 关于 `pip` 和 `virtualenv` 以及 `conda` 区别，可以这么理解：`pip` 是一个包管理器，`virtualenv` 是一个环境管理器，而 `conda` 就是它们俩的综合体。
+
+## 4. 注意和总结
+
+**(1) 注意**
+
+在安装有多个 Python 环境情况下，比如除了单独的 Python，还有 Anaconda 环境，那么在 Windows 的 CMD 下使用 `pip install <package>`、`conda install <package>` 等命令到底使用的哪个环境呢？毕竟还是要清楚自己安装的库到底是安装在哪吧。
+
+（1）查看 pip 命令来源哪个环境：`pip --version` 或 `pip -V`，可以看到如下：
+
+``` xml
+pip 9.0.1 from D: devInstall\ Anaconda3\ lib\ site-packages <python 3.6)
+```
+
+如上表示来自 Anaconda 环境下的 pip，则使用 pip 安装的库安装在对应的 anaconda 环境下。
+
+（2）使用：`conda install <package>` 表示安装在默认的 anaconda 环境下，如果想要安装到新建的虚拟环境，如 `py3` ，则先切换到该虚拟环境 `activate <env_name>`（windows 下），然后使用 conda install 安装即可。
+
+（3）查看 CMD 下使用的 python 命令来源哪个环境，`python --version` 或 `python -V`，比如可以看到：
+
+``` xml
+Python 3.6.4:: Anaconda, Inc.
+```
+
+表明来源 Anaconda 环境。
+
+
 
 
 
