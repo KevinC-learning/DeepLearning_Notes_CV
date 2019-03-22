@@ -60,7 +60,7 @@
 - [Python基础入门笔记（一）](./other/Python/Python基础入门笔记（一）.md)
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
-- [TensorFlow的Windows、Ubuntu、Mac的安装教程](./other/TensorFlow的Windows、Ubuntu、Mac的安装教程.md)
+- [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)
 - ……
 
@@ -71,7 +71,7 @@
 - [03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)
 - [04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)
 - [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](./Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)
-- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)（关于局部感受野、权值共享、卷积、池化、参数数量计算等内容，重点看下该文~）
+- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)（关于局部感受野、权值共享、卷积、池化、参数数量计算等内容，重点看下~）
 - [07-递归神经网络LSTM的讲解，以及LSTM网络的使用](./Notes/07-递归神经网络LSTM的讲解，以及LSTM网络的使用.md)
 - [08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](./Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)
 - [09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别](./Notes/09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别.md)
@@ -82,7 +82,7 @@
 补充笔记：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[总结]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面「网上博文」找找看~
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面「网上博文」找找看~
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
 :name_badge: 网上博文：
