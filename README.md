@@ -56,7 +56,7 @@
 
 学习 TensorFlow 之前，先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
 
-- [IDE之PyCharm的使用](./other/IDE之PyCharm的使用.md)
+- [IDE之PyCharm的设置和Debug入门](./other/IDE之PyCharm的设置和Debug入门.md)
 - [Python基础入门笔记（一）](./other/Python/Python基础入门笔记（一）.md)
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
