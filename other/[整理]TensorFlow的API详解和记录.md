@@ -1391,6 +1391,8 @@ Tensorflow 提供了下面这些种优化器：
 
 其中 λ 为正则项超参数，常用的正则化方法包括：**L1正则和L2正则**。
 
+关于损失函数 loss function（或代价函数，cost function）先推荐看完该文 [Tensorflow基础知识---损失函数详解](https://sthsf.github.io/wiki/Algorithm/DeepLearning/Tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Tensorflow%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86---%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3.html)。
+
 #### tf.nn.softmax_cross_entropy_with_logits
 
 用法见：【[(11) tf.nn.softmax_cross_entropy_with_logits的用法](#11-tfnnsoftmax_cross_entropy_with_logits的用法)】
