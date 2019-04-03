@@ -67,6 +67,7 @@
   - [Sklearn Universal Machine Learning Tutorial Series | 莫烦Python](https://morvanzhou.github.io/tutorials/machine-learning/sklearn/)
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
+- [数字图像处理包用法](./other/数字图像处理包用法.md)
 - ……
 
 《深度学习框架Tensorflow学习与应用》笔记索引（其中也有补充一些其他地方学习到的内容）：
@@ -76,9 +77,9 @@
 - [03-Tensorflow线性回归以及分类的简单使用](./Notes/03-Tensorflow线性回归以及分类的简单使用.md)
 - [04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)
 - [05-使用Tensorboard进行结构可视化，以及网络运算过程可视化](./Notes/05-使用Tensorboard进行结构可视化，以及网络运算过程可视化.md)
-- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)（关于局部感受野、权值共享、卷积、池化、参数数量计算等内容，重点看下~）
+- [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)（关于局部感受野、权值共享、卷积、池化、参数数量计算等内容，学习 CNN 重点看下！）
 - [07-递归神经网络LSTM的讲解，以及LSTM网络的使用](./Notes/07-递归神经网络LSTM的讲解，以及LSTM网络的使用.md)
-- [08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](./Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)
+- [08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](./Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)（含补充的迁移学习）
 - [09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别](./Notes/09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别.md)
 - [10-使用Tensorflow进行验证码识别](./Notes/10-使用Tensorflow进行验证码识别.md)
 - [11-Tensorflow在NLP中的使用(一)](./Notes/11-Tensorflow在NLP中的使用\(一\).md)
@@ -171,14 +172,24 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 - 参数细节的可视化，绘制各个参数变化情况
 - 补充内容：可视化工具 TensorBoard 更多使用和细节★（这部分会不断补充和更新的…）
 
-（4）
+（4）！！！
 
 在【[06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md)】该文可以学习到：
 
-- 卷积神经网络 CNN（包括局部感受野、权值共享、卷积、池化）
+- 卷积神经网络 CNN（包括局部感受野、权值共享、卷积、二维池化、多通道池化等）
 - 补充内容：参数数量的计算（以 LeNet-5 为例子）
-- 补充内容：TensorFlow 中的 Padding 到底是怎样的？★ （这个认真看下~）
+- 补充内容：TensorFlow 中的 Padding 到底是怎样的？ 
+- 补充内容：TensorFlow 中的卷积和池化 API 详解
 - 补充内容：TensorFlow 中的 Summary 的用法
+
+（5）
+
+在【[08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别](./Notes/08-保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别.md)】中可以学到：
+
+- 保存模型、加载模型
+- 使用 Inception-v3 网络模型进行图像识别
+- 补充内容：加载预训练模型和保存模型以及 fine-tuning
+- 补充内容：迁移学习
 
 
 
