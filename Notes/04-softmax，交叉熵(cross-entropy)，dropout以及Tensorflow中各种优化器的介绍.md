@@ -552,7 +552,7 @@ Iter 20,Testing Accuracy 0.9288
 ```
 
 
-### 六、提供准确度
+### 六、提高准确度
 
 ``` python
 # coding: utf-8

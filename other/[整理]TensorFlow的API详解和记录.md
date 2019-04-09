@@ -1,5 +1,3 @@
-
-
 ## 一、TensorFlow的API查阅
 
 TensorFlow官方文档_w3cschool：https://www.w3cschool.cn/tensorflow_python/
@@ -26,46 +24,47 @@ TensorFlow 是一个采用数据流图（data flow graphs），用于数值计�
 
 <!-- GFM-TOC -->
 
-- [(1) tf.placeholder函数](#1-tfplaceholder函数)
-- [(2) tf.nn.conv2d是怎样实现卷积的](#2-tfnnconv2d是怎样实现卷积的)
-- [(3) tf.nn.max_pool实现池化操作](#3-tfnnmax_pool实现池化操作)
-- [(4) tf.nn.relu函数](#4-tfnnrelu函数)
-- [(5) tf.reshape、tf.get_shape和set_shape函数](#5-tfreshapetfget_shape和set_shape函数)
-- [(6) tf.nn.dropout函数](#6-tfnndropout函数)
-- [(7) tf.argmax函数](#7-tfargmax函数)
-- [(8) tf.cast类型转换函数](#8-tfcast类型转换函数)
-- [(9) tf.train.AdamOptimizer函数](#9-tftrainAdamOptimizer函数)
-- [(10) tf.Graph()函数](#10-tfGraph函数)
-- [(11) tf.nn.softmax_cross_entropy_with_logits的用法](#11-tfnnsoftmax_cross_entropy_with_logits的用法)
-- [(12) tf.dynamic_partition函数，分拆数组](#12-tfdynamic_partition函数分拆数组)
-- [(13) tf.reduce_mean等函数](#13-tfreduce_mean等函数)
-- [(14) apply_gradients 和 compute_gradients](#14-apply_gradients-和-compute_gradients)
-- [(15) tf.trainable_variables和tf.all_variables的对比](#15-tftrainable_variables和tfall_variables的对比)
-- [(16) tf.control_dependencies](#16-tfcontrol_dependencies)
-- [(17) tf.global_variables_initializer()和tf.local_variables_initializer()区别](#17-tfglobal_variables_initializer和tflocal_variables_initializer区别)
-- [(18) tf.InteractiveSession()与tf.Session()的区别](#18-tfInteractiveSession与tfSession的区别)
-- [(19) tf.get_variable和tf.Variable区别](#19-tfget_variable和tfVariable区别)
-- [(20) tf.where()用法](#20-tfwhere用法)
-- [(21) tf.less()用法](#21-tfless用法)
-- [(22) tf.app.run()](#22-tfapprun)
-- [(23) tensorflow中的参数初始化方法](#23-tensorflow中的参数初始化方法)
+- [1. tf.placeholder函数](#1-tfplaceholder函数)
+- [2. tf.nn.conv2d是怎样实现卷积的](#2-tfnnconv2d是怎样实现卷积的)
+- [3. tf.nn.max_pool实现池化操作](#3-tfnnmax_pool实现池化操作)
+- [4. tf.nn.relu函数](#4-tfnnrelu函数)
+- [5. tf.reshape、tf.get_shape和set_shape函数](#5-tfreshapetfget_shape和set_shape函数)
+- [6. tf.nn.dropout函数](#6-tfnndropout函数)
+- [7. tf.argmax函数](#7-tfargmax函数)
+- [8. tf.cast类型转换函数](#8-tfcast类型转换函数)
+- [9. tf.train.AdamOptimizer函数](#9-tftrainAdamOptimizer函数)
+- [10. tf.Graph()函数](#10-tfGraph函数)
+- [11. tf.nn.softmax_cross_entropy_with_logits的用法](#11-tfnnsoftmax_cross_entropy_with_logits的用法)
+- [12. tf.dynamic_partition函数，分拆数组](#12-tfdynamic_partition函数分拆数组)
+- [13. tf.reduce_mean等函数](#13-tfreduce_mean等函数)
+- [14. apply_gradients 和 compute_gradients](#14-apply_gradients-和-compute_gradients)
+- [15. tf.trainable_variables和tf.all_variables的对比](#15-tftrainable_variables和tfall_variables的对比)
+- [16. tf.control_dependencies](#16-tfcontrol_dependencies)
+- [17. tf.global_variables_initializer()和tf.local_variables_initializer()区别](#17-tfglobal_variables_initializer和tflocal_variables_initializer区别)
+- [18. tf.InteractiveSession()与tf.Session()的区别](#18-tfInteractiveSession与tfSession的区别)
+- [19. tf.get_variable和tf.Variable区别](#19-tfget_variable和tfVariable区别)
+- [20. tf.where()用法](#20-tfwhere用法)
+- [21. tf.less()用法](#21-tfless用法)
+- [22. tf.app.run()](#22-tfapprun)
+- [23. tensorflow中的参数初始化方法](#23-tensorflow中的参数初始化方法)
   - [tf.truncated_normal的用法](#tftruncated_normal的用法)
   - [tf.truncated_normal(shape, mean, stddev) ](#tftruncated_normalshape-mean-stddev)
-- [(24) 优化器](#24-优化器)
-- [(25) 损失函数(或代价函数)](#25-损失函数或代价函数)
+- [24. 优化器](#24-优化器)
+- [25. 损失函数(或代价函数)](#25-损失函数或代价函数)
   - [tf.nn.softmax_cross_entropy_with_logits](#tfnnsoftmax_cross_entropy_with_logits)
   - [tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)](#tfnnsparse_softmax_cross_entropy_with_logitslogits-labels-namenone)
   - [tf.nn.sigmoid_cross_entropy_with_logits(logits, targets, name=None)](#tfnnsigmoid_cross_entropy_with_logitslogits-targets-nameNone)
   - [tf.nn.weighted_cross_entropy_with_logits(logits, targets, pos_weight, name=None)](#tfnnweighted_cross_entropy_with_logitslogits-targets-pos_weight-nameNone)
-- [(26) 设置自动衰减的学习率](#26-设置自动衰减的学习率)
-- [(27) 命令行参数](#27-命令行参数)
+- [26. 设置自动衰减的学习率](#26-设置自动衰减的学习率)
+- [27. 命令行参数](#27-命令行参数)
+- [28. tf.concat()详解](#28-tfconcat详解)
 
 <!-- /GFM-TOC -->
 
 > *参考来源：CSDN博主 [zj360202的博文](https://blog.csdn.net/zj360202/article/details/70243424) + 网上其他博文资料* 
 
 
-### (1) tf.placeholder函数
+### 1. tf.placeholder函数
 
 `tf.placeholder(dtype, shape=None, name=None)`：此函数可以理解为形参，用于定义过程，在执行的时候再赋具体的值。
 
@@ -90,7 +89,7 @@ with tf.Session() as sess:
 
 参考：[tf.placeholder函数](https://blog.csdn.net/zj360202/article/details/70243127)
 
-### (2) tf.nn.conv2d是怎样实现卷积的
+### 2. tf.nn.conv2d是怎样实现卷积的
 
 tf.nn.conv2d 是 TensorFlow 里面实现卷积的函数：`tf.nn.conv2d(input, filter, strides, padding, use_cudnn_on_gpu=None, name=None)`
 
@@ -104,7 +103,7 @@ tf.nn.conv2d 是 TensorFlow 里面实现卷积的函数：`tf.nn.conv2d(input, f
 
 参考：[tf.nn.conv2d是怎样实现卷积的？](https://blog.csdn.net/zj360202/article/details/70243424)
 
-### (3) tf.nn.max_pool实现池化操作
+### 3. tf.nn.max_pool实现池化操作
 
 max pooling 是 CNN 当中的最大值池化操作，其实用法和卷积很类似：`tf.nn.max_pool(value, ksize, strides, padding, name=None)`
 
@@ -119,7 +118,7 @@ max pooling 是 CNN 当中的最大值池化操作，其实用法和卷积很类
 
 参考：[tf.nn.max_pool实现池化操作](https://blog.csdn.net/zj360202/article/details/70243836)
 
-### (4) tf.nn.relu函数
+### 4. tf.nn.relu函数
 
 `tf.nn.relu(features, name=None)`  =  `max(0,features)`
 
@@ -136,7 +135,7 @@ tf.nn.relu(tf.nn.conv2d(x_image, w_conv1, strides=[1, 1, 1, 1], padding='SAME') 
 
 参考：[tf.nn.relu函数](https://blog.csdn.net/zj360202/article/details/70256545)
 
-### (5) tf.reshape、tf.get_shape和set_shape函数
+### 5. tf.reshape、tf.get_shape和set_shape函数
 
 `tf.reshape(tensor, shape, name=None)`：数据重定形状函数。
 
@@ -266,7 +265,7 @@ print(sess.run(tf.shape(x1), feed_dict={x1:[[0,1],[2,3]]}))
 
 这代表了图中最开始没有 shape 的 x1 在使用了 set_shape 后，它的图中的信息已经改变了，如果取消掉注释就会报错，因为我们传入了和图不符合的参数。
 
-### (6) tf.nn.dropout函数
+### 6. tf.nn.dropout函数
 
 `tf.nn.dropout(x, keep_prob, noise_shape=None, seed=None, name=None)`：此函数是为了防止在训练中过拟合的操作，将训练输出按一定规则进行变换。
 
@@ -282,7 +281,7 @@ print(sess.run(tf.shape(x1), feed_dict={x1:[[0,1],[2,3]]}))
 tf.nn.dropout(20,0.8)
 ```
 
-### (7) tf.argmax函数
+### 7. tf.argmax函数
 
 `tf.argmax(input, axis=None, name=None, dimension=None)`：此函数是对矩阵按行或列计算最大值。
 
@@ -450,7 +449,7 @@ array([[[ 5,  7],
      [ 1,  9]]])
 ```
 
-### (8) tf.cast类型转换函数
+### 8. tf.cast类型转换函数
 
 `tf.cast(x, dtype, name=None)`：此函数是类型转换函数。
 
@@ -467,7 +466,7 @@ array([[[ 5,  7],
 tf.cast(a, tf.int32) ==> [1, 2]  # dtype=tf.int32
 ```
 
-### (9) tf.train.AdamOptimizer函数
+### 9. tf.train.AdamOptimizer函数
 
 ``` python
 class tf.train.AdamOptimizer
@@ -481,7 +480,7 @@ __init__(learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-08, use_locking
 
 相应参数都有默认值。
 
-### (10) tf.Graph()函数
+### 10. tf.Graph()函数
 
 tf.Graph() 函数非常重要，注意体现在两个方面：
 
@@ -647,7 +646,7 @@ with tf.Session(graph=g2) as sess1:
 
 参考：[tf.Graph()函数](https://blog.csdn.net/zj360202/article/details/78539464)
 
-### (11) tf.nn.softmax_cross_entropy_with_logits的用法
+### 11. tf.nn.softmax_cross_entropy_with_logits的用法
 
 `tf.nn.softmax_cross_entropy_with_logits(logits, labels, name=None)`，除去 name 参数用以指定该操作的 name，与方法有关的一共两个参数：
 
@@ -713,7 +712,7 @@ Function(softmax_cross_entropy_with_logits) result=
 
 关于 softmax、softmax loss、cross entropy，推荐该文，可以说讲解的非常好：**[卷积神经网络系列之softmax，softmax loss和cross entropy的讲解 - AI之路 - CSDN博客](https://blog.csdn.net/u014380165/article/details/77284921)**
 
-### (12) tf.dynamic_partition函数，分拆数组
+### 12. tf.dynamic_partition函数，分拆数组
 
 拆分 Tensor：`dynamic_partition(data, partitions, num_partition, name=None)`
 
@@ -749,7 +748,7 @@ with tf.Session() as sess:
 
 参考：[tf.dynamic_partition 函数 分拆数组](https://blog.csdn.net/zj360202/article/details/78642340)
 
-### (13) tf.reduce_mean等函数
+### 13. tf.reduce_mean等函数
 
 tensorflow 中有一类在 tensor 的某一维度上求值的函数。如：
 
@@ -782,7 +781,7 @@ tf.reduce_mean(x, 1) ==> [1.5,  3.5] #指定第二个参数为1，则第二维�
 
 参考：[tensorflow官方例子中的诸如tf.reduce_mean()这类函数](https://blog.csdn.net/qq_32166627/article/details/52734387)
 
-### (14) apply_gradients 和 compute_gradients
+### 14. apply_gradients 和 compute_gradients
 
 （1）
 
@@ -896,7 +895,7 @@ train()
 参考：[Tensorflow 学习笔记（六）—— Optimizer](https://applenob.github.io/tf_6.html#1.-%E4%BD%BF%E7%94%A8minimize)
 
 
-### (15) tf.trainable_variables和tf.all_variables的对比
+### 15. tf.trainable_variables和tf.all_variables的对比
 
 tf.trainable_variables 返回的是需要训练的变量列表。
 
@@ -934,7 +933,7 @@ global_step:0
 
 分析：上面得到两个变量，后面的一个得到上三个变量，因为 global_step 在声明的时候**说明不是训练变量，用来关键字 trainable=False。** 
 
-### (16) tf.control_dependencies
+### 16. tf.control_dependencies
 
 `tf.control_dependencies(self, control_inputs)`：
 
@@ -955,7 +954,7 @@ with tf.Session() as sess:
 
 参考：[TensorFlow笔记——（1）理解tf.control_dependencies与control_flow_ops.with_dependencies](https://blog.csdn.net/liuweiyuxiang/article/details/79952493)
 
-### (17) tf.global_variables_initializer()和tf.local_variables_initializer()区别
+### 17. tf.global_variables_initializer()和tf.local_variables_initializer()区别
 
 tf.global_variables_initializer() 添加节点用于初始化所有的变量(GraphKeys.VARIABLES)。返回一个初始化所有全局变量的操作（Op）。在你构建完整个模型并在会话中加载模型后，运行这个节点。
 
@@ -979,7 +978,7 @@ feed_dict={
 
 tf.local_variables_initializer() 返回一个初始化所有局部变量的操作（Op）。初始化局部变量（GraphKeys.LOCAL_VARIABLE）。GraphKeys.LOCAL_VARIABLE 中的变量指的是被添加入图中，但是未被储存的变量。关于储存，请了解 tf.train.Saver 相关内容，在此处不详述，敬请原谅。
 
-### (18) tf.InteractiveSession()与tf.Session()的区别
+### 18. tf.InteractiveSession()与tf.Session()的区别
 
 tf.InteractiveSession()：它能让你在运行图的时候，插入一些计算图，这些计算图是由某些操作（operations）构成的。这对于工作在交互式环境中的人们来说非常便利，比如使用 IPython。tf.InteractiveSession() 是一种交互式的 session 方式，它**让自己成为了默认的 session**，也就是说用户在不需要指明用哪个 session 运行的情况下，就可以运行起来，这就是默认的好处。这样的话就是 run() 和 eval() 函数可以不指明 session。
 
@@ -1042,7 +1041,7 @@ print(c.eval())
 - [tf.InteractiveSession()与tf.Session()](https://blog.csdn.net/qq_14839543/article/details/77822916)
 - [TensorFlow（笔记）：tf.Session()和tf.InteractiveSession()的区别](https://blog.csdn.net/u010513327/article/details/81023698)
 
-### (19) tf.get_variable和tf.Variable区别
+### 19. tf.get_variable和tf.Variable区别
 
 之所以会出现这两种类型的 scope，主要是后者（variable scope）为了实现 tensorflow 中的变量共享机制：即为了使得在代码的任何部分可以使用某一个已经创建的变量，TF引入了变量共享机制，使得可以轻松的共享变量，而不用传一个变量的引用。具体解释如下：
 
@@ -1165,7 +1164,7 @@ with tf.variable_scope('cltdevelop', reuse=True):
 ValueErrorL Variable cltdevelop/v1 doesnot exist, or was not created with tf.get_variable()
 ```
 
-### (20) tf.where()用法
+### 20. tf.where()用法
 
 `where(condition, x=None, y=None, name=None)`的用法：
 
@@ -1190,7 +1189,7 @@ with tf.Session() as sess:
 
 参考：[tenflow 入门 tf.where(）用法](https://blog.csdn.net/ustbbsy/article/details/79564828)
 
-### (21) tf.less()用法
+### 21. tf.less()用法
 
 `less(x, y, name=None)`：以元素方式返回（x <y）的真值。
 
@@ -1204,7 +1203,7 @@ with tf.Session() as sess:
 
 参考：[TensorFlow函数：tf.less](https://www.w3cschool.cn/tensorflow_python/tensorflow_python-fw182f4x.html)
 
-### (22) tf.app.run()
+### 22. tf.app.run()
 
 [tf.app.run()](https://blog.csdn.net/helei001/article/details/51859423) ：处理 flag 解析，然后执行 main 函数，那么 flag 解析是什么意思呢？诸如这样的：
 
@@ -1230,7 +1229,7 @@ if __name__ == '__main__':
     tf.app.run()  #执行main函数  
 ```
 
-### (23) tensorflow中的参数初始化方法
+### 23. tensorflow中的参数初始化方法
 
 参考：[tensorflow中的参数初始化方法](https://blog.csdn.net/dcrmg/article/details/80034075)
 
@@ -1283,7 +1282,7 @@ with tf.Session() as sess:
 
 参考：[tf.truncated_normal的用法](https://blog.csdn.net/UESTC_C2_403/article/details/72235565)
 
-### (24) 优化器
+### 24. 优化器
 
 #### tensorflow 优化器
 
@@ -1381,7 +1380,7 @@ Tensorflow 提供了下面这些种优化器：
 - [AI学习笔记——Tensorflow中的Optimizer(优化器)](https://www.afenxi.com/59457.html)
 - [TensorFlow 学习摘要（三） 深度学习 - TensorFlow 优化器](http://blog.720ui.com/2018/tensorflow_03_dl_tensorflow_optimizer/)
 
-### (25) 损失函数(或代价函数)
+### 25. 损失函数(或代价函数)
 
 在机器学习中，loss function（损失函数）也称 cost function（代价函数），是用来计算预测值和真实值的差距。 然后以 loss function 的最小值作为目标函数进行反向传播迭代计算模型中的参数，这个让 loss function 的值不断变小的过程称为优化。 
 
@@ -1430,7 +1429,7 @@ sigmoid_cross_entropy_with_logits 是 TensorFlow 最早实现的交叉熵算法�
 
 weighted_sigmoid_cross_entropy_with_logits 是 sigmoid_cross_entropy_with_logits 的拓展版，多支持一个 pos_weight 参数，在传统基于 sigmoid 的交叉熵算法上，正样本算出的值乘以某个系数。
 
-### (26) 设置自动衰减的学习率
+### 26. 设置自动衰减的学习率
 
 在训练神经网络的过程中，合理的设置学习率是一个非常重要的事情。对于训练一开始的时候，设置一个大的学习率，可以快速进行迭代，在训练后期，设置小的学习率有利于模型收敛和稳定性。
 
@@ -1484,7 +1483,7 @@ plt.show()
 - [设置自动衰减的学习率](https://blog.csdn.net/TwT520Ly/article/details/80402803)
 - [Tensorflow实现学习率衰减](https://blog.csdn.net/u013555719/article/details/79334359)
 
-### (27) 命令行参数
+### 27. 命令行参数
 
 第一种：利用 python 的 argparse 包
 
@@ -1580,6 +1579,55 @@ root:~/Tensorflowexample$ python flags_example.py --m_plus 1.0 --m_minus 0.2 --l
 ```
 
 参考：[[干货|实践] Tensorflow学习 - 使用flags定义命令行参数](https://zhuanlan.zhihu.com/p/33249875)
+
+### 28. tf.concat()详解
+
+tensorflow 中用来拼接张量的函数 tf.concat()，用法：
+
+``` python
+tf.concat([tensor1, tensor2, tensor3,...], axis)
+```
+
+先给出 tf 源代码中的解释：
+
+``` python
+  t1 = [[1, 2, 3], [4, 5, 6]]
+  t2 = [[7, 8, 9], [10, 11, 12]]
+  tf.concat([t1, t2], 0)  # [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+  tf.concat([t1, t2], 1)  # [[1, 2, 3, 7, 8, 9], [4, 5, 6, 10, 11, 12]]
+ 
+  # tensor t3 with shape [2, 3]
+  # tensor t4 with shape [2, 3]
+  tf.shape(tf.concat([t3, t4], 0))  # [4, 3]
+  tf.shape(tf.concat([t3, t4], 1))  # [2, 6]
+```
+
+这里解释了当 axis=0 和 axis=1 的情况，怎么理解这个 axis 呢？其实这和 numpy 中的 np.concatenate() 用法是一样的。
+
+- axis=0     代表在第 0 个维度拼接
+- axis=1     代表在第 1 个维度拼接 
+
+对于一个二维矩阵，第 0 个维度代表最外层方括号所框下的子集，第 1 个维度代表内部方括号所框下的子集。维度越高，括号越小。
+
+对于这种情况，我可以再解释清楚一点：
+
+对于 `[ [ ], [ ]]` 和 `[[ ], [ ]]`，低维拼接等于拿掉最外面括号，高维拼接是拿掉里面的括号（保证其他维度不变）。注意：tf.concat() 拼接的张量只会改变一个维度，其他维度是保存不变的。比如两个 shape 为 [2,3] 的矩阵拼接，要么通过 axis=0 变成 [4,3]，要么通过 axis=1 变成 [2,6]。改变的维度索引对应 axis 的值。
+
+这样就可以理解多维矩阵的拼接了，可以用 axis 的设置来从不同维度进行拼接。 对于三维矩阵的拼接，自然 axis 取值范围是 [0, 1, 2]。
+
+对于 axis 等于负数的情况
+
+负数在数组索引里面表示倒数(countdown)。比如，对于列表 ls = [1,2,3] 而言，ls[-1] = 3，表示读取倒数第一个索引对应值。
+
+axis=-1 表示倒数第一个维度，对于三维矩阵拼接来说，axis=-1 等价于 axis=2。同理，axis=-2 代表倒数第二个维度，对于三维矩阵拼接来说，axis=-2 等价于 axis=1。
+
+一般在维度非常高的情况下，我们想在最'高'的维度进行拼接，一般就直接用 countdown 机制，直接 axis=-1 就搞定了。
+
+
+
+---
+
+*update：2019-04-09*
 
 <div align="right">
     <a href="#一TensorFlow的API查阅">回到顶部</a>

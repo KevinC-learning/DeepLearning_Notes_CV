@@ -88,13 +88,13 @@
 补充笔记：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面「网上博文」找找看~
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面「网上博文」找找看，<a href="#bowen">传送</a>！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
-:name_badge: 网上博文：
+:name_badge: 网上博文：<a name="bowen"></a>
 
-- 关于损失函数(或代价函数)：[Tensorflow基础知识---损失函数详解](https://sthsf.github.io/wiki/Algorithm/DeepLearning/Tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Tensorflow%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86---%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3.html) （推荐看下~）
-- 关于 tensorflow 中优化器：[第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132)
+- 关于损失函数(或代价函数)：[Tensorflow基础知识---损失函数详解](https://sthsf.github.io/wiki/Algorithm/DeepLearning/Tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Tensorflow%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86---%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3.html)  | [深度学习中常用的损失函数有哪些（覆盖分类，回归，风格化，GAN等任务）？](<https://zhuanlan.zhihu.com/p/60302475>) [荐]
+- 关于 tensorflow 中优化器：[第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132) [荐] | [深度学习——各种优化器算法Optimizer详解](https://mp.weixin.qq.com/s/aJZ3T8EVaGDGfqxIs2av6A) [荐]
 - 学习使用 TensorBoard 可视化：[详解 TensorBoard－如何调参](https://blog.csdn.net/aliceyangxi1987/article/details/71716596) | [[干货|实践] TensorBoard可视化 - 知乎](https://zhuanlan.zhihu.com/p/33178205)
 - tensorflow 模型的保存和读取：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)
 - ……
@@ -160,7 +160,7 @@ cross_entropy2=tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits, y_)
 
 注1：好像后面的笔记中程序代码都是这样的，我觉得可能视频讲解老师没注意到这点问题。另外，在该文 [06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题](./Notes/06-卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题.md) 的笔记中，我也记录了该问题。
 
-注2：对 softmax、softmax loss、cross entropy 不了解，推荐看改完：**[卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)**，讲解的非常易懂。【荐】
+注2：对 softmax、softmax loss、cross entropy 不了解，推荐看这几篇：**[卷积神经网络系列之softmax，softmax loss和cross entropy的讲解](https://blog.csdn.net/u014380165/article/details/77284921)**  | [CNN入门讲解：我的Softmax和你的不太一样](<https://zhuanlan.zhihu.com/p/41784404>)，讲解的非常易懂。【荐】
 
 另外，关于在 TensorFlow 中有哪些损失函数的实现呢？看看该文：[tensorflow API:tf.nn.softmax_cross_entropy_with_logits()等各种损失函数](https://blog.csdn.net/NockinOnHeavensDoor/article/details/80139685)
 
