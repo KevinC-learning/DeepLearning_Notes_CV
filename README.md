@@ -88,10 +88,12 @@
 补充笔记：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面「网上博文」找找看，<a href="#bowen">传送</a>！！！
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面【:name_badge: <a href="#bowen">网上博文</a>】找找看！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
-:name_badge: 网上博文：<a name="bowen"></a>
+<a name="bowen"></a>
+
+:name_badge: 网上博文：
 
 - 关于损失函数(或代价函数)：[Tensorflow基础知识---损失函数详解](https://sthsf.github.io/wiki/Algorithm/DeepLearning/Tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Tensorflow%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86---%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3.html)  | [深度学习中常用的损失函数有哪些（覆盖分类，回归，风格化，GAN等任务）？](<https://zhuanlan.zhihu.com/p/60302475>) [荐]
 - 关于 tensorflow 中优化器：[第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132) [荐] | [深度学习——各种优化器算法Optimizer详解](https://mp.weixin.qq.com/s/aJZ3T8EVaGDGfqxIs2av6A) [荐]
