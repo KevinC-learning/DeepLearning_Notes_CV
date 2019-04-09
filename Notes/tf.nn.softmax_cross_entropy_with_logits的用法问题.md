@@ -1,6 +1,6 @@
 
 
-发现了问题：在【[04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)】中（三）节开始的代码`4-1交叉熵.py`，可以注意到如下代码：
+发现个问题：在【[04-softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍](./Notes/04-softmax，交叉熵\(cross-entropy\)，dropout以及Tensorflow中各种优化器的介绍.md)】中（三）节开始的代码`4-1交叉熵.py`，可以注意到如下代码：
 
 ``` python
 # 创建一个简单的神经网络
