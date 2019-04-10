@@ -63,14 +63,18 @@
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)
-- scikit-learn 学习，网上：
+  - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
+  - [pandas学习笔记](./other/科学计算库之pandas的使用.md)
+  - [matplotlib学习笔记](./other/科学计算库之matplotlib的使用.md)
+  - [scikit-learn学习笔记](./other/科学计算库之scikit-learn的使用.md)
+- scikit-learn 学习，网上资料：
   - [Sklearn Universal Machine Learning Tutorial Series | 莫烦Python](https://morvanzhou.github.io/tutorials/machine-learning/sklearn/)
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
 - [数字图像处理包用法](./other/数字图像处理包用法.md)
 - ……
 
-《深度学习框架Tensorflow学习与应用》笔记索引（其中也有补充一些其他地方学习到的内容）：
+《深度学习框架Tensorflow学习与应用》笔记索引（其中会有补充一些内容）：
 
 - [01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装](./Notes/01-Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装.md)
 - [02-Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作](./Notes/02-Tensorflow的基础使用，包括对图\(graphs\),会话\(session\),张量\(tensor\),变量\(Variable\)的一些解释和操作.md)
