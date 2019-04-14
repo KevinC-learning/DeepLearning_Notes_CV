@@ -3,7 +3,7 @@
 - PIL 和 Pillow 只提供最基础的数字图像处理，功能有限；
 
 - opencv 实际上是一个 c++ 库，只是提供了 python 接口，更新速度非常慢。
-- scikit-image 是基于 scipy 的一款图像处理包，它将图片作为numpy数组进行处理，正好与 matlab 一样，因此，我们最终选择 scikit-image 进行数字图像处理。
+- scikit-image 是基于 scipy 的一款图像处理包，它将图片作为 numpy 数组进行处理，正好与 matlab 一样，因此，我们最终选择 scikit-image 进行数字图像处理。
 
 
 
@@ -13,7 +13,7 @@
 
 ---
 
-# 1. opencv-python的使用
+# 1. opencv-python 的使用
 
 ## opencv-python安装
 
@@ -27,7 +27,7 @@ opencv 依赖 numpy，先安装好 numpy。
 
 方法二：下载 whl 文件安装
 
-到官网 <https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv>，下载相应 Python 版本的 OpenCV 的 whl 文件。如下子的 opencv_python‑3.4.1‑cp36‑cp36m‑win_amd64.whl，然后在 whl 文件所在目录下，使用命令安装即可：
+到官网 <https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv>，下载相应 Python 版本的 OpenCV 的 whl 文件。比如下载的是 opencv_python‑3.4.1‑cp36‑cp36m‑win_amd64.whl，则打开该 whl 文件所在目录，CMD 进入到该目录，使用命令安装即可：
 
 ``` 
 pip install opencv_python‑3.4.1‑cp36‑cp36m‑win_amd64.whl
@@ -267,6 +267,12 @@ def color_annotation(label_path, output_path):
 
     cv2.imwrite(output_path,color)
 ```
+
+
+
+## 2. scikit-image 的使用
+
+
 
 
 

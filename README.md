@@ -62,7 +62,7 @@
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Python函数使用个人随记](./other/Python/Python函数使用个人随记.md)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
-- [Jupyter Notebook的介绍、安装及使用](./other/Jupyter Notebook的介绍、安装及使用.md)
+- [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 - [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)
   - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
@@ -73,7 +73,7 @@
   - [Sklearn Universal Machine Learning Tutorial Series | 莫烦Python](https://morvanzhou.github.io/tutorials/machine-learning/sklearn/)
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
-- [Python图像处理笔记](./other/Python图像处理笔记.md)
+- [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)
 - ……
 
 
