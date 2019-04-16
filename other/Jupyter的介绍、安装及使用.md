@@ -118,7 +118,7 @@ c.NotebookApp.notebook_dir = u'D:\jupyter-code'
 
 （3）修改 JupyterNotebook 快捷方式的目标属性
 
-右击 JupyterNotebook 快捷方式，选择【属性】，删除【目标】属性中的【%USERPROFILE%】，点击【应用】–【确定】。 
+右击 JupyterNotebook 快捷方式，选择【属性】，删除【目标】属性中的【%USERPROFILE%】，点击【应用】–【确定】。
 
 再次打开 JupyterNotebook 发现工作目录已经修改为我们自己的工作目录。 
 

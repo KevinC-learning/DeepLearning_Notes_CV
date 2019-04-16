@@ -73,7 +73,7 @@
   - [Sklearn Universal Machine Learning Tutorial Series | 莫烦Python](https://morvanzhou.github.io/tutorials/machine-learning/sklearn/)
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
-- [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)
+- [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)  |  可能用到 matlab，可以学习下：[matlab学习](./other/matlab学习.md)
 - ……
 
 
@@ -111,7 +111,7 @@
 
 
 
-补充笔记：
+补充的内容：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
 - 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面【:name_badge: <a href="#bowen">网上博文</a>】找找看！！！
