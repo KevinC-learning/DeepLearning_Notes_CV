@@ -74,6 +74,7 @@
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
 - [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)  |  可能用到 matlab，可以学习下：[matlab学习](./other/matlab学习.md)
+- [深度学习框架对比.md](./other/深度学习框架对比.md)
 - ……
 
 

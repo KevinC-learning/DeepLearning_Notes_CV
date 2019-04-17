@@ -51,6 +51,74 @@ import cv2
 
 ## opencv-python 图像处理
 
+### opencv api 详解
+
+#### 1.cv2.imread() 函数
+
+imread 的函数原型是：Mat imread( const string& filename, int flags=1 );
+
+Mat是OpenCV里的一个数据结构，在这里我们定义一个Mat类型的变量img，用于保存读入的图像，在本文开始有写到，我们用imread函数来读取图像，第一个字段标识图像的文件名（包括扩展名），第二个字段用于指定读入图像的颜色和深度，它的取值可以有以下几种：
+
+1) CV_LOAD_IMAGE_UNCHANGED (<0)，以原始图像读取（包括alpha通道），
+
+2) CV_LOAD_IMAGE_GRAYSCALE ( 0)，以灰度图像读取
+
+3) CV_LOAD_IMAGE_COLOR (>0)，以RGB格式读取
+
+——from：<https://blog.csdn.net/zhangpinghao/article/details/8144829>
+
+文档中是这么写的：
+
+``` markdown
+Flags specifying the color type of a loaded image:
+
+CV_LOAD_IMAGE_ANYDEPTH - If set, return 16-bit/32-bit image when the input has the corresponding depth, otherwise convert it to 8-bit.
+CV_LOAD_IMAGE_COLOR - If set, always convert image to the color one
+CV_LOAD_IMAGE_GRAYSCALE - If set, always convert image to the grayscale one
+>0 Return a 3-channel color image.
+Note
+
+In the current implementation the alpha channel, if any, is stripped from the output image. Use negative value if you need the alpha channel.
+
+=0 Return a grayscale image.
+<0 Return the loaded image as is (with alpha channel).
+```
+
+大致翻译一下：
+
+Flags指定了所读取图片的颜色类型
+
+- CV_LOAD_IMAGE_ANYDEPTH 返回图像的深度不变。
+
+- CV_LOAD_IMAGE_COLOR 总是返回一个彩色图。
+
+- CV_LOAD_IMAGE_GRAYSCALE 总是返回一个灰度图。
+
+0 返回3通道彩色图，注意：alpha 通道将被忽略，如果需要alpha 通道，请使用负值
+
+=0 返回灰度图
+
+<0 返回原图（带 alpha 通道）
+
+我觉得这里最大的问题就是一会说深度，一会说通道数，两个问题都没有说明白。
+
+实测，当读取一副黑白图时，如果使用Flags=2（CV_LOAD_IMAGE_ANYDEPTH），此时Flags>0，得到的仍是黑白图而不是彩色图。其它的值，如 1,3,4 等均是彩色。
+
+所以我觉得第一句话应该改为  CV_LOAD_IMAGE_ANYDEPTH 返回图像原有的深度，但是通道数变为 1，这是 Flags>0 中的特例
+
+自己测了一下，然后总结如下：
+
+- flag=-1 时，8位深度，原通道
+- flag=0，8位深度，1通道
+- flag=1,   8位深度  ，3通道
+- flag=2，原深度，1通道
+- flag=3,  原深度，3通道
+- flag=4，8位深度 ，3通道
+
+在源码中可以看到
+
+——from：[opencv中imread第二个参数的含义](<https://blog.csdn.net/z914022466/article/details/52709981>)
+
 ### 图像处理代码随记
 
 （1）设置 500x500x3 图像 的 100x100 区域为蓝色：
@@ -104,9 +172,9 @@ RGB 彩色图像中，一种彩色由R（红色），G（绿色），B（蓝色�
 
 实际中数都是二进制形式的，并且未必按照 R，G，B 顺序，比如[OpenCV](http://lib.csdn.net/base/opencv)是按照 B,G,R 顺序将三个色值保存在 3 个连续的字节里。
 
-**灰度图像**是用不同饱和度的黑色来表示每个图像点，比如用8位 0-255数字表示“灰色”程度，每个像素点只需要一个灰度值，8位即可，这样一个 3X3 的灰度图，只需要9个byte就能保存
+**灰度图像**是用不同饱和度的黑色来表示每个图像点，比如用8位 0-255数字表示“灰色”程度，每个像素点只需要一个灰度值，8 位即可，这样一个 3X3 的灰度图，只需要9个byte就能保存
 
-RGB值和灰度的转换，实际上是人眼对于彩色的感觉到亮度感觉的转换，这是一个心理学问题，有一个公式：
+RGB 值和灰度的转换，实际上是人眼对于彩色的感觉到亮度感觉的转换，这是一个心理学问题，有一个公式：
 
 **Grey = 0.299\*R + 0.587\*G + 0.114\*B**
 
@@ -114,7 +182,7 @@ RGB值和灰度的转换，实际上是人眼对于彩色的感觉到亮度感�
 
 ——from：[RGB图像转为灰度图](https://blog.csdn.net/u010312937/article/details/71305714)
 
-### 理解赋值生成的图像
+### 代码生成的图像
 
 先看这样的代码：
 
@@ -270,7 +338,215 @@ def color_annotation(label_path, output_path):
 
 
 
-## 2. scikit-image 的使用
+
+
+# 2. scikit-image 的使用
+
+
+
+
+
+
+
+---
+
+# 3. libtiff.TIFF
+
+##  python下tiff图像的读取和保存方法
+
+对比测试 **scipy.misc** 和 **PIL.Image** 和 **libtiff.TIFF** 三个库
+
+测试两类输入矩阵：
+
+1. (读取图像) 读入uint8、uint16、float32的lena.tif
+2. (生成矩阵) 使用numpy产生随机矩阵，float64的mat
+
+``` python
+import numpy as np
+from scipy import misc
+from PIL import Image
+from libtiff import TIFF 
+#
+# 读入已有图像,数据类型和原图像一致
+tif32 = misc.imread('.\test\lena32.tif') #<class 'numpy.float32'>
+tif16 = misc.imread('.\test\lena16.tif') #<class 'numpy.uint16'>
+tif8  = misc.imread('.\test\lena8.tif')  #<class 'numpy.uint8'>
+# 产生随机矩阵,数据类型float64
+np.random.seed(12345)
+flt = np.random.randn(512, 512)          #<class 'numpy.float64'>
+# 转换float64矩阵type,为后面作测试
+z8 = (flt.astype(np.uint8))              #<class 'numpy.uint8'>
+z16 = (flt.astype(np.uint16))            #<class 'numpy.uint16'>
+z32 = (flt.astype(np.float32))           #<class 'numpy.float32'> 
+```
+
+①对图像和随机矩阵的存储
+
+``` python
+# scipy.misc『不论输入数据是何类型，输出图像均为uint8』
+misc.imsave('.\test\lena32_scipy.tif', tif32)   #--> 8bit(tif16和tif8同)
+
+misc.imsave('.\test\\randmat64_scipy.tif', flt) #--> 8bit
+misc.imsave('.\test\\randmat8_scipy.tif', z8)   #--> 8bit(z16和z32同)
+
+# PIL.Image『8位16位输出图像与输入数据类型保持一致，64位会存成32位』
+Image.fromarray(tif32).save('.\test\lena32_Image.tif') #--> 32bit
+Image.fromarray(tif16).save('.\test\lena16_Image.tif') #--> 16bit
+Image.fromarray(tif8).save('.\test\lena8_Image.tif')   #--> 8bit
+
+Image.fromarray(flt).save('.\test\\randmat_Image.tif') #--> 32bit(flt.min~flt.max)
+im = Image.fromarray(flt.astype(np.float32))                      
+im.save('.\test\\randmat32_Image.tif')                 #--> 32bit(灰度值范围同上)
+#『uint8和uint16类型转换,会使输出图像灰度变换到255和65535』
+im = Image.frombytes('I;16', (512, 512), flt.tostring())
+im.save('.\test\\randmat16_Image1.tif')                #--> 16bit(0~65535)
+im = Image.fromarray(flt.astype(np.uint16))                      
+im.save('.\test\\randmat16_Image2.tif')                #--> 16bit(0~65535)
+im = Image.fromarray(flt.astype(np.uint8))                      
+im.save('.\test\\randmat8_Image.tif')                  #--> 8bit(0~255)
+
+# libtiff.TIFF『输出图像与输入数据类型保持一致』
+tif = TIFF.open('.\test\\randmat_TIFF.tif', mode='w') 
+tif.write_image(flt, compression=None)
+tif.close() #float64可以存储,但因BitsPerSample=64,一些图像软件不识别
+tif = TIFF.open('.\test\\randmat32_TIFF.tif', mode='w') 
+tif.write_image(flt.astype(np.float32), compression=None)
+tif.close() #--> 32bit(flt.min~flt.max)
+#『uint8和uint16类型转换,会使输出图像灰度变换到255和65535』
+tif = TIFF.open('.\test\\randmat16_TIFF.tif', mode='w') 
+tif.write_image(flt.astype(np.uint16), compression=None)
+tif.close() #--> 16bit(0~65535,8位则0~255)
+```
+
+②图像或矩阵归一化对存储的影响
+
+``` python
+# 『使用scipy,只能存成uint8』
+z16Norm = (z16-np.min(z16))/(np.max(z16)-np.min(z16))  #<class 'numpy.float64'>
+z32Norm = (z32-np.min(z32))/(np.max(z32)-np.min(z32))
+scipy.misc.imsave('.\test\\randmat16_norm_scipy.tif', z16Norm)  #--> 8bit(0~255)
+
+# 『使用Image,归一化后变成np.float64 直接转8bit或16bit都会超出阈值,要*255或*65535』
+# 『如果没有astype的位数设置,float64会直接存成32bit』
+im = Image.fromarray(z16Norm)
+im.save('.\test\\randmat16_norm_Image.tif')       #--> 32bit(0~1)
+im = Image.fromarray(z16Norm.astype(np.float32))
+im.save('.\test\\randmat16_norm_to32_Image.tif')  #--> 32bit(灰度范围值同上)
+im = Image.fromarray(z16Norm.astype(np.uint16))
+im.save('.\test\\randmat16_norm_to16_Image.tif')  #--> 16bit(0~1)超出阈值
+im = Image.fromarray(z16Norm.astype(np.uint8))
+im.save('.\test\\randmat16_norm_to8_Image.tif')   #--> 8bit(0~1)超出阈值
+
+im = Image.fromarray((z16Norm*65535).astype(np.uint16))
+im.save('.\test\\randmat16_norm_to16_Image1.tif') #--> 16bit(0~65535)
+im = Image.fromarray((z16Norm*255).astype(np.uint16))
+im.save('.\test\\randmat16_norm_to16_Image2.tif') #--> 16bit(0~255)
+im = Image.fromarray((z16Norm*255).astype(np.uint8))
+im.save('.\test\\randmat16_norm_to8_Image2.tif')  #--> 8bit(0~255)
+# 『使用TIFF结果同Image』
+```
+
+③TIFF读取和存储多帧 tiff 图像
+
+``` python
+#tiff文件解析成图像序列：读取tiff图像
+def tiff_to_read(tiff_image_name):  
+    tif = TIFF.open(tiff_image_name, mode = "r")  
+    im_stack = list()
+    for im in list(tif.iter_images()):  
+        im_stack.append(im)
+    return  
+    #根据文档,应该是这样实现,但测试中不管是tif.read_image还是tif.iter_images读入的矩阵数值都有问题
+  
+#图像序列保存成tiff文件：保存tiff图像   
+def write_to_tiff(tiff_image_name, im_array, image_num):
+    tif = TIFF.open(tiff_image_name, mode = 'w') 
+    for i in range(0, image_num):  
+        im = Image.fromarray(im_array[i])
+        #缩放成统一尺寸  
+        im = im.resize((480, 480), Image.ANTIALIAS)  
+        tif.write_image(im, compression = None)     
+    out_tiff.close()  
+    return   
+```
+
+补充：libtiff 读取多帧 tiff 图像
+
+因为（单帧）TIFF.open().read_image()和（多帧）TIFF.open().iter_images() 有问题，故换一种方式读
+
+``` python
+from libtiff import TIFFfile
+tif = TIFFfile('.\test\lena32-3.tif')
+samples, _ = tif.get_samples()
+```
+
+——from：[python下tiff图像的读取和保存方法](<https://blog.csdn.net/index20001/article/details/80242450>)
+
+## tiff文件的保存与解析
+
+tiff 文件是一种常用的图像文件格式，支持将多幅图像保存到一个文件中，极大得方便了图像的保存和处理。
+
+python 中支持 tiff 文件处理的是 libtiff 模块中的 TIFF 类（libtiff 下载链接<https://pypi.python.org/pypi/libtiff/>）。
+
+这里主要介绍 tiff 文件的解析和保存，具体见如下代码：
+
+``` python
+from libtiff import TIFF
+from scipy import misc
+ 
+##tiff文件解析成图像序列
+##tiff_image_name: tiff文件名；
+##out_folder：保存图像序列的文件夹
+##out_type：保存图像的类型，如.jpg、.png、.bmp等
+def tiff_to_image_array(tiff_image_name, out_folder, out_type): 
+          
+    tif = TIFF.open(tiff_image_name, mode = "r")
+    idx = 0
+    for im in list(tif.iter_images()):
+		#
+        im_name = out_folder + str(idx) + out_type
+        misc.imsave(im_name, im)
+        print im_name, 'successfully saved!!!'
+        idx = idx + 1
+    return
+ 
+##图像序列保存成tiff文件
+##image_dir：图像序列所在文件夹
+##file_name：要保存的tiff文件名
+##image_type:图像序列的类型
+##image_num:要保存的图像数目
+def image_array_to_tiff(image_dir, file_name, image_type, image_num):
+ 
+    out_tiff = TIFF.open(file_name, mode = 'w')
+	
+	#这里假定图像名按序号排列
+    for i in range(0, image_num):
+        image_name = image_dir + str(i) + image_type
+        image_array = Image.open(image_name)
+		#缩放成统一尺寸
+        img = image_array.resize((480, 480), Image.ANTIALIAS)
+        out_tiff.write_image(img, compression = None, write_rgb = True)
+		
+    out_tiff.close()
+    return 
+```
+
+——from：[【python图像处理】tiff文件的保存与解析](<https://blog.csdn.net/guduruyu/article/details/71191709>)
+
+很多医学文件采用格式TIFF格式存储，并且一个TIFF文件由多帧序列组合而成，使用libtiff可以将TIFF文件中的多帧提取出来。
+
+``` xml
+from libtiff import TIFF
+
+def tiff2Stack(filePath):
+    tif = TIFF.open(filePath,mode='r')
+    stack = []
+    for img in list(tif.iter_images()):
+        stack.append(img)
+    return  stack
+```
+
+——from：[Python进行TIFF文件处理](<https://www.jianshu.com/p/4db164533d75>)
 
 
 
