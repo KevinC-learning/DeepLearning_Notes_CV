@@ -245,7 +245,11 @@ print(ann_img)
 
 接下来可以来看叠加矩阵的第二行像素值，第三行像素值。。。依次内推。理解起来是一样的。
 
-### label图像
+> 这里提一下，我发现经过 cv.imread() 读取的图像，打印出来的三个维度的数值，是按照  BGR 顺序打印的。在使用 cv.imwrite() 写入输出图像的时候，第二个参数也得按照 BGR 顺序存储，所以如果label上色，记得按照 BGR 顺序赋值。
+>
+> 参考：[opencv使用BGR而非RGB的原因](<https://blog.csdn.net/weixin_35653315/article/details/73460022>)  
+
+### label图像上色
 
 先看代码：
 
@@ -310,6 +314,10 @@ print(cv2.imread("label.png"))
 
 可以看到维度由原来的 2 个维度变为 3 维的了，并且**第三个维度的值和前面维度的值是一样的**。
 
+> 
+>
+> 
+
 ### 给lable上色
 
 代码：
@@ -336,7 +344,7 @@ def color_annotation(label_path, output_path):
     cv2.imwrite(output_path,color)
 ```
 
-
+**注意：**这里不是
 
 
 
