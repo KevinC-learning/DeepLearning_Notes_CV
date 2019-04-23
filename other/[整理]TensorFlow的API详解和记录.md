@@ -60,6 +60,7 @@ TensorFlow 是一个采用数据流图（data flow graphs），用于数值计�
 - [26. 设置自动衰减的学习率](#26-设置自动衰减的学习率)
 - [27. 命令行参数](#27-命令行参数)
 - [28. tf.concat()详解](#28-tfconcat详解)
+- [29.Batch Normalization](#29-BatchNormalization)
 
 <!-- /GFM-TOC -->
 
@@ -1624,6 +1625,20 @@ tf.concat([tensor1, tensor2, tensor3,...], axis)
 axis=-1 表示倒数第一个维度，对于三维矩阵拼接来说，axis=-1 等价于 axis=2。同理，axis=-2 代表倒数第二个维度，对于三维矩阵拼接来说，axis=-2 等价于 axis=1。
 
 一般在维度非常高的情况下，我们想在最'高'的维度进行拼接，一般就直接用 countdown 机制，直接 axis=-1 就搞定了。
+
+### 29. BatchNormalization
+
+
+
+参考：
+
+- [TensorFlow实现Batch Normalization](<https://blog.csdn.net/marsjhao/article/details/72876460>)
+- [tensorflow中Batch Normalization的实现](<https://blog.csdn.net/shuzfan/article/details/79054561>)
+- [3.1 Tensorflow: 批标准化（Batch Normalization）](<https://blog.csdn.net/FontThrone/article/details/76652772>)
+
+
+
+
 
 
 

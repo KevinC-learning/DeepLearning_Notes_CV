@@ -55,6 +55,8 @@
 
 ## 2. 笔记
 
+### (1) 第一部分
+
 学习 TensorFlow 之前，先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
 
 - [IDE之PyCharm的设置和Debug入门](./other/IDE之PyCharm的设置和Debug入门.md)
@@ -77,7 +79,7 @@
 - [深度学习框架对比.md](./other/深度学习框架对比.md)
 - ……
 
-
+### (2) tensorflow学习
 
 《深度学习框架Tensorflow学习与应用》笔记索引（其中会有补充一些内容）：
 
@@ -110,8 +112,6 @@
 - [11-Tensorflow在NLP中的使用(一)](./Notes/11-Tensorflow在NLP中的使用\(一\).md)
 - [12-Tensorflow在NLP中的使用(二)](./Notes/12-Tensorflow在NLP中的使用\(二\).md)
 
-
-
 补充的内容：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
@@ -129,6 +129,12 @@
 - 学习使用 TensorBoard 可视化：[详解 TensorBoard－如何调参](https://blog.csdn.net/aliceyangxi1987/article/details/71716596) | [[干货|实践] TensorBoard可视化 - 知乎](https://zhuanlan.zhihu.com/p/33178205)
 - tensorflow 模型的保存和读取：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)
 - ……
+
+### (3) 其他
+
+- [Batch Normalization学习笔记及其实现 - 知乎](<https://zhuanlan.zhihu.com/p/26138673>)
+
+
 
 ## 3. MNIST
 
