@@ -63,6 +63,7 @@ TensorFlow 是一个采用数据流图（data flow graphs），用于数值计�
 - [29.Batch Normalization](#29-BatchNormalization)
 - [30. tf.metrics算子 ](#30-tfmetrics算子)
 - [31. tf.image.resize_images()](#31-tfimageresize_images)
+- [32. conv2d_transpose](#32-tflayersconv2d_transpose和tfnnconv2d_transpose)
 
 <!-- /GFM-TOC -->
 
@@ -1736,6 +1737,106 @@ with tf.Session() as sess:
 ```
 
 参考：[tensorflow里面用于改变图像大小的函数](<https://blog.csdn.net/UESTC_C2_403/article/details/72699260>)
+
+### 32. tf.layers.conv2d_transpose(和tf.nn.conv2d_transpose?)
+
+（1）[tf.layers.conv2d_transpose 反卷积](<https://blog.csdn.net/weiwei9363/article/details/78954063>)
+
+参数：
+
+``` xml
+conv2d_transpose( 
+inputs, 
+filters, 
+kernel_size, 
+strides=(1, 1), 
+padding=’valid’, 
+data_format=’channels_last’, 
+activation=None, 
+use_bias=True, 
+kernel_initializer=None, 
+bias_initializer=tf.zeros_initializer(), 
+kernel_regularizer=None, 
+bias_regularizer=None, 
+activity_regularizer=None, 
+kernel_constraint=None, 
+bias_constraint=None, 
+trainable=True, 
+name=None, 
+reuse=None 
+)
+```
+
+比较关注的参数：
+
+- inputs: 输入的张量
+- filters: 输出卷积核的数量
+- kernel_size : 在卷积操作中卷积核的大小
+- strides: （不太理解，我直接理解成放大的倍数）
+- padding : ‘valid’ 或者 ‘same’。
+
+反卷积的过程：
+
+- Step 1 扩充: 将 inputs 进行填充扩大。扩大的倍数与strides有关。扩大的方式是在元素之间插strides - 1 个 0
+
+- Step 2 卷积: 对扩充变大的矩阵，用大小为kernel_size卷积核做卷积操作，这样的卷积核有filters个，并且这里的步长为1(与参数strides无关，一定是1)
+
+举个例子：
+
+- inputs：[ [1, 1], [2,2] ]
+- strides = 2(扩大2倍)
+- filters = 1
+- kernel_size = 3(假设核的值都是1)
+- padding = ‘same’
+
+代码：
+
+``` python
+a = np.array([[1,1],[2,2]], dtype=np.float32)
+# [[1,1],
+#  [2,2]]
+
+# tf.layers.conv2d_transpose 要求输入是4维的
+a = np.reshape(a, [1,2,2,1])
+
+# 定义输入
+x = tf.constant(a,dtype=tf.float32)
+# 进行tf.layers.conv2d_transpose
+upsample_x = tf.layers.conv2d_transpose(x, 1, 3, strides=2, padding='same', kernel_initializer=tf.ones_initializer())
+with tf.Session() as sess:
+    tf.global_variables_initializer().run()
+    print(sess.run(upsample_x))
+    # [[[[1],[1],[2],[1]],
+    #   [[1],[1],[2],[1]],
+    #   [[3],[3],[6],[3]],
+    #   [[2],[2],[4],[2]]]]
+```
+
+（2）[【TensorFlow】tf.nn.conv2d_transpose是怎样实现反卷积的？](<https://blog.csdn.net/mao_xiao_feng/article/details/71713358>)
+
+今天来介绍一下Tensorflow里面的反卷积操作，网上反卷积的用法的介绍比较少，希望这篇教程可以帮助到各位
+
+反卷积出自这篇论文：Deconvolutional Networks，有兴趣的同学自行了解
+
+首先无论你如何理解反卷积，请时刻记住一点，反卷积操作是卷积的反向
+
+如果你随时都记住上面强调的重点，那你基本就理解一大半了，接下来通过一些函数的介绍为大家强化这个观念
+
+conv2d_transpose(value, filter, output_shape, strides, padding="SAME", data_format="NHWC", name=None)
+
+``` xml
+除去name参数用以指定该操作的name，与方法有关的一共六个参数：
+第一个参数value：指需要做反卷积的输入图像，它要求是一个Tenso
+第二个参数filter：卷积核，它要求是一个Tensor，具有[filter_height, filter_width, out_channels, in_channels]这样的shape，具体含义是[卷积核的高度，卷积核的宽度，卷积核个数，图像通道数]
+第三个参数output_shape：反卷积操作输出的shape，细心的同学会发现卷积操作是没有这个参数的，那这个参数在这里有什么用呢？下面会解释这个问题
+第四个参数strides：反卷积时在图像每一维的步长，这是一个一维的向量，长度4
+第五个参数padding：string类型的量，只能是"SAME","VALID"其中之一，这个值决定了不同的卷积方式
+第六个参数data_format：string类型的量，'NHWC'和'NCHW'其中之一，这是tensorflow新版本中新加的参数，它说明了value参数的数据格式。'NHWC'指tensorflow标准的数据格式[batch, height, width, in_channels]，'NCHW'指Theano的数据格式,[batch, in_channels，height, width]，当然默认值是'NHWC'
+ 
+开始之前务必了解卷积的过程，参考我的另一篇文章：http://blog.csdn.net/mao_xiao_feng/article/details/53444333
+```
+
+（剩下内容略。。。
 
 
 
