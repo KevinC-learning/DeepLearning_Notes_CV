@@ -109,5 +109,65 @@ print(c)
 
 参考：[5 python numpy.expand_dims的用法](<https://blog.csdn.net/qq_16949707/article/details/53418912>)
 
+## 4. numpy.argmax()
+
+numpy.argmax(a, axis=None, out=None)：返回沿轴 axis 最大值的索引。
+
+Parameters: 
+
+- a : array_like 数组 
+  
+- axis : int, 可选 ，默认情况下，索引的是平铺的数组，否则沿指定的轴。 
+  
+- out : array, 可选 ，如果提供，结果以合适的形状和类型被插入到此数组中。 
+
+Returns: index_array : ndarray of ints 
+
+索引数组。它具有与 a.shape 相同的形状，其中 axis 被移除。 
+
+例子：
+
+``` python
+>>> a = np.arange(6).reshape(2,3)
+>>> a
+array([[0, 1, 2],
+       [3, 4, 5]])
+>>> np.argmax(a)
+5
+>>> np.argmax(a, axis=0)#0代表列
+array([1, 1, 1])
+>>> np.argmax(a, axis=1)#1代表行
+array([2, 2])
+>>>
+>>> b = np.arange(6)
+>>> b[1] = 5
+>>> b
+array([0, 5, 2, 3, 4, 5])
+>>> np.argmax(b) # 只返回第一次出现的最大值的索引
+1
+```
+
+再来看：
+
+``` python
+import numpy as np
+a = np.arange(6).reshape(2, 3)
+a[1, 1] = 7
+print(a)
+print(np.argmax(a))
+```
+
+运行结果：
+
+``` xml
+[[0 1 2]
+ [3 7 5]]
+4
+```
+
+可以看到 np.argmax(a) 是平铺后最大值的位置。
+
+
+
 
 

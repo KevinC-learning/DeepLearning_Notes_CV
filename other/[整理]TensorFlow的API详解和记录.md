@@ -61,6 +61,8 @@ TensorFlow 是一个采用数据流图（data flow graphs），用于数值计�
 - [27. 命令行参数](#27-命令行参数)
 - [28. tf.concat()详解](#28-tfconcat详解)
 - [29.Batch Normalization](#29-BatchNormalization)
+- [30. tf.metrics算子 ](#30-tfmetrics算子)
+- [31. tf.image.resize_images()](#31-tfimageresize_images)
 
 <!-- /GFM-TOC -->
 
@@ -1638,13 +1640,108 @@ axis=-1 表示倒数第一个维度，对于三维矩阵拼接来说，axis=-1 �
 
 
 
+### 30. tf.metrics算子
 
+本文将深入介绍Tensorflow内置的评估指标算子，以避免出现令人头疼的问题。
+
+- `tf.metrics.accuracy()`
+- `tf.metrics.precision()`
+- `tf.metrics.recall()`
+- `tf.metrics.mean_iou()`
+
+简单起见，本文在示例中使用tf.metrics.accuracy()，但它的模式以及它背后的原理将适用于所有评估指标。如果您只想看到有关如何使用`tf.metrics`的示例代码，请跳转到5.1和5.2节，如果您想要了解为何使用这种方式，请继续阅读。
+
+这篇文章将通过一个非常简单的代码示例来理解`tf.metrics`的原理，这里使用Numpy创建自己的评估指标。这将有助于对Tensorflow中的评估指标如何工作有一个很好的直觉认识。然后，我们将给出如何采用`tf.metrics`快速实现同样的功能。但首先，我先讲述一下写下这篇博客的由来。
+
+3、生成数据
+
+在我们开始使用任何评估指标之前，让我们先从简单的数据开始。我们将使用以下Numpy数组作为我们预测的标签和真实标签。数组的每一行视为一个batch，因此这个例子中共有4个batch。
+
+``` python
+import numpy as np
+labels = np.array([[1,1,1,0],
+                   [1,1,1,0],
+                   [1,1,1,0],
+                   [1,1,1,0]], dtype=np.uint8)
+predictions = np.array([[1,0,0,0],
+                        [1,1,0,0],
+                        [1,1,1,0],
+                        [0,1,1,1]], dtype=np.uint8)
+n_batches = len(labels)
+```
+
+4、建立评价指标
+
+为了简单起见，这里采用的评估指标是准确度（accuracy）：
+
+``` python
+n_items = labels.size
+accuracy = (labels ==  predictions).sum() / n_items
+print("Accuracy :", accuracy)
+[OUTPUT]
+Accuracy : 0.6875
+```
+
+这种方法的问题在于它不能扩展到大型数据集，这些数据集太大而无法一次性加载到内存。为了使其可扩展，我们希望使评估指标能够逐步更新，每次更新一个batch中预测值和标签。为此，我们需要跟踪两个值：
+
+- 正确预测的例子总和
+- 目前所有例子的总数
+
+。。。。。。
+
+6、其它metric
+
+`tf.metrics`中的其他评估指标将以相同的方式工作。它们之间的唯一区别可能是调用 tf.metrics 函数时需要额外参数。例如，`tf.metrics.mean_iou`需要额外的参数`num_classes`来表示预测的类别数。另一个区别是背后所创建的变量，如`tf.metrics.mean_iou`创建的是一个**混淆矩阵**，但仍然可以按照我在本文第5部分中描述的方式收集和初始化它们。
+
+7、结语
+
+对于TF中所有metric，其都是返回两个op，一个是计算评价指标的op，另外一个是更新op，这个op才是真正其更新作用的。我想之所以TF会采用这种方式，是因为metric所服务的其实是评估模型的时候，此时你需要收集整个数据集上的预测结果，然后计算整体指标，而TF的metric这种设计恰好满足这种需求。但是在训练模型时使用它们，就是理解它的原理，才可以得到正确的结果。
+
+
+
+### 31. tf.image.resize_images()
+
+tensorflow 里面用于改变图像大小的函数是 `tf.image.resize_images(image, （w, h）, method)`：image 表示需要改变此存的图像，第二个参数改变之后图像的大小，method 用于表示改变图像过程用的差值方法。
+
+0：双线性差值。1：最近邻居法。2：双三次插值法。3：面积插值法。
+
+例如：
+
+``` python
+import matplotlib.pyplot as plt;
+import tensorflow as tf;
+ 
+image_raw_data_jpg = tf.gfile.FastGFile('11.jpg', 'r').read()
+ 
+with tf.Session() as sess:
+	img_data_jpg = tf.image.decode_jpeg(image_raw_data_jpg)
+	img_data_jpg = tf.image.convert_image_dtype(img_data_jpg, dtype=tf.float32)
+	resize_0 = tf.image.resize_images(img_data_jpg, (500, 500), method=0)
+	resize_1 = tf.image.resize_images(img_data_jpg, (500, 500), method=1)
+	resize_2 = tf.image.resize_images(img_data_jpg, (500, 500), method=2)
+	resize_3 = tf.image.resize_images(img_data_jpg, (500, 500), method=3)
+	
+	print resize_0.get_shape
+ 
+	plt.figure(0)
+	plt.imshow(resize_0.eval())
+	plt.figure(1)
+	plt.imshow(resize_1.eval())
+	plt.figure(2)
+	plt.imshow(resize_2.eval())
+	plt.figure(3)
+	plt.imshow(resize_3.eval())
+ 
+	plt.show()
+```
+
+参考：[tensorflow里面用于改变图像大小的函数](<https://blog.csdn.net/UESTC_C2_403/article/details/72699260>)
 
 
 
 ---
 
-*update：2019-04-09*
+*update：2019-04-28*
 
 <div align="right">
     <a href="#top">回到顶部</a>
