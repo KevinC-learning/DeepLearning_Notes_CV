@@ -167,7 +167,91 @@ print(np.argmax(a))
 
 可以看到 np.argmax(a) 是平铺后最大值的位置。
 
+## numpy.squeeze函数
 
+**语法**：numpy.squeeze(a,axis = None)
+
+ 1）a表示输入的数组；
+ 2）axis用于指定需要删除的维度，但是指定的维度必须为单维度，否则将会报错；
+ 3）axis的取值可为None 或 int 或 tuple of ints, 可选。若axis为空，则删除所有单维度的条目；
+ 4）返回值：数组
+ 5) 不会修改原数组；
+
+作用：从数组的形状中删除单维度条目，即把shape中为1的维度去掉
+
+引用：https://docs.scipy.org/doc/numpy/reference/generated/numpy.squeeze.html
+
+场景：在机器学习和深度学习中，通常算法的结果是可以表示向量的数组（即包含两对或以上的方括号形式[[]]），如果直接利用这个数组进行画图可能显示界面为空（见后面的示例）。我们可以利用squeeze（）函数将表示向量的数组转换为秩为1的数组，这样利用matplotlib库函数画图时，就可以正常的显示结果了。
+
+例1：
+
+``` python
+#例1
+import numpy as np
+
+a  = np.arange(10).reshape(1,10)
+a
+
+# array([[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+# a.shape
+# (1, 10)
+
+b = np.squeeze(a)
+b
+
+# array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+b.shape
+
+# (10,)
+```
+
+例2：
+
+``` python
+#例2
+c  = np.arange(10).reshape(2,5)
+c
+
+# array([[0, 1, 2, 3, 4],
+       [5, 6, 7, 8, 9]])
+
+np.squeeze(c)
+
+# array([[0, 1, 2, 3, 4],
+       [5, 6, 7, 8, 9]])
+
+```
+
+例3：
+
+``` python
+#例3
+d  = np.arange(10).reshape(1,2,5)
+d
+
+# array([[[0, 1, 2, 3, 4],
+        [5, 6, 7, 8, 9]]])
+
+d.shape
+
+# (1, 2, 5)
+
+np.squeeze(d)
+
+# array([[0, 1, 2, 3, 4],
+       [5, 6, 7, 8, 9]])
+
+np.squeeze(d).shape
+
+# (2, 5)
+```
+
+**结论**：根据上述例1~3可知，np.squeeze（）函数可以删除数组形状中的单维度条目，即把shape中为1的维度去掉，但是对非单维的维度不起作用。
+
+（剩下略。。。
+
+详细参考：[Numpy库学习—squeeze()函数](<https://blog.csdn.net/zenghaitao0128/article/details/78512715>)
 
 
 

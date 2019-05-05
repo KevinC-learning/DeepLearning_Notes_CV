@@ -565,3 +565,6 @@ pause
 - max_number_of_steps：训练的步数
 - model_name：使用到的模型
 
+### 补充：tfrecord文件制作
+
+参考：[TensorFlow 学习（二） 制作自己的TFRecord数据集，读取，显示及代码详解 - CSDN](<https://blog.csdn.net/miaomiaoyuan/article/details/56865361>)

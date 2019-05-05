@@ -13,9 +13,9 @@
 
 ---
 
-# 1. opencv-python 的使用
+# 一、opencv-python 的使用
 
-## opencv-python安装
+## （1）opencv-python安装
 
 **（1）Windows 下的安装**
 
@@ -49,11 +49,11 @@ import cv2
 
 
 
-## opencv-python 图像处理
+## （2）opencv-python 图像处理
 
-### opencv api 详解
+### OpenCV API 详解
 
-#### 1.cv2.imread() 函数
+#### 1. cv2.imread() 函数
 
 imread 的函数原型是：Mat imread( const string& filename, int flags=1 );
 
@@ -344,11 +344,28 @@ def color_annotation(label_path, output_path):
     cv2.imwrite(output_path,color)
 ```
 
-**注意：**这里不是
+**注意：**这里赋值顺序是先 BGR 顺序，即 [139, 69, 19] 赋值的分别是 B 通道、G 通道、R 通道。具体原因网上查找下资料。
+
+### 图像归一化：/255.0 和/127.5 -1
+
+在代码中看到图像的2种处理方式：
+
+- img/255.0
+- img/127.5 - 1
+
+第一种是对图像进行归一化，范围为[0, 1]，第二种也是对图像进行归一化，范围为[-1, 1]，这两种只是归一化范围不同，为了直观的看出2种区别，分别对图像进行两种处理：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190505170110.png)
+
+从图中可以看出， 第二种方式图像显示的更黑，其直方图如下：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190505170130.png)
+
+同样，其直方图的分布规律相同，第二种分布相对稀疏。——from：[图像处理/255.0 和/127.5 -1](<https://blog.csdn.net/u011276025/article/details/76050377>)
 
 
 
-# 2. scikit-image 的使用
+# 二、scikit-image 的使用
 
 
 
@@ -358,7 +375,7 @@ def color_annotation(label_path, output_path):
 
 ---
 
-# 3. libtiff.TIFF
+# 三、libtiff.TIFF
 
 ##  python下tiff图像的读取和保存方法
 

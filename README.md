@@ -108,6 +108,10 @@
   - 补充内容：加载预训练模型和保存模型以及 fine-tuning
   - 补充内容：迁移学习
 - [09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别](./Notes/09-Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别.md)
+  - TensorFlow 的 GPU 版本安装
+  - 使用 inception-v3 模型进行训练预测
+  - 使用 tensorflow 已经训练好的模型进行微调
+  - 制作 `.tfrecord` 存储文件
 - [10-使用Tensorflow进行验证码识别](./Notes/10-使用Tensorflow进行验证码识别.md)
 - [11-Tensorflow在NLP中的使用(一)](./Notes/11-Tensorflow在NLP中的使用\(一\).md)
 - [12-Tensorflow在NLP中的使用(二)](./Notes/12-Tensorflow在NLP中的使用\(二\).md)
