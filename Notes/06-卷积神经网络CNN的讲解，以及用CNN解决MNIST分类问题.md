@@ -504,7 +504,7 @@ def max_pool(value,
 
   实验证明：对于实际的池化后的数据尺寸，strides 产生影响，具体的计算方式和卷积中的 strides 相同。
 
-**Padding 总结：** 
+#### padding 总结
 
 关于 TensorFlow 中两种 padding 方式“SAME” 和 “VALID” 的到底怎么理解，先阅读下这两篇文章：
 
@@ -546,6 +546,24 @@ def max_pool(value,
   其中可以看到 “SAME” 方式，在左侧 padding 了一列 0，在右侧 padding 了两列 0。
 
   个人理解：就是说采用 ”SAME“ 方式，在滑动过程中余下窗口元素不够的情况下，一定会 padding 一定数量的 0 以至能覆盖到余下窗口元素。
+
+[TensorFlow中CNN的两种padding方式“SAME”和“VALID”](<https://blog.csdn.net/wuzqChom/article/details/74785643>)：
+
+> 让我们来看看变量 x 是一个 2×3 的矩阵，max pooling 窗口为2×2，两个维度的步长 strides=2。
+>
+> 第一次由于窗口可以覆盖，橙色区域做 max pooling，没什么问题，如下：
+>
+> ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190528103657.png)
+>
+> 接下来就是SAME和VALID的区别所在：由于步长为 2，当向右滑动两步之后，VALID方式发现余下的窗口不到 2×2 所以直接将第三列舍弃，而 SAME 方式并不会把多出的一列丢弃，但是只有一列了不够 2×2 怎么办？填充！
+>
+> ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190528103622.png)
+>
+> 如上图所示，SAME 会增加第四列以保证可以达到 2×2，但为了不影响原始信息，一般以 0 来填充。这就不难理解不同的 padding 方式输出的形状会有所不同了。
+>
+> > 当 CNN 用于文本中时，一般卷积层设置卷积核的大小为 n×k，其中k为输入向量的维度（即[n,k,input_channel_num,output_channel_num]），这时候我们就需要选择“VALID”填充方式，这时候窗口仅仅是沿着一个维度扫描而不是两个维度。可以理解为统计语言模型当中的 N-gram。
+
+
 
 ----
 
