@@ -64,6 +64,8 @@
 - [Python基础入门笔记（一）](./other/Python/Python基础入门笔记（一）.md)
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Python函数使用整理](./other/Python/Python函数使用整理.md)
+- Python 网上博文：
+  - [pyhton中`__pycache__`文件夹的产生与作用](<https://blog.csdn.net/yitiaodashu/article/details/79023987>)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 - [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)

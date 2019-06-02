@@ -25,17 +25,5 @@ Fun
 '''
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
 参考：[Python程序执行顺序](<https://blog.csdn.net/kunpengtingting/article/details/80178618>)
 
