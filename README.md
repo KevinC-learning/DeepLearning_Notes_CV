@@ -24,7 +24,7 @@
 第12周 Tensorflow在NLP中的使用(二)
 ```
 
-> 说明：实际第 5 周讲的是 Tensorborad 结构可视化，第 6 周讲的是 CNN，下载链接里的文件夹顺序，我已修正。
+> 说明：实际第 5 周讲的是 Tensorborad 结构可视化，第 6 周讲的是 CNN，下面视频中链接里的文件夹顺序，我已修正。
 
 (1) 在线观看：
 
@@ -142,7 +142,9 @@
 
 - [Batch Normalization学习笔记及其实现 - 知乎](<https://zhuanlan.zhihu.com/p/26138673>)
 
+### (4) 顺便学习下深度学习前端框架：keras 学习
 
+- [Keras 学习笔记](./other/keras/keras-learning.md)
 
 ## 3. MNIST
 
