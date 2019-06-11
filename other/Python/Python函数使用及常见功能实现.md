@@ -1,4 +1,6 @@
-## [[Python]断言assert的用法](https://blog.csdn.net/humanking7/article/details/45950781)
+# Python 函数
+
+## 断言 assert 的用法
 
 assert的语法格式：assert expression，它的等价语句为：
 
@@ -22,7 +24,7 @@ Traceback (most recent call last):
 AssertionError
 ```
 
-
+——from：[[Python]断言assert的用法](https://blog.csdn.net/humanking7/article/details/45950781)
 
 ## Python 中 yied 的使用
 
@@ -140,3 +142,11 @@ StopIteration
 yield 的好处是显而易见的，把一个函数改写为一个 generator 就获得了迭代能力，比起用类的实例保存状态来计算下一个 next() 的值，不仅代码简洁，而且执行流程异常清晰。
 
 ——from：[Python yield 使用浅析 | 菜鸟教程](<http://www.runoob.com/w3cnote/python-yield-used-analysis.html>)
+
+
+
+# Python功能实现
+
+Python 保存数据到本地文件：
+
+- [python保存数据到本地文件](<https://blog.csdn.net/rosefun96/article/details/78877452>)
