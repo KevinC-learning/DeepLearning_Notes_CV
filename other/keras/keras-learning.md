@@ -1,4 +1,4 @@
-# 一、keras 安装和入门
+#  一、keras 安装和入门
 
 安装 keras：
 
@@ -17,7 +17,7 @@
 测试是否安装成功：
 
 ``` python
-import keras
+ import keras
 ```
 
 查看 keras 版本：
@@ -335,7 +335,7 @@ test_datagen=ImageDataGenerator()
 
 > *来源：[【Keras】Keras入门指南 - 简书](https://www.jianshu.com/p/e9c1e68a615e)*
 
-
+ 
 
 ---
 
@@ -1195,13 +1195,59 @@ with tf.Session() as sess:
 
 参考：[tensorflow里面用于改变图像大小的函数](<https://blog.csdn.net/UESTC_C2_403/article/details/72699260>)
 
-在 keras 代码中，还可以这样写：
+有个注意的地方，在训练模型使用如下代码情况下：
 
 ``` python
-from keras import backend K
+...
+output   = Add(name='fc1_voc12')([conv38_1, conv38_2, conv38_3, conv38_4])
+output   = Lambda(lambda image: tf.image.resize_images(image, (H,W)))(output)
+...
+```
+
+本人 load_mode() 导入模型进行测试集上的测试时，会有如下报错：
+
+``` python
+ NameError: name 'tf' is not defined
+```
+
+可按照该文 [在tf.keras模型中使用tensorflow操作 ](https://codeday.me/bug/20190607/1194897.html)（网上还找到一篇关于该问题：[Keras model cannot be loaded if it contains a Lambda layer calling tf.image.resize_images · Issue #5298](<https://github.com/keras-team/keras/issues/5298>) 可以一起看看）方式解决：
+
+> 这是因为在模型加载期间，tf 不会在重构 Lambda 图层的范围内导入。它可以通过向 load_model 提供custom_objects 字典来解决。
+>
+> ``` python
+> m = tf.keras.models.load_model('1.h5', custom_objects={'tf': tf})
+> ```
+
+我按如上方式操作了，但还会继续报这样类似错误：
+
+``` python
+NameError: name 'H' is not defined
+ 
+NameError: name 'W' is not defined
+```
+
+解决方式是，同样是添加 custom_objects 字典方式：
+
+``` python
+m = tf.keras.models.load_model('1.h5', custom_objects={'tf': tf, 'H':H, 'W':W})
+```
+
+> 注：记得前面按照训练模型一致定义 H、W。
+>
+> ``` python
+> H = 256
+> W = 256
+> ```
+
+另外，对于该操作，在 keras 代码中，还可以这样写：
+
+``` python
+from keras import backend as K
 
 K.resize_images(x, x.shape[1]*2, x.shape[2]*2, "channels_last")
 ```
+
+> 注：参考「使用抽象 Keras 后端编写新代码」 <https://keras.io/zh/backend/>
 
 查下函数的定义，如下：
 
@@ -1293,22 +1339,20 @@ model.fit(X, Y, ..., callbacks=[lrate])
 
 在keras中做深度网络预测时，有这两个预测函数model.predict_classes(test) 和model.predict(test)，本例中是多分类，标签经过了one-hot编码，如[1,2,3,4,5]是标签类别，经编码后为[1 0 0 0 0],[0 1 0 0 0]...[0 0 0 0 1]
 
-- model.predict_classes(test)预测的是类别，打印出来的值就是类别号
-
-  同时只能用于序列模型来预测，不能用于函数式模型
+- model.predict_classes(test)预测的是类别，打印出来的值就是类别号。**同时只能用于序列模型来预测，不能用于函数式模型**
 
     ``` python
-      predict_test = model.predict_classes(X_test).astype('int')
-      inverted = encoder.inverse_transform([predict_test])
-      print(predict_test)
-      print(inverted[0])
-    ```
-
+predict_test = model.predict_classes(X_test).astype('int')
+  inverted = encoder.inverse_transform([predict_test])
+  print(predict_test)
+  print(inverted[0])
+  ```
+  
     ``` xml
-    [1 0 0 ... 1 0 0]
-    [2. 1. 1. ... 2. 1. 1.]
+[1 0 0 ... 1 0 0]
+  [2. 1. 1. ... 2. 1. 1.]
     ```
-
+  
 - model.predict(test)预测的是数值,而且输出的还是5个编码值，不过是实数，预测后要经过argmax(predict_test,axis=1)
 
   ``` python
@@ -1512,8 +1556,6 @@ model.load_weights(fname, by_name=True)
 
 参考：[Keras模型的加载和保存、预训练、按层名匹配参数](<https://blog.csdn.net/dongapple/article/details/77530212>)  |  [关于Keras模型 - Keras中文文档](<https://keras-cn.readthedocs.io/en/latest/models/about_model/>)
 
-
-
 ## 应用 Applications - Keras 中文文档
 
 Keras 的应用模块（keras.applications）提供了带有预训练权值的深度学习模型，这些模型可以用来进行预测、特征提取和微调（fine-tuning）。
@@ -1535,7 +1577,7 @@ Keras 的应用模块（keras.applications）提供了带有预训练权值的�
 
 所有的这些架构都兼容所有的后端 (TensorFlow, Theano 和 CNTK)，并且会在实例化时，根据 Keras 配置文件`〜/.keras/keras.json` 中设置的图像数据格式构建模型。举个例子，如果你设置 `image_data_format=channels_last`，则加载的模型将按照 TensorFlow 的维度顺序来构造，即「高度-宽度-深度」（Height-Width-Depth）的顺序。
 
-参考：[应用 Applications - Keras 中文文档](<https://keras.io/zh/applications/>)
+**参考：[应用 Applications - Keras 中文文档](<https://keras.io/zh/applications/>)  [荐]**
 
 
 
@@ -1871,15 +1913,69 @@ min_lr：学习率的下限
 
 ——from：[Keras保存最好的模型](<https://www.jianshu.com/p/0711f9e54dd2>)
 
+## load_model() 导入模型报错
+
+我在训练完 HRNet 模型后，然后导入训练好的模型进行预测 `load_mode("hrnet.h5")` 发现报了如下字样的错误：
+
+``` xml
+str object has no attribute decode
+```
+
+经过网上找答案，发现导入模型设置 compile=False 即可解决 `load_model("hrnet.h5", compile=False)`。
+
+参考的博文来自：[Keras加载预训练模型](<https://www.wandouip.com/t5i44145/>)，以下为原文。
+
+Keras中存储模型主要有两种方式：
+
+1.只存储模型中的权重参数：
+
+```python
+#save
+model.save_weights('my_model_weights.h5')
+#load
+model.load_weights('my_model_weights.h5')
+```
+
+2.存储整个模型包括模型图的结构以及权重参数：
+
+```python
+#save
+model.save('my_model.h5') 
+#load
+model = load_model('my_model.h5')
+```
+
+以上两步在存储和恢复通过系统模块构建的模型时就已经足够了，但是load_model()函数如果涉及到自定义的模块的时候还需要在加载模型的时候进行额外的声明。
+
+以下举例进行说明：
+
+比如训练模型的时候用到了自定义的模块AttentionLayer，那么在加载模型的时候需要在custom_objects的参数中声明对应的字典项，否则将会报模块未定义的错误。
+
+```python
+model = load_model('./model1/GRUAttention( 0.8574).h5', custom_objects={'AttentionLayer': AttentionLayer})
+```
+
+在训练的过程中有时候也会用到自定义的损失函数，这时候如果你加载模型知识为了进行预测不再其基础上再进行训练，那么加载模型的时候就没有必要在custom_objects参数中声明对应的字典项，只需要将compile参数设为False即可：
+
+```python
+model = load_model('./model1/GRUAttention(0.8574).h5', compile=False})
+```
+
+如果此时你好需要在加载后的模型上继续进行训练，那么声明损失函数对应的字典项就是必须的：
+
+```python
+model = load_model('./model1/GRUAttention(0.8574).h5', compile=True, custom_objects={'focal_loss_fixed':focal_loss})
+```
 
 
-—
 
 ---
 
 # 整理于网络：keras 的坑
 
-Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorFlow, CNTK, 或者 Theano 作为后端运行。Keras 的开发重点是支持快速的实验。能够以最小的时间把你的想法转换为实验结果，是做好研究的关键。本人是keras的忠实粉丝，可能是因为它实在是太简单易用了，不用多少代码就可以将自己的想法完全实现，但是在使用的过程中还是遇到了不少坑，本文做了一个归纳，供大家参考。
+Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorFlow, CNTK, 或者 Theano 作为后端运行。
+
+Keras 的开发重点是支持快速的实验。能够以最小的时间把你的想法转换为实验结果，是做好研究的关键。本人是keras的忠实粉丝，可能是因为它实在是太简单易用了，不用多少代码就可以将自己的想法完全实现，但是在使用的过程中还是遇到了不少坑，本文做了一个归纳，供大家参考。
 
 Keras 兼容的 Python 版本: Python 2.7-3.6。
 

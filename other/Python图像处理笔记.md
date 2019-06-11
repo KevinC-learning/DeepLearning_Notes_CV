@@ -53,7 +53,7 @@ import cv2
 
 ### OpenCV API 详解
 
-#### 1. cv2.imread() 函数详解
+#### 1. cv2.imread() 和cv2.imwrite()
 
 （1）
 
@@ -120,6 +120,8 @@ Flags指定了所读取图片的颜色类型
 在源码中可以看到。默认是 1。
 
 ——from：[opencv中imread第二个参数的含义](<https://blog.csdn.net/z914022466/article/details/52709981>)
+
+**!!!注意：** cv2.imread() 和cv2.imwrite() 函数，其中第一个参数 finename，一定是在已存在的目录，若指定的是不存在的目录，就不会写入和读取到图像文件了。
 
 （2）
 
