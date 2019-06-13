@@ -1,6 +1,6 @@
 <a name="top"></a>
 
-# TensorFlow学习记录
+# 学习记录
 
 
 ## 1. 前言
@@ -53,9 +53,9 @@
 - 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
 - [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
 
-## 2. 笔记
+## 2. tensorflow学习
 
-### (1) 第一部分
+### (1) Python、科学计数库等基础
 
 学习 TensorFlow 之前，先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
 
@@ -70,7 +70,7 @@
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 - [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
-- [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)
+- [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)  | 更多学习见下：
   - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
   - [pandas学习笔记](./other/科学计算库之pandas的使用.md)
   - [matplotlib学习笔记](./other/科学计算库之matplotlib的使用.md)
@@ -80,11 +80,11 @@
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
   - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  - 可用于计算准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 等评价指标。 [荐] 
-- [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)  |  可能用到 matlab，可以学习下：[matlab学习](./other/matlab学习.md)
+- [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)  |  可能用到 matlab，可以学习下：[matlab的安装和学习](./other/matlab学习.md)
 - [深度学习框架对比.md](./other/深度学习框架对比.md)
 - ……
 
-### (2) tensorflow学习
+### (2) tensorflow笔记
 
 《深度学习框架Tensorflow学习与应用》笔记索引（其中会有补充一些内容）：
 
@@ -121,39 +121,74 @@
 - [11-Tensorflow在NLP中的使用(一)](./Notes/11-Tensorflow在NLP中的使用\(一\).md)
 - [12-Tensorflow在NLP中的使用(二)](./Notes/12-Tensorflow在NLP中的使用\(二\).md)
 
-补充的内容：
+笔记补充：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面【:name_badge: <a href="#bowen">网上博文</a>】找找看！！！
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面【<a href="#bowen">网上博文</a>】找找看！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
-<a name="bowen"></a>
+## 3. keras 学习
 
-:name_badge: 网上博文：
+- [Keras 学习笔记.md](./other/keras/keras-learning.md)
+
+- [Keras中的多分类损失函数categorical_crossentropy](<https://blog.csdn.net/u010412858/article/details/76842216>)
+
+  > 注意：当使用`categorical_crossentropy`损失函数时，你的标签应为多类模式，例如如果你有 10 个类别，每一个样本的标签应该是一个 10 维的向量，该向量在对应有值的索引位置为 1 其余为 0。
+  >
+  > 可以使用这个方法进行转换：
+  >
+  > ``` python
+  > from keras.utils.np_utils import to_categorical
+  > 
+  > categorical_labels = to_categorical(int_labels, num_classes=None)
+  > ```
+  >
+  > 以 mnist 数据集为例：
+  >
+  > ```  python
+  > from keras.datasets import mnist
+  > 
+  > (X_train, y_train), (X_test, y_test) = mnist.load_data()
+  > y_train = to_categorical(y_train, 10)
+  > y_test = to_categorical(y_test, 10)
+  > 
+  > ...
+  > model.compile(loss='categorical_crossentropy', optimizer='adam')
+  > model.fit(X_train, y_train, epochs=100, batch_size=1, verbose=2)
+  > ```
+
+
+
+## 4. 网上博文<a name="bowen"></a>
+
+损失函数：
 
 - 关于**损失函数(或代价函数)**：[Tensorflow基础知识---损失函数详解](https://sthsf.github.io/wiki/Algorithm/DeepLearning/Tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Tensorflow%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86---%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3.html)  | [深度学习中常用的损失函数有哪些（覆盖分类，回归，风格化，GAN等任务）？](<https://zhuanlan.zhihu.com/p/60302475>) [荐]  
 - 自定义损失函数：[tensorflow内置的四个损失函数](https://blog.csdn.net/limiyudianzi/article/details/80693695) [荐]  | [自定义损失函数](https://blog.csdn.net/limiyudianzi/article/details/80697711)  |  [二分类、多分类与多标签问题的区别,对应损失函数的选择,你知道吗？ - 掘金](<https://juejin.im/post/5b38971be51d4558b10aad26>)  [荐]
+- [损失函数loss大大总结](<https://blog.csdn.net/qq_14845119/article/details/80787753>)  |  [从loss处理图像分割中类别极度不均衡的状况---keras](<https://blog.csdn.net/m0_37477175/article/details/83004746#_1>)  |  [语义分割 各种loss实现 python](<https://blog.csdn.net/qq_21997625/article/details/87695961>)  [荐]
+
+优化器：
+
 - 关于 **tensorflow 中优化器**：[个人笔记-优化器参数详解（learning rate、weight decay、momentum、滑动平均等）](./other/tensorflow优化器参数详解.md)  [荐]  |  [第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132) [荐] | [深度学习——优化器算法Optimizer详解（BGD、SGD、MBGD、Momentum、NAG、Adagrad、Adadelta、RMSprop、Adam）](https://www.cnblogs.com/guoyaohua/p/8542554.html)  [荐]
+
+其他：
+
 - CNN网络架构演进：[一文总览CNN网络架构演进：从LeNet到DenseNet](https://mp.weixin.qq.com/s/aJZ3T8EVaGDGfqxIs2av6A) [荐]
 - 学习使用 TensorBoard 可视化：[详解 TensorBoard－如何调参](https://blog.csdn.net/aliceyangxi1987/article/details/71716596) | [[干货|实践] TensorBoard可视化 - 知乎](https://zhuanlan.zhihu.com/p/33178205)
 - tensorflow 模型的保存和读取：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)
 - fine-tuning：[tensorflow从已经训练好的模型中，恢复(指定)权重(构建新变量、网络)并继续训练(finetuning)](<https://blog.csdn.net/ying86615791/article/details/76215363>)  [荐]
 - ……
 
-### (3) 其他
+Batch Normalization：
 
 - [Batch Normalization学习笔记及其实现 - 知乎](<https://zhuanlan.zhihu.com/p/26138673>)
 
-### (4) 深度学习前端框架：keras 学习
-
-- [Keras 学习笔记](./other/keras/keras-learning.md)
-
-## 3. MNIST
+## 5. MNIST
 
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
 
-## 4. TF快速入门总结
+## 6. TF快速入门总结
 
 参考「机器之心」编译文章：
 
