@@ -1,4 +1,6 @@
-# 0、前言和目录
+# 0、写在前面
+
+## 前言
 
 基于 python 脚本语言开发的数字图片处理包，比如 PIL、Pillow、opencv、scikit-image 等。
 
@@ -9,11 +11,17 @@
 
 学习：[python skimage图像处理(一) - 简书](<https://www.jianshu.com/p/f2e88197e81d>)
 
+写在前面的：
+
+> 注：opencv 读取以及 numpy 创建图像多维数组都是先高度 height、再宽度 width，但在电脑上显示的是`width x height` 的格式。
+
+
+
 ## 目录
 
-[一、opencv-python 的使用](#一opencv-python-的使用)
+[一、opencv-python](#一opencv-python)
 
-[二、scikit-image 的使用](#二scikit-image的使用)
+[二、scikit-image](#二scikit-image)
 
 
 
@@ -21,7 +29,7 @@
 
 ---
 
-# 一、opencv-python 的使用
+# 一、opencv-python
 
 ## 1. opencv-python安装
 
@@ -457,7 +465,7 @@ print(img.dtype.name)
 
 
 
-# 二、scikit-image 的使用
+# 二、scikit-image
 
 
 
