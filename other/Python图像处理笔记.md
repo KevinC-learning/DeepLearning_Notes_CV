@@ -1,3 +1,5 @@
+# 0、前言和目录
+
 基于 python 脚本语言开发的数字图片处理包，比如 PIL、Pillow、opencv、scikit-image 等。
 
 - PIL 和 Pillow 只提供最基础的数字图像处理，功能有限；
@@ -5,9 +7,15 @@
 - opencv 实际上是一个 c++ 库，只是提供了 python 接口，更新速度非常慢。
 - scikit-image 是基于 scipy 的一款图像处理包，它将图片作为 numpy 数组进行处理，正好与 matlab 一样，因此，我们最终选择 scikit-image 进行数字图像处理。
 
-
-
 学习：[python skimage图像处理(一) - 简书](<https://www.jianshu.com/p/f2e88197e81d>)
+
+## 目录
+
+[一、opencv-python 的使用](#一opencv-python-的使用)
+
+[二、scikit-image 的使用](#二scikit-image的使用)
+
+
 
 
 
@@ -15,7 +23,7 @@
 
 # 一、opencv-python 的使用
 
-## （1）opencv-python安装
+## 1. opencv-python安装
 
 **（1）Windows 下的安装**
 
@@ -49,11 +57,11 @@ import cv2
 
 
 
-## （2）opencv-python 图像处理
+## 2. opencv-python 图像处理
 
 ### OpenCV API 详解
 
-#### 1. cv2.imread() 和cv2.imwrite()
+#### 1）cv2.imread() 和cv2.imwrite()
 
 （1）
 
@@ -283,6 +291,13 @@ print(ann_img)
 > 这里提一下，我发现经过 cv.imread() 读取的图像，打印出来的三个维度的数值，是按照  BGR 顺序打印的。在使用 cv.imwrite() 写入输出图像的时候，第二个参数也得按照 BGR 顺序存储，所以如果label上色，记得按照 BGR 顺序赋值。
 >
 > 参考：[opencv使用BGR而非RGB的原因](<https://blog.csdn.net/weixin_35653315/article/details/73460022>)  
+>
+> ```
+> label_img = cv2.imread("./aaa.png")
+> label_img = cv2.cvtColor(label_img, cv2.COLOR_BGR2RGB)  # cv2默认为bgr顺序
+> ```
+>
+> 注：可以使用颜色空间转换函数 cv2.cvtColor 设置 cv2 的默认读取和写入通道顺序。关于该函数讲解见：[opencv中颜色空间转换函数 cv2.cvtColor()](<https://blog.csdn.net/u012193416/article/details/79312798>)
 
 ### label图像上色
 
@@ -304,7 +319,9 @@ print(ann_img[:2, :2])
 print('\n---------------\n')
 
 cv2.imwrite("label.png", ann_img[:2, :2])
-print(cv2.imread("label.png"))
+img = cv2.imread("label.png")
+print(img.shape)
+print(img)
 ```
 
 运行结果：
@@ -323,6 +340,7 @@ print(cv2.imread("label.png"))
 
 ---------------
 
+(2, 2, 3)
 [[[255 255 255]
   [255 255 255]]
 
@@ -330,16 +348,21 @@ print(cv2.imread("label.png"))
   [255 255 255]]]
 ```
 
-来分析下，先看 `print(ann_img[:2, :2])` 这行代码打印出来：
+可以看到本地保存下来的 label.png 信息，是 8bit 的：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190617173609.png)
+
+我们来分析下，先看 `print(ann_img[:2, :2])` 这行代码打印出来：
 
 ``` xml
 [[255 255]
  [255 255]]
 ```
 
-可以看出是两个维度的，且像素值是赋值的 255，没啥问题。然后 `cv2.imwrite("label.png", ann_img[:2, :2])` 磁盘写入并输出了 `label.png` 图像，然后我们再 `cv2.imread("label.png")` 读取和打印该图像像素值，结果：
+可以看出是两个维度的，且像素值是赋值的 255，没啥问题。然后 `cv2.imwrite("label.png", ann_img[:2, :2])` 磁盘写入并保存 `label.png` 到本地，然后我们再 `cv2.imread("label.png")` 读取和打印该图像 shape 和像素值，结果：
 
 ``` xml
+(2, 2, 3)
 [[[255 255 255]
   [255 255 255]]
 
@@ -349,9 +372,13 @@ print(cv2.imread("label.png"))
 
 可以看到维度由原来的 2 个维度变为 3 维的了，并且**第三个维度的值和前面维度的值是一样的**。
 
-> 
+> 解释：本质是因 img = cv2.imread("label.png")  默认以第二个参数为 flags=1 方式读取的（关于第二个参数的详解参考前面的内容）。改为 img = cv2.imread("label.png", 0) 读取，可以看到结果如下：
 >
-> 
+> ``` python
+> (2, 2)
+> [[[255 255]
+>   [255 255]]
+> ```
 
 ### 给lable上色
 
@@ -397,6 +424,36 @@ def color_annotation(label_path, output_path):
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190505170130.png)
 
 同样，其直方图的分布规律相同，第二种分布相对稀疏。——from：[图像处理/255.0 和/127.5 -1](<https://blog.csdn.net/u011276025/article/details/76050377>)
+
+
+
+## 3. 图像数据类型及转换
+
+在 skimage 中，一张图片就是一个简单的 numpy 数组，数组的数据类型有很多种，相互之间也可以转换。这些数据类型及取值范围如下表所示：
+
+| Data type | Range             |
+| --------- | ----------------- |
+| uint8     | 0 to 255          |
+| uint16    | 0 to 65535        |
+| uint32    | 0 to 232          |
+| float     | -1 to 1 or 0 to 1 |
+| int8      | -128 to 127       |
+| int16     | -32768 to 32767   |
+| int32     | -231 to 231 - 1   |
+
+一张图片的像素值范围是 [0, 255]，因此默认类型是 unit8。可用如下代码查看数据类型：
+
+``` python
+from skimage import io,data
+img=data.chelsea()
+print(img.dtype.name)
+```
+
+在上面的表中，特别注意的是 float 类型，它的范围是 [-1,1] 或 [0,1] 之间。一张彩色图片转换为灰度图后，它的类型就由 unit8 变成了 float。
+
+——from：[python数字图像处理（4）：图像数据类型及颜色空间转换](https://www.cnblogs.com/denny402/p/5122328.html)
+
+
 
 
 
