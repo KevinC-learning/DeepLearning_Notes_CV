@@ -1,4 +1,4 @@
-# 0、写在前面
+# 写在前面
 
 ## 前言
 
@@ -19,15 +19,365 @@
 
 ## 目录
 
+[各类图像库快速入门](#各类图像库快速入门)
+
 [一、opencv-python](#一opencv-python)
 
 [二、scikit-image](#二scikit-image)
 
 
 
+# 各类图像库快速入门
+
+总结下主流 Python 图像库的一些基本使用方法和需要注意的地方：
+
+1. opencv
+2. PIL(pillow)
+3. matplotlib.image
+4. scipy.misc
+5. skimage
+
+### opencv: cv2.imread
+
+图片读取操作：
+
+``` python
+import cv2
+import numpy as np
+
+#读入图片：默认彩色图，cv2.IMREAD_GRAYSCALE灰度图，cv2.IMREAD_UNCHANGED包含alpha通道
+img = cv2.imread('1.jpg')
+cv2.imshow('src',img)
+print(img.shape) # (h,w,c)
+print(img.size) # 像素总数目
+print(img.dtype)
+print(img)
+cv2.waitKey()
+```
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618012347.png)
+
+值得注意的是，**opencv 读进来的图片已经是一个 numpy 矩阵了，彩色图片维度是（高度，宽度，通道数）。数据类型是 uint8。** 
+
+```python
+#gray = cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE) #灰度图
+#cv2.imshow('gray',gray)
+#也可以这么写，先读入彩色图，再转灰度图
+src = cv2.imread('1.jpg')
+gray = cv2.cvtColor(src,cv2.COLOR_BGR2GRAY)
+cv2.imshow('gray',gray)
+print(gray.shape)
+print(gray.size)
+print(gray)
+cv2.waitKey()
+```
+
+上面提到了两种获取灰度图的方式，读进来的灰度图的矩阵格式是（高度，宽度）。
+
+```python
+#注意，计算图片路径是错的，Opencv也不会提醒你，但print img时得到的结果是None
+img2 = cv2.imread('2.jpg')
+print(img2)
+```
+
+结果：None
+
+```
+#如何解决“读到的图片不存在的问题”？ #加入判断语句，如果为空，做异常处理
+img2 = cv2.imread('2.jpg')
+if img2 == None:
+    print('fail to load image!')
+```
+
+结果：fail to load image!
+
+#### 图片矩阵变换
+
+opencv读入图片的矩阵格式是：（height,width,channels）。而在深度学习中，因为要对不同通道应用卷积，所以会采取另一种方式：（channels,height,width）。为了应对该要求，我们可以这么做
+
+```python
+#注意到，opencv读入的图片的彩色图是一个channel last的三维矩阵（h,w,c），即（高度，宽度，通道）
+#有时候在深度学习中用到的的图片矩阵形式可能是channel first，那我们可以这样转一下
+print(img.shape)
+img = img.transpose(2,0,1)
+print(img.shape)
+```
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618012615.png)
+
+在深度学习搭建CNN时，往往要做相应的图像数据处理，比如图像要扩展维度，比如扩展成`（batch_size,channels,height,width）`。对于这种要求，我们可以这么做。
+
+```
+#有时候还要扩展维度，比如有时候我们需要预测单张图片，要在要加一列做图片的个数，可以这么做
+img = np.expand_dims(img, axis=0)
+print(img.shape)
+```
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618012646.png)
+
+上面提到的是预测阶段时预测单张图片的扩展维度的操作，如果是训练阶段，构建batch，即得到这种形式：（batch_size,channels,height,width）。我一般喜欢这么做
+
+```python
+data_list = [] 
+loop:
+    im = cv2.imread('xxx.png')
+    data_list.append(im)
+data_arr = np.array(data_list)
+```
+
+这样子就能构造成我们想要的形式了。
+
+#### 图片归一化
+
+```
+#因为opencv读入的图片矩阵数值是0到255，有时我们需要对其进行归一化为0~1
+img3 = cv2.imread('1.jpg')
+img3 = img3.astype("float") / 255.0  #注意需要先转化数据类型为float
+print(img3.dtype)
+print(img3)
+```
+
+#### 存储图片
+
+```python
+#存储图片
+cv2.imwrite('test1.jpg',img3) #得到的是全黑的图片，因为我们把它归一化了
+#所以要得到可视化的图，需要先*255还原
+img3 = img3 * 255
+cv2.imwrite('test2.jpg',img3)  #这样就可以看到彩色原图了
+```
+
+#### opencv大坑之BGR
+
+opencv对于读进来的图片的通道排列是BGR，而不是主流的RGB！谨记！
+
+```python
+#opencv读入的矩阵是BGR，如果想转为RGB，可以这么转
+img4 = cv2.imread('1.jpg')
+img4 = cv2.cvtColor(img4,cv2.COLOR_BGR2RGB)
+```
+
+#### 访问像素
+
+```python
+#访问像素
+print(img4[10,10])  #3channels
+print(gray[10,10]) #1channel
+img4[10,10] = [255,255,255]
+gray[10,10] = 255
+print(img4[10,10])  #3channels
+print(gray[10,10]) #1channel
+```
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618012758.png)
+
+#### ROI操作
+
+```python
+#roi操作
+roi = img4[200:550,100:450,:]
+cv2.imshow('roi',roi)
+cv2.waitKey()
+```
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618012820.png)
+
+#### 通道操作
+
+```python
+#分离通道
+img5 = cv2.imread('1.jpg')
+b,g,r = cv2.split(img5)
+#合并通道
+img5 = cv2.merge((b,g,r))
+#也可以不拆分
+img5[:,:,2] = 0  #将红色通道值全部设0
+```
+
+### PIL：PIL.Image
+
+PIL 即 Python Imaging Library，也即为我们所称的 Pillow，是一个很流行的图像库，它比 opencv 更为轻巧，正因如此，它深受大众的喜爱。
+
+（略。。。请阅读参考原文）
+
+### matplotlib.image
+
+（略。。。请阅读参考原文）
+
+### scipy.misc
+
+（略。。。请阅读参考原文）
+
+### skimage.io
+
+（略。。。请阅读参考原文）
+
+### 总结
+
+1. 除了 opencv 读入的彩色图片以 BGR 顺序存储外，其他所有图像库读入彩色图片都以 RGB 存储。
+2. 除了 PIL 读入的图片是img类之外，其他库读进来的图片都是以 numpy 矩阵。
+3. 各大图像库的性能，老大哥当属opencv，无论是速度还是图片操作的全面性，都属于碾压的存在，毕竟他是一个巨大的 cv 专用库。下面那张图就是我从知乎盗来的一张关于各个主流图像库的一些性能比较图，从测试结果看来，opencv 确实胜出太多了。
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618013241.png)
+
+——更多内容请阅读原文：[Python各类图像库的图片读写方式总结](https://www.cnblogs.com/skyfsm/p/8276501.html)  【荐】
+
+### 再次总结
+
+#### 读取图片
+
+1 matplotlib.pylab：
+
+``` python
+import pylab as plt
+import numpy as np
+img = plt.imread('examples.png')
+print(type(img), img.dtype, np.min(img), np.max(img))
+[out]
+(<type 'numpy.ndarray'>, dtype('float32'), 0.0, 1.0)    # matplotlib读取进来的图片是float，0-1
+```
+
+2 PIL.image.open
+
+``` python
+from PIL import Image
+import numpy as np
+img = Image.open('examples.png')
+print(type(img), np.min(img), np.max(img))
+img = np.array(img)     # 将PIL格式图片转为numpy格式
+print(type(img), img.dtype, np.min(img), np.max(img))
+[out]
+(<class 'PIL.PngImagePlugin.PngImageFile'>, 0, 255)    # 注意，PIL是有自己的数据结构的，但是可以转换成numpy数组
+(<type 'numpy.ndarray'>, dtype('uint8'), 0, 255)    # 和用matplotlib读取不同，PIL和matlab相同，读进来图片和其存储在硬盘的样子是一样的，uint8，0-255
+```
+
+3 cv2.imread
+
+``` python
+import cv2
+import numpy as np
+img = cv2.imread('examples.png')    # 默认是读入为彩色图，即使原图是灰度图也会复制成三个相同的通道变成彩色图
+img_gray = cv2.imread('examples.png', 0)    # 第二个参数为0的时候读入为灰度图，即使原图是彩色图也会转成灰度图
+print(type(img), img.dtype, np.min(img), np.max(img))
+print(img.shape)
+print(img_gray.shape)
+[out]
+(<type 'numpy.ndarray'>, dtype('uint8'), 0, 255)    # opencv读进来的是numpy数组，类型是uint8，0-255
+(824, 987, 3)    # 彩色图3通道
+(824, 987)    # 灰度图单通道
+```
+
+注意，pylab.imread 和 PIL.Image.open读入的都是 RBG顺序，而 cv2.imread读入的是 BGR顺序，混合使用的时候要特备注意
+
+``` python
+import cv2
+import pylab as plt
+from PIL import Image
+import numpy as np
+img_plt = plt.imread('examples.png')
+img_pil = Image.open('examples.png')
+img_cv = cv2.imread('examples.png')
+print(img_plt[125, 555, :])
+print(np.array(img_pil)[125, 555, :] / 255.0)
+print(img_cv[125, 555, :] / 255.0)
+[out]
+[ 0.61176473  0.3764706   0.29019609]
+[ 0.61176471  0.37647059  0.29019608]
+[ 0.29019608  0.37647059  0.61176471]    # opencv的是BGR顺序
+```
+
+#### 显示图片
+
+1 matplotlib.pylab - plt.imshow，这个函数的实际上就是将一个 numpy 数组格式的 RGB 图像显示出来
+
+```python
+import pylab as plt
+import numpy as np
+img = plt.imread('examples.png')
+plt.imshow(img) 
+plt.show()
+```
+
+```python
+import pylab as plt
+from PIL import Image
+import numpy as np
+img = Image.open('examples.png')
+img_gray = img.convert('L')    #转换成灰度图像
+img = np.array(img)
+img_gray = np.array(img_gray)
+plt.imshow(img)    # or plt.imshow(img / 255.0)，matplotlib和matlab一样，如果是float类型的图像，范围是0-1才能正常imshow，如果是uint8图像，范围则需要是0-255
+plt.show()
+plt.imshow(img_gray, cmap=plt.gray())    # 显示灰度图要设置cmap参数
+plt.show()
+plt.imshow(Image.open('examples.png'))    # 实际上plt.imshow可以直接显示PIL格式图像
+plt.show()   
+```
+
+```python
+import pylab as plt
+import cv2
+import numpy as np
+img = cv2.imread('examples.png')
+plt.imshow(img[..., -1::-1])    # 因为opencv读取进来的是bgr顺序呢的，而imshow需要的是rgb顺序，因此需要先反过来
+plt.show()
+```
+
+2 cv2 - 不用考虑了，pylab.imshow方便多了
+
+#### 灰度图-RGB图相互转换
+
+1 PIL.Image
+
+```python
+from PIL import Image
+img = Image.open('examples.png')
+img_gray = img.convert('L')    # RGB转换成灰度图像
+img_rgb = img_gray.convert('RGB') # 灰度转RGB
+print(img)
+print(img_gray)
+print(img_rgb)
+
+[out]
+<PIL.PngImagePlugin.PngImageFile image mode=RGB size=987x824 at 0x7FC2CCAE04D0>
+<PIL.Image.Image image mode=L size=987x824 at 0x7FC2CCAE0990>
+<PIL.Image.Image image mode=RGB size=987x824 at 0x7FC2CCAE0250>
+```
+
+2 cv2（注意，opencv 在读入图片的时候就可以通过参数实现颜色通道的转换，下面是用别的方式实现）
+
+```python
+import cv2
+import pylab as plt
+img = cv2.imread('examples.png')
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # BGR转灰度
+img_bgr = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)    # 灰度转BRG
+img_rgb = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2RGB)    # 也可以灰度转RGB
+```
+
+### 保存图片
+
+1 PIL.image - 保存PIL格式的图片
+
+```python
+from PIL import Image
+img = Image.open('examples.png')
+img.save('examples2.png')
+img_gray = img.convert('L')
+img_gray.save('examples_gray.png')    # 不管是灰度还是彩色，直接用save函数保存就可以，但注意，只有PIL格式的图片能够用save函数
+```
+
+2 cv2.imwrite - 保存numpy格式的图片
+
+```python
+import cv2
+img = cv2.imread('examples.png')    # 这是BGR图片
+cv2.imwrite('examples2.png', img)    # 这里也应该用BGR图片保存，这里要非常注意，因为用pylab或PIL读入的图片都是RGB的，如果要用opencv存图片就必须做一个转换
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+cv2.imwrite('examples_gray.png', img_gray)
+```
 
 
----
 
 # 一、opencv-python
 
