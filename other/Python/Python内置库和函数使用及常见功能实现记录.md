@@ -1,4 +1,4 @@
-# Python 函数
+# 一、Python 函数
 
 ## 断言 assert 的用法
 
@@ -143,11 +143,89 @@ yield 的好处是显而易见的，把一个函数改写为一个 generator 就
 
 ——from：[Python yield 使用浅析 | 菜鸟教程](<http://www.runoob.com/w3cnote/python-yield-used-analysis.html>)
 
+## Python 中的 os.path 模块
+
+以下实例演示了 os.path 相关方法的使用：
+
+``` python
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+ 
+import os
+ 
+print( os.path.basename('/root/runoob.txt') )   # 返回文件名
+print( os.path.dirname('/root/runoob.txt') )    # 返回目录路径
+print( os.path.split('/root/runoob.txt') )      # 分割文件名与路径
+print( os.path.join('root','test','runoob.txt') )  # 将目录和文件名合成一个路径
+```
+
+> 补充一个：`os.path.splitext(“文件路径”)` 分离文件名与扩展名；默认返回 (fname,fextension) 元组，可做分片操作。例子：
+>
+> ``` python
+> import os
+> path_01='D:/User/wgy/workplace/data/notMNIST_large.tar.gar'
+> path_02='D:/User/wgy/workplace/data/notMNIST_large'
+> root_01=os.path.splitext(path_01)
+> root_02=os.path.splitext(path_02)
+> print(root_01)
+> print(root_02)
+> ```
+>
+> 结果：
+>
+> ``` xml
+> ('D:/User/wgy/workplace/data/notMNIST_large.tar', '.gar')
+> ('D:/User/wgy/workplace/data/notMNIST_large', '')
+> ```
+
+执行以上程序输出结果为：
+
+``` xml
+runoob.txt
+/root
+('/root', 'runoob.txt')
+root/test/runoob.txt
+```
+
+以下实例输出文件的相关信息。
+
+``` python
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+ 
+import os
+import time
+ 
+file='/root/runoob.txt' # 文件路径
+ 
+print( os.path.getatime(file) )   # 输出最近访问时间
+print( os.path.getctime(file) )   # 输出文件创建时间
+print( os.path.getmtime(file) )   # 输出最近修改时间
+print( time.gmtime(os.path.getmtime(file)) )  # 以struct_time形式输出最近修改时间
+print( os.path.getsize(file) )   # 输出文件大小（字节为单位）
+print( os.path.abspath(file) )   # 输出绝对路径
+print( os.path.normpath(file) )  # 规范path字符串形式
+```
+
+执行以上程序输出结果为：
+
+``` python
+1539052805.5735736
+1539052805.5775735
+1539052805.5735736
+time.struct_time(tm_year=2018, tm_mon=10, tm_mday=9, tm_hour=2, tm_min=40, tm_sec=5, tm_wday=1, tm_yday=282, tm_isdst=0)
+7
+/root/runoob.txt
+/root/runoob.txt
+```
+
+——from：[Python os.path() 模块 | 菜鸟教程](<https://www.runoob.com/python/python-os-path.html>)
 
 
-# Python实现功能
 
-## Python 保存数据到本地文件
+# 二、Python实现功能
+
+## 保存数据到本地文件
 
 （1）[python保存数据到本地文件](<https://blog.csdn.net/rosefun96/article/details/78877452>)
 
@@ -192,7 +270,7 @@ fileObject.close()
 
 
 
-## Python计算程序运行时间
+## 计算程序运行时间
 
 方法1：
 
@@ -391,3 +469,271 @@ CPU执行时间: 0.04683999999997468
 所以，这给了我一个启发，以后写代码时，要精简不必要的开销，譬如经常使用print()。。。
 
 ——from：[Python计算程序运行时间—time.time()、time.clock() - 知乎](<https://zhuanlan.zhihu.com/p/33450843>)
+
+## 判断字符串是否包含子字符串几种方法
+
+1、使用成员操作符 in
+
+``` python
+>>> s='nihao,shijie'
+>>> t='nihao'
+>>> result = t in s
+>>> print result
+True
+```
+
+2、使用 string 模块的 find()/rfind() 方法
+
+``` python
+>>> import string
+>>> s='nihao,shijie'
+>>> t='nihao'
+>>> result = string.find(s,t)!=-1
+>>> print result
+True
+>>> result = string.rfind(s,t)!=-1
+>>> print result
+True 
+```
+
+详细参考：[Python find()方法 | 菜鸟教程](<https://www.runoob.com/python/att-string-find.html>)  |  [Python rfind()方法 | 菜鸟教程](<https://www.runoob.com/python/att-string-rfind.html>)
+
+3、使用 string 模块的 index()/rindex() 方法 
+
+index()/rindex() 方法跟 find()/rfind() 方法一样，只不过找不到子字符串的时候会报一个 ValueError 异常。
+
+``` python
+import string
+
+def find_string(s,t):
+    try:
+        string.index(s,t)
+        return True
+    except(ValueError): 
+        return False
+
+s='nihao,shijie'
+t='nihao'
+result = find_string(s,t)
+print result  #True
+```
+
+详细参考：[Python index()方法 | 菜鸟教程](<https://www.runoob.com/python/att-string-index.html>)  |  [Python rindex()方法 | 菜鸟教程](<https://www.runoob.com/python/att-string-rindex.html>)
+
+4、使用字符串对象的 find()/rfind()、index()/rindex() 和 count() 方法
+
+``` python
+>>> s='nihao,shijie'
+>>> t='nihao'
+>>> result = s.find(t)>=0
+>>> print result
+True
+>>> result=s.count(t)>0
+>>> print result
+True
+>>> result=s.index(t)>=0
+>>> print result
+True
+```
+
+——from：[Python判断一个字符串是否包含子串的几种方法](<https://blog.csdn.net/yl2isoft/article/details/52079960>)
+
+## 遍历文件夹下所有文件及目录 os.walk
+
+遍历文件夹中的所有子文件夹及子文件使用 os.walk() 方法非常简单。 
+
+语法格式大致如下：
+
+```python
+os.walk(top[, topdown=True[, onerror=None[, followlinks=False]]])
+```
+
+- **top** -- 是你所要遍历的目录的地址, 返回的是一个三元组(root,dirs,files)，`【文件夹路径, 文件夹名字, 文件名】`。
+  - root 所指的是当前正在遍历的这个文件夹的本身的地址
+  - dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
+  - files 同样是 list , 内容是该文件夹中所有的文件(不包括子目录)
+- **topdown** --可选，为 True，则优先遍历 top 目录，否则优先遍历 top 的子目录(默认为开启)。如果 topdown 参数为 True，walk 会遍历 top文件夹，与 top 文件夹中每一个子目录。
+- **onerror** -- 可选，需要一个 callable 对象，当 walk 需要异常时，会调用。
+- **followlinks** -- 可选，如果为 True，则会遍历目录下的快捷方式(linux 下是软连接 symbolic link )实际所指的目录(默认关闭)，如果为 False，则优先遍历 top 的子目录。
+
+示例如下：
+
+1、**显示目录下所有文件**
+
+``` python
+#conding=utf8  
+import os 
+g = os.walk(r"e:\test")  
+for path,dir_list,file_list in g:  
+    for file_name in file_list:  
+        print(os.path.join(path, file_name) )
+```
+
+2、**显示所有子目录**
+
+``` python
+#conding=utf8  
+import os 
+g = os.walk("e:\test")  
+for path,dir_list,file_list in g:  
+    for dir_name in dir_list:
+        print(os.path.join(path, dir_name) )
+```
+
+参考：[Python遍历文件夹下所有文件及目录](<https://blog.csdn.net/mighty13/article/details/77995857>)  | [Python os.walk() 方法 | 菜鸟教程](<https://www.runoob.com/python/os-walk.html>)
+
+---
+
+创建一个包含子文件夹和文件的 walk 文件夹，通过终端 tree 看一下目录结构：
+
+```xml
+walk
+├── test1
+│   ├── test1_1
+│   │   ├── test1_1_1
+│   │   └── test1_1_a.py
+│   ├── test1_2
+│   │   └── test1_2_1
+│   ├── test1_3
+│   ├── test1_a.py
+│   └── test1_b.py
+├── test2
+│   ├── test2_1
+│   └── test2_a.py
+├── test3
+└── test.py
+```
+
+我们通过 for 循环遍历 os.walk() 的返回结果：
+
+```python
+import os
+for root, dirs, files in os.walk("/home/python/walk",True):
+    print("root:%s"%root)
+    print("dirs:%s"%dirs)
+    print("files:%s"%files)
+    print("-------------------------------")
+```
+
+运行结果如下：
+
+``` xml
+root:/home/python/walk
+dirs:['test2', 'test1', 'test3']
+files:['test.py']
+-------------------------------
+root:/home/python/walk/test2
+dirs:['test2_1']
+files:['test2_a.py']
+-------------------------------
+root:/home/python/walk/test2/test2_1
+dirs:[]
+files:[]
+-------------------------------
+root:/home/python/walk/test1
+dirs:['test1_2', 'test1_3', 'test1_1']
+files:['test1_a.py', 'test1_b.py']
+-------------------------------
+root:/home/python/walk/test1/test1_2
+dirs:['test1_2_1']
+files:[]
+-------------------------------
+root:/home/python/walk/test1/test1_2/test1_2_1
+dirs:[]
+files:[]
+-------------------------------
+root:/home/python/walk/test1/test1_3
+dirs:[]
+files:[]
+-------------------------------
+root:/home/python/walk/test1/test1_1
+dirs:['test1_1_1']
+files:['test1_1_a.py']
+-------------------------------
+root:/home/python/walk/test1/test1_1/test1_1_1
+dirs:[]
+files:[]
+-------------------------------
+root:/home/python/walk/test3
+dirs:[]
+files:[]
+-------------------------------
+```
+
+注意：如果你传入的需要遍历的路径是一个相对路径的话，那么返回的 dirpath 即 root 也将是相对路径。
+
+使用 os.walk() 获取文件夹下的文件大小：
+
+```python
+import os
+from os.path import join,getsize
+def getdirsize(dir):
+    size = 0 
+    for root,dirs,files in os.walk(dir):
+        size += sum([getsize(join(root,name)) for name in files])
+    return size
+```
+
+——from：[os.walk的使用及获取文件夹下所有文件的大小 - 简书](<https://www.jianshu.com/p/a5ec32322fd6>)
+
+##读取文件夹下的所有文件 os.listdir
+
+`os.listdir()` 方法用于返回**指定的文件夹包含的文件或文件夹的名字的列表**。这个列表以字母顺序。 它不包括 '.' 和 '..' 即使它在文件夹中。只支持在 Unix, Windows 下使用。
+
+示例：
+
+``` python
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+import os, sys
+
+# 打开文件
+path = "/var/www/html/"
+dirs = os.listdir( path )
+
+# 输出所有文件和文件夹
+for file in dirs:
+   print file
+```
+
+执行结果：
+
+``` xml
+test.htm
+stamp
+faq.htm
+_vti_txt
+robots.txt
+itemlisting
+resumelisting
+writing_effective_resume.htm
+advertisebusiness.htm
+papers
+resume
+```
+
+——from：[Python os.listdir() 方法 | 菜鸟教程](<https://www.runoob.com/python/os-listdir.html>)
+
+读取某文件夹下的所有文件如下：
+
+``` python
+import os
+path = "D:/Python34/news" #文件夹目录
+files= os.listdir(path) #得到文件夹下的所有文件名称
+s = []
+for file in files: #遍历文件夹
+     if not os.path.isdir(file): #判断是否是文件夹，不是文件夹才打开
+          f = open(path+"/"+file); #打开文件
+          iter_f = iter(f); #创建迭代器
+          str = ""
+          for line in iter_f: #遍历文件，一行行遍历，读取文本
+              str = str + line
+          s.append(str) #每个文件的文本存到list中
+print(s) #打印结果
+```
+
+> 注：open(path) 是打开某个文件。ite r是 python 的迭代器。  
+
+你也可以把遍历文件夹的操作定义成一个函数，如果是文件夹就不断迭代遍历。进而读取文件夹下所有的文件（包括文件夹里中的文件）
+

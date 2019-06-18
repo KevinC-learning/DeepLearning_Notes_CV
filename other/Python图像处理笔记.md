@@ -37,7 +37,9 @@
 4. scipy.misc
 5. skimage
 
-### opencv: cv2.imread
+### opencv
+
+#### cv2.imread
 
 图片读取操作：
 
@@ -182,7 +184,7 @@ cv2.waitKey()
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618012820.png)
 
-#### 通道操作
+#### 通道拆分(cv2.split)及合并(cv2.merge)
 
 ```python
 #分离通道
@@ -192,6 +194,23 @@ b,g,r = cv2.split(img5)
 img5 = cv2.merge((b,g,r))
 #也可以不拆分
 img5[:,:,2] = 0  #将红色通道值全部设0
+```
+
+补充：——from：<https://www.jianshu.com/p/9fd339f806a7>
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618110806.png)
+
+在 cv2.split 分离出的图像基础上，扩展另外两个通道，但另外两个通道值为 0，而得到上面的这样的图像。代码如下：
+
+``` python
+# 生成一个值为0的单通道数组
+zeros = np.zeros(image.shape[:2], dtype = "uint8")
+
+# 分别扩展B、G、R成为三通道。另外两个通道用上面的值为0的数组填充
+cv2.imshow("Blue", cv2.merge([B, zeros, zeros]))
+cv2.imshow("Green", cv2.merge([zeros, G, zeros]))
+cv2.imshow("Red", cv2.merge([zeros, zeros, R]))
+cv2.waitKey(0)
 ```
 
 ### PIL：PIL.Image

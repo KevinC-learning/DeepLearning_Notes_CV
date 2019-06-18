@@ -3,7 +3,7 @@
 # 学习记录
 
 
-## 1. 写在前面
+## 1. 资料索引
 
 学习来源：炼数成金的《深度学习框架TensorFlow学习与应用》视频 + 网上博客内容  。
 
@@ -53,6 +53,8 @@
 - 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
 - [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
 
+
+
 ## 2. tensorflow学习
 
 ### (1) Python、科学计数库等基础
@@ -63,7 +65,7 @@
 - [Python文件执行顺序](./other/Python/Python文件执行顺序.md)
 - [Python基础入门笔记（一）](./other/Python/Python基础入门笔记（一）.md)
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
-- [Python内置库和函数使用及常见功能实现](./other/Python/Python内置库和函数使用及常见功能实现.md)
+- [Python内置库和函数使用及常见功能实现记录](./other/Python/Python内置库和函数使用及常见功能实现记录.md)
 - Python 网上博文：
   - [pyhton中`__pycache__`文件夹的产生与作用](<https://blog.csdn.net/yitiaodashu/article/details/79023987>)
   - [python自定义异常和主动抛出异常（raise）](<https://blog.csdn.net/skullFang/article/details/78820541>)
@@ -124,8 +126,10 @@
 笔记补充：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md)  这里没记录的和没记全的内容可以下面【<a href="#bowen">网上博文</a>】找找看！！！
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) 【荐】 ，另外，这里没记录和没记全的内容通过下面【<a href="#bowen">网上博文</a>】找找看！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
+
+
 
 ## 3. keras 学习
 
@@ -158,6 +162,8 @@
   > ```
 
 - [keras中的回调函数](<https://blog.csdn.net/jiandanjinxin/article/details/77097910>)  [荐]
+
+
 
 <a name="bowen"></a>
 
@@ -194,10 +200,14 @@ Batch Normalization：
 
 - [Batch Normalization学习笔记及其实现 - 知乎](<https://zhuanlan.zhihu.com/p/26138673>)
 
+
+
 ## 5. MNIST
 
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
+
+
 
 ## 6. TF快速入门总结
 
