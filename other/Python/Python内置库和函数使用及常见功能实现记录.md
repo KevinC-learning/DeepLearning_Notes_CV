@@ -232,6 +232,45 @@ time.struct_time(tm_year=2018, tm_mon=10, tm_mday=9, tm_hour=2, tm_min=40, tm_se
 
 ——from：[Python2.x 和 Python3.x 中 raw_input( ) 和 input( ) 区别 | 菜鸟教程](<https://www.runoob.com/w3cnote/python2-python3-raw_input-and-input.html>)
 
+## Python 数据类型转换
+
+（1）其他 --> int
+
+str -> int：（如果字符串中有数字(0-9)和正负号(+/-)以外的字符，就会报错。）
+
+``` python
+int('1209')     # 1209
+int('-12')      # -12
+int('+1008')    # 1008
+```
+
+（2）其他 --> flot
+
+str -> float：（如果字符串含有正负号(+/-)、数字(0-9)和小数点(.)以外的字符，则不支持转换。）
+
+``` python
+float('-1209')          # -1209.0
+float('-0120.29023')    # -120.29023
+```
+
+（3）其他 --> str
+
+`str()` 函数可以将任意对象转换为字符串。
+
+int -> str：（int 转换 str 会直接完全转换）
+
+```py
+str(12)     # 12
+```
+
+float -> str：（float 转换 str 会去除末位为 0 的小数部分。）
+
+```py
+str(-12.90)     # -12.9
+```
+
+更多参考：[史上最全的 Python 3 类型转换指南 - 格物](<https://shockerli.net/post/python3-data-type-convert/>)
+
 
 
 # 二、Python实现功能
@@ -748,3 +787,64 @@ print(s) #打印结果
 
 你也可以把遍历文件夹的操作定义成一个函数，如果是文件夹就不断迭代遍历。进而读取文件夹下所有的文件（包括文件夹里中的文件）
 
+## 使用 pyinstaller 打包 py 文件成可执行文件，如exe文件
+
+PyInstaller 可以用来打包 python 应用程序，打包完的程序就可以在没有安装Python解释器的机器上运行了。 
+
+PyInstaller 支持 Python 2.7 和 Python 3.3+。可以在 Windows、Mac OS X 和 Linux 上使用，但是并不是跨平台的，而是说你要是希望打包成 `.exe` 文件，需要在 Windows 系统上运行 PyInstaller 进行打包工作；打包成 mac app，需要在 Mac OS 上使用。
+
+1、安装
+
+①Linux or MacOS
+
+你可以从[PyPi](https://pypi.python.org/pypi/PyInstaller/)上下载安装，当然也可以使用 pip 或者 easy_install 来安装。
+
+``` xml
+pip install pyinstaller
+or
+easy_install pyinstaller
+```
+
+版本更新：
+
+``` xml
+pip install --upgrade pyinstaller
+or
+easy_install --upgrade pyinstaller
+```
+
+②windows
+
+Windows 上运行 PyInstaller 还需要 PyWin32 或者 pypiwin32，其中 pypiwin32 在你安装 PyInstaller 的时候会自动安装。
+
+使用 pip 安装：`pip install pyinstaller` 
+
+切换到需要打包的目录，执行打包：
+
+``` python
+pyinstaller dpython.py
+```
+
+执行完毕后，源文件所在目录将生成 dist 和 build 两个文件夹。 其中，build 目录是 pyinstaller 存储临时文件的目录，可以安全删除。最终的打包程序在 dist 内部的 dpython 目录中。目录中其他文件是可执行文件 dpython.exe 的动态链接库。
+
+参数：
+
+| 参数 | 含义                                                         |
+| ---- | ------------------------------------------------------------ |
+| `-F` | 指定打包后只生成一个exe格式的文件                            |
+| `-D` | –onedir 创建一个目录，包含exe文件，但会依赖很多文件（默认选项） |
+| `-c` | –console, –nowindowed 使用控制台，无界面(默认)               |
+| `-w` | –windowed, –noconsole 使用窗口，无控制台                     |
+| `-p` | 添加搜索路径，让其找到对应的库。                             |
+| `-i` | 改变生成程序的icon图标                                       |
+
+例如使用：`pyinstaller -F test.py` 打包。
+
+注意如果有引用第三方库的话，这种方法打包的 exe 会提示缺少模块，这时候需要把所有引用的第三方库也一起打包进去：`pyinstaller -F -p C:\Users\Lenovo\AppData\Local\Programs\Python\Python36\Lib; test.py`
+
+参考及相关阅读：
+
+- [使用 pyinstaller 打包 py 文件成 exe 程序 - SegmentFault 思否](<https://segmentfault.com/a/1190000014216548>)
+- [超详细Pyinstaller打包exe+反编译Pyinstaller打包的exe教程+防止反编译教程 - 知乎](<https://zhuanlan.zhihu.com/p/59442292>)
+- [pyinstaller简洁教程 | Legendtkl](<http://legendtkl.com/2015/11/06/pyinstaller/>)
+- [ 如何使用pyinstaller打包python脚本？ - 知乎](<https://www.zhihu.com/question/52660083>)

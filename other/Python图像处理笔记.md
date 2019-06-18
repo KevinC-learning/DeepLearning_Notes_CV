@@ -1269,4 +1269,24 @@ else:
     print("Exit.")
 ```
 
-根据提示输入相关参数。注：raw_input 已在 python3 中不可用，py2、py3 版本统一为 input。
+根据提示输入相关参数。
+
+注意，输入哪个通道 band 的时候，继续运行会报错。原因是：
+
+> 在 Python3.x 中 **raw_input( )** 和 **input( )** 进行了整合，去除了 **raw_input( )**，仅保留了 **input( )** 函数，其接收任意任性输入，将<u>**所有输入默认为字符串处理**</u>，并返回字符串类型。详细：[Python2.x 和 Python3.x 中 raw_input( ) 和 input( ) 区别 | 菜鸟教程](<https://www.runoob.com/w3cnote/python2-python3-raw_input-and-input.html>)
+>
+> 所以代码需要改下，在需要用户输入的两处加上，如下：
+>
+> ``` python
+> # 用户输入生成缩略图的波段
+> selected_band = input(
+>     bandNumber.__str__() + " band(s) in total.Input the number of band(1-" + bandNumber.__str__() + "):\n")
+> selected_band = int(selected_band) # 加上的
+> # 获取波段内容
+> band = dataset.GetRasterBand(selected_band)
+> 
+> # 设置缩放比例因子
+> scale = 0.1
+> scale = input("Input scale factor(0-1):\n")
+> scale = float(scale)  # 加上的
+> ```
