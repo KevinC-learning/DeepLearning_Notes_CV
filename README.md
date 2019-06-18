@@ -69,6 +69,7 @@
 - Python 网上博文：
   - [pyhton中`__pycache__`文件夹的产生与作用](<https://blog.csdn.net/yitiaodashu/article/details/79023987>)
   - [python自定义异常和主动抛出异常（raise）](<https://blog.csdn.net/skullFang/article/details/78820541>)
+  - 
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 - [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
@@ -82,7 +83,7 @@
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
   - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  - 可用于计算准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 等评价指标。 [荐] 
-- [Python图像处理笔记(含opencv-python、scikit-image等)](./other/Python图像处理笔记.md)  | 可能用到 matlab，可以学习下：[matlab的安装和学习](./other/matlab学习.md)
+- [Python图像处理笔记(含opencv-python/scikit-image/gdal库等等)](./other/Python图像处理笔记.md)  | 可能用到 matlab，同时学习下：[matlab的安装和学习](./other/matlab学习.md)
 - [深度学习框架对比.md](./other/深度学习框架对比.md)
 - ……
 
@@ -215,8 +216,6 @@ Batch Normalization：
 
 - [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
 - [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
-
-
 
 
 

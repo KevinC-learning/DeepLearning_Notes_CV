@@ -19,11 +19,11 @@
 
 ## 目录
 
-[各类图像库快速入门](#各类图像库快速入门)
-
-[一、opencv-python](#一opencv-python)
-
-[二、scikit-image](#二scikit-image)
+- [各类图像库快速入门](#各类图像库快速入门)
+- [一、opencv-python](#一opencv-python)
+- [二、scikit-image](#二scikit-image)
+- [三、libtiff.TIFF](#三libtiffTIFF)
+- [四、开源栅格空间数据转换库GDAL](#四开源栅格空间数据读取转换库GDAL)
 
 
 
@@ -1044,5 +1044,229 @@ def tiff2Stack(filePath):
 
 
 
+# 四、开源栅格空间数据转换库GDAL
+
+GDAL(Geospatial Data Abstraction Library)是一个的开源栅格空间数据读取/转换库。其中还有一系列命令行工具来进行数据转换和处理。
+
+而 ORG 项目是 GDAL 的一个分支，功能与 GDAL 类似，只不过它提供对矢量数据的支持。 也就是说，可以用 ORG 的库来读取、处理 shapefile 等矢量数据（如果想显示 shapefile，还需要用其他工具）。
+
+有很多著名的 GIS 类产品都使用了 GDAL/OGR 库，包括 ESRI 的 ARCGIS 9.3，Google Earth 和跨平台的 GRASS GIS 系统。利用 GDAL/OGR 库，可以使基于 Linux 的地理空间数据管理系统提供对矢量和栅格文件数据的支持。
+
+外文名：Geospatial Data Abstraction Library 
+
+简    称：GDAL 
+
+性    质：开源栅格空间数据转换库
+
+用    途：进行数据转换和处理
+
+这里引用一篇博主的博文，提到使用 GDAL 的缘由：
+
+> 之所以想在 Python 下使用 GDAL，其实源自一个很实际的需求。虽然 OpenCV 处理图像能力很强， 但是有个短板就是无法加载真正的遥感影像进行处理。因为遥感影像原图一般都 1G 多， 利用 OpenCV 直接打开会提示内存不足。 于是自然地在网上找 OpenCV 打开大图像的相关内容，发现并没有这方面的资料可以参考。 但我们又有读取原始遥感影像的需求。所以必须要解决这个问题。 于是自然想到了两个办法，一是利用  Python 读取大文件的方法。但是看了相关内容后发现， 主要是针对文本文件的读取，并不适合影像。于是放弃。第二种方法是使用 GDAL 来读取遥感影像。 这种方法就是传统也是最有效的办法。
+
+源文请阅读：[Python下GDAL安装与使用]([http://zhaoxuhui.top/blog/2017/06/14/Python%E4%B8%8B%E7%9A%84GDAL%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8.html](http://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html)) - 含 GDAL 的安装和使用。写的很详细。【荐】
+
+以下内容为对原文的主要要点摘入，和自己的理解以及实操，实际按照步骤来是可行的。
+
+## 1. Python下的 GDAL 安装
+
+在 Python下安装 GDAL 其实可以分两大部分，一部分是”Core”的安装，另一部分是”Binding”的安装。 可以理解为 **Core 是 GDAL 的公有 DLL 库，所有语言都会调用这些 DLL 实现功能，而 Binding 则相当于是这些库的 Python 打包接口，以便 Python 可以调用。** 虽然也可以使用 pip 安装”pip install gdal”，但是经过测试会有各种编译的错误，所以不推荐用这种方式安装。 在【[这篇博客](https://zhaoxuhui.top/blog/2017/12/17/上传自己编写的包到PYPI.html#5测试)】中对不同环境下安装 GDAL 进行了简单的总结，以下为其内容的摘入：
+
+> 不过这里有个问题需要注意。就是 GDAL 的库并不太好安装，直接使用 `pip install gdal` 很有可能会失败。 因为安装的是源码包，所以在安装前会编译，而编译又需要用到其它依赖，所以失败的可能性很大。 
+>
+> 如果你是 Windows 用户，那么你可以在【[这个网站](https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal)】搜索下载对应的 GDAL 预先编译好的 wheel 包，然后本地安装即可，一般不会出现问题。或者，如果你使用 Anaconda 环境，那么你可以直接 `conda install gdal`，Anaconda 会自动帮你编译、安装好 GDAL。 （2018-8-7补充：有时可能会出现安装成功，但**使用时报找不到 DLL 的错误。**这主要是因为**虽然 Conda 把 GDAL 包给装了，但是并没有安装完全依赖的DLL。** 所以解决办法就是按照【[这篇博客](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html)】中提到的，安装一下 GDAL Core，基本就能解决问题了。）
+
+**我自己来复述下上面引用表达的意思吧，简单说，想要在 Python 环境安装好 GDAL：**
+
+- 使用 `pip install gdal` 很有可能会失败。 因为安装的是源码包，所以在安装前会编译，而编译又需要用到其它依赖，所以失败的可能性很大。
+
+- 如果使用的 Anconada 环境，可以考虑直接使用 `pip install gdal` 进行安装，可以安装成功，但是在编写 python 代码使用过程中，可能会报找不到 DLL 的错误。（注：在我后面运行某代码，确实有出现了找不到 DLL 的问题）
+  - 主要原因是 conda 把 GDAL 包安装了，但并没有安装完全依赖的 DLL。所以解决办法就是按照【[这篇博客](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html)】提到的，**先安装好 GDAL Core**，就可以解决问题。
+
+所以我们先安装好 GDAL Core 吧。按照如下方式分别安装好：`gdal-300-1911-x64-core.msi` 、`GDAL-3.0.0.win-amd64-py3.6.msi`（即 GDAL for Python）。
+
+### 先GDAL Core 安装
+
+1、下载安装包
+
+打开这个[网站](https://www.gisinternals.com/release.php)如下图，选择对应的安装包。
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618174654.png)
+
+选择时有几个需要注意的地方。首先是 Compiler，这个版本要和你电脑上的VS版本对应。 其次是 Arch.，注意这里并不是与你系统的位数保持一致，而是**要和 Python 位数保持一致。** 假设某电脑上有 VS2010，系统是 64 位但安装了 32 位的 Python， 所以最终选择的版本是 `release-1911-gdal-3-0-0-mapserver-7-4-0`。 点击便会进入下一个界面，可以看到有很的可供选择。
+
+怎么选择？首先根据电脑安装的 Python 版本选择对应的安装包，例如我的电脑上 Python 是 3.6 版本，Python 是 64 位的。我如下选择安装包（红色框）。
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618175603.png)
+
+选择好后点击相应的安装包下载即可。 要注意底下的提示，告诉我们在安装好 Core 后，需要手动将路径添加到系统变量中，否则可能找不到。
+
+2、安装
+
+1）首先安装 gdal-300-1911-x64-core.msi
+
+下一步下一步这样的操作，略。注意：安装完毕，添加 `C:\Program Files\GDAL\` 到 Path 中。
+
+检测是否添加成功，可以打开系统的“运行”，然后输入 `gdalinfo –-version`，如果出现如下提示说明安装成功。
+
+2）安装 GDAL-3.0.0.win-amd64-py3.6.msi（即 GDAL for Python）
+
+点击下一步下一步的操作。注意：其中某一步的页面，第二项选择”Entire feature…“，同时在下面的路径中填写本地的 Python 安装路径，这样程序会自动把文件放到 Lib\site-packages\ 下面，很方便。
+
+3、测试
+
+最后我们可以打开 PyCharm 测试一下，可以看到导入包没有问题，程序正常退出。这样 GDAL 的 Python 环境就配置安装完了。
+
+``` python
+from osgeo import gdal
+from osgeo.gadlconst import *
+```
+
+### 再安装 GDAL Binding
+
+1、方法一：本地安装
+
+先进入网址：<https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal>，根据 Python 版本选择相应的 GDAL 下载。本人根据自己 Python 版本 3.6、64位，选择的为：`GDAL‑3.0.0‑cp36‑cp36m‑win_amd64.whl`。
+
+然后使用你想要的安装 GDAL 到哪个 Python 环境，选择那个环境的 pip 进行安装即可：`pip install GDAL‑3.0.0‑cp36‑cp36m‑win_amd64.whl`
+
+2、方法二：使用 pip 或 conda 安装
+
+- 使用 `pip install gdal` 安装，最前面也提到，使用 pip 安装，“经过测试会有各种编译的错误“，所以不推荐该方式。
+- 如果有 Anconda 环境，可以考虑使用 `conda install gdal` 安装试试。
 
 
+
+## 2. GDAL读取遥感影像
+
+### 1、影像基本信息获取
+
+利用GDAL读取遥感原始影像非常简单，代码如下：
+
+``` python
+from osgeo import gdal
+from gdalconst import *
+
+dataset = gdal.Open(r"E:\GF2_PMS1__20150212_L1A0000647768-MSS1 (2).tif", GA_ReadOnly)
+if dataset is None:
+    print("None")
+else:
+    print ('Driver:\n', 'ShortName:', dataset.GetDriver().ShortName, 'LongName:', dataset.GetDriver().LongName)
+    print ('Size is:\n', dataset.RasterXSize, '*', dataset.RasterYSize, '*', dataset.RasterCount)
+    print ('Projection is ', dataset.GetProjection())
+```
+
+结果如下，在控制台中输出了文件的相关信息：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618185758.png)
+
+### 2、影像数据读取
+
+**影像读取实例**：下面代码展示了读取一幅遥感印象其中一个波段某一区域的影像，并显示出来。
+
+``` python
+# coding=utf-8
+from osgeo import gdal
+from gdalconst import *
+from matplotlib import pyplot as plt
+
+# 以只读方式打开遥感影像
+dataset = gdal.Open(r"E:\GF2_PMS1__20150212_L1A0000647768-MSS1 (2).tif", GA_ReadOnly)
+
+
+
+# 输出影像信息
+print('Raster Info:')
+print('Driver:', dataset.GetDriver().ShortName)
+print('Description:', dataset.GetDescription())
+print('BandCount:', dataset.RasterCount)
+print('\n')
+
+# 获取影像的第一个波段
+band_b = dataset.GetRasterBand(1)
+
+# 输出波段信息
+print('Band Info:')
+print('XSize:', band_b.XSize)
+print('YSize:', band_b.YSize)
+print('DataType:', band_b.DataType)
+print('Min&Max:', band_b.ComputeRasterMinMax())
+
+# 读取第一个波段中从(4000,7300)开始，x、y方向各400像素的范围
+data = band_b.ReadAsArray(4000, 4300, 400, 400)
+
+# 调用Matplotlib以灰度形式显示图像
+plt.imshow(data, cmap='gray')
+plt.show()
+```
+
+控制台打印结果如下：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618190345.png)
+
+显示的图像信息：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618190431.png)
+
+### 3、实例练习
+
+基于上面的知识，这里进行一个简单的练习，即利用 GDAL 为遥感影像制作小尺寸的缩略图。
+
+``` python
+# coding=utf-8
+from osgeo import gdal
+from gdalconst import *
+from matplotlib import pyplot as plt
+
+# 用户输入影像路径
+image_path = input("Input image path:\n")
+
+# 以只读方式打开遥感影像
+dataset = gdal.Open(image_path, GA_ReadOnly)
+
+# 获取影像波段数
+bandNumber = dataset.RasterCount
+
+# 用户输入生成缩略图的波段
+selected_band = input(
+    bandNumber.__str__() + " band(s) in total.Input the number of band(1-" + bandNumber.__str__() + "):\n")
+
+# 获取波段内容
+band = dataset.GetRasterBand(selected_band)
+
+# 设置缩放比例因子
+scale = 0.1
+scale = input("Input scale factor(0-1):\n")
+
+# 原始影像大小
+oriX = band.XSize
+oriY = band.YSize
+
+# 缩放后影像大小
+newX = int(scale * oriX)
+newY = int(scale * oriY)
+
+# 输出信息
+print('Output Info:')
+print("Original Size is ", oriX, " * ", oriY)
+print("New Size is ", newX, " * ", newY)
+print("Selected band is ", selected_band)
+
+# 用户交互，是否确定
+result = input("Are you sure?(Y/N)")
+
+# 如果确定就继续，否则退出
+if result.__eq__('Y') or result.__eq__('y'):
+    print("Processing...")
+    # 读取影像，这里最后两个参数即使在前面说过的最终需要的大小
+    data = band.ReadAsArray(0, 0, band.XSize, band.YSize, newX, newY)
+    print("OK.")
+
+    # 调用Matplotlib以灰度形式显示图像
+    plt.imshow(data, cmap='gray')
+    plt.show()
+else:
+    print("Exit.")
+```
+
+根据提示输入相关参数。注：raw_input 已在 python3 中不可用，py2、py3 版本统一为 input。

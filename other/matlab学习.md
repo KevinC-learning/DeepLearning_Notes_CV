@@ -3,6 +3,20 @@ matlab 2017a 安装教程：
 - 下载和破解：[Matlab R2017a 中文版下载安装与破解图文教程](<https://blog.csdn.net/gisboygogogo/article/details/76793803>)
 - 按照上面的步骤安装后提示”License Manager Error – 8″，则按这个方式解决：[MathWorks MATLAB R2017a 官方原版+完美破解补丁 | 乐软博客](<https://www.isharepc.com/2073.html>)
 
+# matlab 常见的图像处理操作
+
+1、imread() 函数
+
+image = imread(filename) 可以读取图像并查看返回的数值，如果想要查看指定维度的图像数值，可以：
+
+``` python
+image = imread(filename)(:, :, 3)  #返回第三维度的数值
+```
+
+
+
+
+
 # 一、matlab 基础
 
 ## 1. matlab 认识

@@ -221,6 +221,17 @@ time.struct_time(tm_year=2018, tm_mon=10, tm_mday=9, tm_hour=2, tm_min=40, tm_se
 
 ——from：[Python os.path() 模块 | 菜鸟教程](<https://www.runoob.com/python/python-os-path.html>)
 
+## raw_input( ) 和 input( ) 区别
+
+1、在 Python2.x 中 raw_input( ) 和 input( )，两个函数都存在，其中区别为:
+
+- **raw_input( )** 将所有输入作为字符串看待，返回字符串类型。
+- **input( )** 只能接收"数字"的输入，在对待纯数字输入时具有自己的特性，它返回所输入的数字的类型（ int, float ）。
+
+2、在 Python3.x 中 **raw_input( )** 和 **input( )** 进行了整合，去除了 **raw_input( )**，仅保留了 **input( )** 函数，其接收任意任性输入，将所有输入默认为字符串处理，并返回字符串类型。
+
+——from：[Python2.x 和 Python3.x 中 raw_input( ) 和 input( ) 区别 | 菜鸟教程](<https://www.runoob.com/w3cnote/python2-python3-raw_input-and-input.html>)
+
 
 
 # 二、Python实现功能
