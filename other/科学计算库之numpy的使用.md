@@ -452,5 +452,22 @@ numpy 中的数据类型转换，不能直接改原数据的 dtype，只能用�
 
 ——from：[numpy数据类型dtype转换](https://www.cnblogs.com/hhh5460/p/5129032.html)
 
+## 7. numpy函数 all() 和any() 比较矩阵
 
+数组元素的比对，我们可以直接使用“==”进行比较，比如：
+
+``` python
+a=np.array([1,2,3])
+b=np.array([1,2,1])
+a==b
+
+结果：
+array([ True,True,False],dtype=bool)
+```
+
+但是当数组元素较多时，查看输出结果便变得很麻烦，这时我们可以使用 all() 方法，直接比对 a 矩阵和 b 矩阵的所有对应的元素是否相等。
+
+而 any() 方法是查看两矩阵是否有一个对应元素相等。事实上，all() 操作就是对两个矩阵的比对结果再做一次与运算，而 any 则是做一次或运算。
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618111812.png)
 

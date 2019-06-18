@@ -57,7 +57,7 @@
 
 ## 2. tensorflow学习
 
-### (1) Python、科学计数库等基础
+### (1) Python基础及科学计数库等
 
 学习 TensorFlow 之前，先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
 
