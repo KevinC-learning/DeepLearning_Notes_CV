@@ -271,6 +271,14 @@ str(-12.90)     # -12.9
 
 更多参考：[史上最全的 Python 3 类型转换指南 - 格物](<https://shockerli.net/post/python3-data-type-convert/>)
 
+## Python 字符串的操作 replace、split、endswith
+
+
+
+
+
+参考：[Python 字符串操作（截取/替换/查找/分割）](<https://blog.csdn.net/zhuhai__yizhi/article/details/77581625>)
+
 
 
 # 二、Python实现功能
@@ -520,7 +528,7 @@ CPU执行时间: 0.04683999999997468
 
 ——from：[Python计算程序运行时间—time.time()、time.clock() - 知乎](<https://zhuanlan.zhihu.com/p/33450843>)
 
-## 判断字符串是否包含子字符串几种方法
+## 判断字符串是否包含子字符串几种方法 in、find、rfind、index、rindex、count
 
 1、使用成员操作符 in
 

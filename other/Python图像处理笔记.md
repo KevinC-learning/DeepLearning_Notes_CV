@@ -846,6 +846,66 @@ print(img.dtype.name)
 
 # 三、libtiff.TIFF
 
+## Python 下载安装 libtiff
+
+1、方法一
+
+使用 pip 安装： `pip install libtiff`，但是在使用的时候可能会报如下类似错误：
+
+``` xml
+Failed to find TIFF library. Make sure that libtiff is installed and its location is listed in PATH|LD_LIBRARY_PATH|
+```
+
+2、方法二
+
+而后，我使用下载 whl 文件，离线本地安装方式，成功了，使用未报错。（参考：<https://github.com/RivuletStudio/rivuletpy/issues/8>）
+
+0. 先使用 pip 卸载前面已安装的 libtiff：`pip uninstall libtiff`；
+
+1. 先在这里 <https://www.lfd.uci.edu/~gohlke/pythonlibs/#pylibtiff> 选择好相应的 whl 文件下载，我根据我本地的 Python 版本，选择的为 `libtiff‑0.4.2‑cp36‑cp36m‑win_amd64.whl`；
+2. 下载完毕，切换到 whl 文件所在目录，执行 `pip install libtiff‑0.4.2‑cp36‑cp36m‑win_amd64.whl` 进行安装即可。（注意，请清楚你使用的 pip 是哪个环境下的，避免安装到自己不想安装的 Python 环境下）
+
+3、方法三
+
+我看到还有一种安装方式，也可以试试，来源：<http://landcareweb.com/questions/8084/shi-yong-numpyzai-pythonzhong-shi-yong-tiff-dao-ru-dao-chu>
+
+> 如果你在 python3 上，你不能 `pip3 install libtiff`。而是手动安装：
+>
+> ``` python
+> git clone git@github.com:pearu/pylibtiff.git
+> python3 setup.py install
+> ```
+
+## libtiff 的简单使用
+
+使用：
+
+``` python
+from libtiff import TIFF
+
+tif = TIFF.open('filename.tif', mode='r')
+# read an image in the currect TIFF directory as a numpy array
+image = tif.read_image()
+
+# read all images in a TIFF file:
+for image in tif.iter_images(): 
+    pass
+
+tif = TIFF.open('filename.tif', mode='w')
+tif.write_image(image)
+```
+
+——from：<http://landcareweb.com/questions/8084/shi-yong-numpyzai-pythonzhong-shi-yong-tiff-dao-ru-dao-chu> 的 libtiff 部分。
+
+常见函数的使用，个人小结：
+
+``` python
+tif = TIFF.open()  打开图像
+image = tif.read_image() 读取图像，返回 TIFF 类型
+image.shape  形状，如(7200, 6800, 3)
+image[:, :, 0]  查看第一通道的矩阵数值
+```
+
 ##  python下tiff图像的读取和保存方法
 
 对比测试 **scipy.misc** 和 **PIL.Image** 和 **libtiff.TIFF** 三个库
@@ -1044,6 +1104,8 @@ def tiff2Stack(filePath):
 
 
 
+
+
 # 四、开源栅格空间数据转换库GDAL
 
 GDAL(Geospatial Data Abstraction Library)是一个的开源栅格空间数据读取/转换库。其中还有一系列命令行工具来进行数据转换和处理。
@@ -1208,6 +1270,24 @@ plt.show()
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618190431.png)
 
+相关函数见原文：
+
+- [dir(dataset)、help(dataset)](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#dirdatasethelpdataset)
+- [dataset.GetDescription()](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#datasetgetdescription)
+- [dataset.RasterCount](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#datasetrastercount)
+- [dataset.GetRasterBand(BandNumber)](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#datasetgetrasterbandbandnumber)
+- [dataset.RasterXSize](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#datasetrasterxsize)
+- [dataset.RasterYSize](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#datasetrasterysize)
+- [dataset.ReadRaster()、dataset.ReadAsArray()](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#datasetreadrasterdatasetreadasarray)
+- [dir(band)、help(band)](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#dirbandhelpband)
+- [band.XSize](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#bandxsize)
+- [band.YSize](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#bandysize)
+- [band.DataType](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#banddatatype)
+- [band.GetNoDataValue()](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#bandgetnodatavalue)
+- [band.GetMaximum()](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#bandgetmaximum)
+- [band.GetMinimum()](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#bandgetminimum)
+- [band.ComputeRasterMinMax()](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html#bandcomputerasterminmax)
+
 ### 3、实例练习
 
 基于上面的知识，这里进行一个简单的练习，即利用 GDAL 为遥感影像制作小尺寸的缩略图。
@@ -1290,3 +1370,17 @@ else:
 > scale = input("Input scale factor(0-1):\n")
 > scale = float(scale)  # 加上的
 > ```
+
+## 3. Python利用GDAL读写遥感影像
+
+来源：[Python利用GDAL读写遥感影像](<http://zhaoxuhui.top/blog/2018/06/13/ReadAndWriteImageWithGDAL.html>)
+
+之前在【[这篇博客](https://zhaoxuhui.top/blog/2017/06/14/Python下的GDAL的安装与使用.html)】中简单介绍了 GDAL 的使用，但并不是很完整。本文给出一个相对规范、比较完整，具有一定通用性的 GDAL 读写 tif 影像的代码，以便以后使用。代码以图像裁剪和波段融合/分离两个小功能为例进行介绍。
+
+### 1、影像裁剪代码
+
+### 2、多波段融合代码
+
+### 3、波段拆分
+
+### 4、功能整合脚本

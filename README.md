@@ -83,7 +83,7 @@
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
   - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  - 可用于计算准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 等评价指标。 [荐] 
-- [Python图像处理笔记(含opencv-python/scikit-image/gdal库等等)](./other/Python图像处理笔记.md)  | 可能用到 matlab，同时学习下：[matlab的安装和学习](./other/matlab学习.md)
+- [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff.TIFF/gdal库等等)](./other/Python图像处理笔记.md)  | 可能用到 matlab，同时学习下：[matlab的安装和学习](./other/matlab学习.md)
 - [深度学习框架对比.md](./other/深度学习框架对比.md)
 - ……
 
