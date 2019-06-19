@@ -1,5 +1,29 @@
 # 一、Python 函数
 
+## Python 内置函数
+
+| [abs()](https://www.runoob.com/python/func-number-abs.html)  | [divmod()](https://www.runoob.com/python/python-func-divmod.html) | [input()](https://www.runoob.com/python/python-func-input.html) | [open()](https://www.runoob.com/python/python-func-open.html) | [staticmethod()](https://www.runoob.com/python/python-func-staticmethod.html) |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [all()](https://www.runoob.com/python/python-func-all.html)  | [enumerate()](https://www.runoob.com/python/python-func-enumerate.html) | [int()](https://www.runoob.com/python/python-func-int.html)  | [ord()](https://www.runoob.com/python/python-func-ord.html)  | [str()](https://www.runoob.com/python/python-func-str.html)  |
+| [any()](https://www.runoob.com/python/python-func-any.html)  | [eval()](https://www.runoob.com/python/python-func-eval.html) | [isinstance()](https://www.runoob.com/python/python-func-isinstance.html) | [pow()](https://www.runoob.com/python/func-number-pow.html)  | [sum()](https://www.runoob.com/python/python-func-sum.html)  |
+| [basestring()](https://www.runoob.com/python/python-func-basestring.html) | [execfile()](https://www.runoob.com/python/python-func-execfile.html) | [issubclass()](https://www.runoob.com/python/python-func-issubclass.html) | [print()](https://www.runoob.com/python/python-func-print.html) | [super()](https://www.runoob.com/python/python-func-super.html) |
+| [bin()](https://www.runoob.com/python/python-func-bin.html)  | [file()](https://www.runoob.com/python/python-func-file.html) | [iter()](https://www.runoob.com/python/python-func-iter.html) | [property()](https://www.runoob.com/python/python-func-property.html) | [tuple()](https://www.runoob.com/python/att-tuple-tuple.html) |
+| [bool()](https://www.runoob.com/python/python-func-bool.html) | [filter()](https://www.runoob.com/python/python-func-filter.html) | [len()](https://www.runoob.com/python/att-string-len.html)   | [range()](https://www.runoob.com/python/python-func-range.html) | [type()](https://www.runoob.com/python/python-func-type.html) |
+| [bytearray()](https://www.runoob.com/python/python-func-bytearray.html) | [float()](https://www.runoob.com/python/python-func-float.html) | [list()](https://www.runoob.com/python/att-list-list.html)   | [raw_input()](https://www.runoob.com/python/python-func-raw_input.html) | [unichr()](https://www.runoob.com/python/python-func-unichr.html) |
+| [callable()](https://www.runoob.com/python/python-func-callable.html) | [format()](https://www.runoob.com/python/att-string-format.html) | [locals()](https://www.runoob.com/python/python-func-locals.html) | [reduce()](https://www.runoob.com/python/python-func-reduce.html) | unicode()                                                    |
+| [chr()](https://www.runoob.com/python/python-func-chr.html)  | [frozenset()](https://www.runoob.com/python/python-func-frozenset.html) | [long()](https://www.runoob.com/python/python-func-long.html) | [reload()](https://www.runoob.com/python/python-func-reload.html) | [vars()](https://www.runoob.com/python/python-func-vars.html) |
+| [classmethod()](https://www.runoob.com/python/python-func-classmethod.html) | [getattr()](https://www.runoob.com/python/python-func-getattr.html) | [map()](https://www.runoob.com/python/python-func-map.html)  | [repr()](https://www.runoob.com/python/python-func-repr.html) | [xrange()](https://www.runoob.com/python/python-func-xrange.html) |
+| [cmp()](https://www.runoob.com/python/func-number-cmp.html)  | [globals()](https://www.runoob.com/python/python-func-globals.html) | [max()](https://www.runoob.com/python/func-number-max.html)  | [reverse()](https://www.runoob.com/python/att-list-reverse.html) | [zip()](https://www.runoob.com/python/python-func-zip.html)  |
+| [compile()](https://www.runoob.com/python/python-func-compile.html) | [hasattr()](https://www.runoob.com/python/python-func-hasattr.html) | [memoryview()](https://www.runoob.com/python/python-func-memoryview.html) | [round()](https://www.runoob.com/python/func-number-round.html) | [__import__()](https://www.runoob.com/python/python-func-__import__.html) |
+| [complex()](https://www.runoob.com/python/python-func-complex.html) | [hash()](https://www.runoob.com/python/python-func-hash.html) | [min()](https://www.runoob.com/python/func-number-min.html)  | [set()](https://www.runoob.com/python/python-func-set.html)  |                                                              |
+| [delattr()](https://www.runoob.com/python/python-func-delattr.html) | [help()](https://www.runoob.com/python/python-func-help.html) | [next()](https://www.runoob.com/python/python-func-next.html) | [setattr()](https://www.runoob.com/python/python-func-setattr.html) |                                                              |
+| [dict()](https://www.runoob.com/python/python-func-dict.html) | [hex()](https://www.runoob.com/python/python-func-hex.html)  | object()                                                     | [slice()](https://www.runoob.com/python/python-func-slice.html) |                                                              |
+| [dir()](https://www.runoob.com/python/python-func-dir.html)  | [id()](https://www.runoob.com/python/python-func-id.html)    | [oct()](https://www.runoob.com/python/python-func-oct.html)  | [sorted()](https://www.runoob.com/python/python-func-sorted.html) | [exec 内置表达式](https://www.runoob.com/python/python-func-exec.html) |
+
+
+
+---
+
 ## 断言 assert 的用法
 
 assert的语法格式：assert expression，它的等价语句为：
@@ -26,7 +50,7 @@ AssertionError
 
 ——from：[[Python]断言assert的用法](https://blog.csdn.net/humanking7/article/details/45950781)
 
-## Python 中 yied 的使用
+## yied 的使用
 
 我们先看：
 
@@ -143,7 +167,7 @@ yield 的好处是显而易见的，把一个函数改写为一个 generator 就
 
 ——from：[Python yield 使用浅析 | 菜鸟教程](<http://www.runoob.com/w3cnote/python-yield-used-analysis.html>)
 
-## Python 中的 os.path 模块
+## os.path 模块
 
 以下实例演示了 os.path 相关方法的使用：
 
@@ -232,7 +256,7 @@ time.struct_time(tm_year=2018, tm_mon=10, tm_mday=9, tm_hour=2, tm_min=40, tm_se
 
 ——from：[Python2.x 和 Python3.x 中 raw_input( ) 和 input( ) 区别 | 菜鸟教程](<https://www.runoob.com/w3cnote/python2-python3-raw_input-and-input.html>)
 
-## Python 数据类型转换
+## 数据类型转换
 
 （1）其他 --> int
 
@@ -271,13 +295,80 @@ str(-12.90)     # -12.9
 
 更多参考：[史上最全的 Python 3 类型转换指南 - 格物](<https://shockerli.net/post/python3-data-type-convert/>)
 
-## Python 字符串的操作 replace、split、endswith
-
-
+## 字符串的操作 replace、split、endswith
 
 
 
 参考：[Python 字符串操作（截取/替换/查找/分割）](<https://blog.csdn.net/zhuhai__yizhi/article/details/77581625>)
+
+
+
+## glob模块
+
+glob 是 python 自己带的一个文件操作相关模块，用它可以查找符合自己目的的文件，类似于 Windows 下的文件搜索，支持通配符操作。
+
+查找文件只用到三个匹配符：`*`、`?`、`[]`。`*` 匹配 0 个或多个字符；`?` 匹配单个字符；`[]` 匹配指定范围内的字符，如：[0-9]匹配数字。
+
+1、glob方法
+
+glob 模块的主要方法就是 glob，该方法返回所有匹配的文件路径列表（list）；它只有一个参数 pathname，定义了文件路径匹配规则，这里可以是绝对路径，也可以是相对路径。其返回的文件名只包括当前目录里的文件名，不包括子文件夹里的文件。
+
+示例：
+
+``` python
+import glob  
+  
+#获取指定目录下的所有图片  
+print glob.glob(r"E:\Picture\*\*.jpg")  
+  
+#获取上级目录的所有.py文件  
+print glob.glob(r'../*.py') #相对路径  
+```
+
+2、iglob方法
+
+获取一个迭代器（ iterator ）对象，使用它可以逐个获取匹配的文件路径名。与glob.glob() 的区别是：glob.glob同时获取所有的匹配路径，而 glob.iglob 一次只获取一个匹配路径。
+
+直接看代码（注：上级目录有两个 py 文件 `a.py`、`b.py`）。
+
+使用 iglob 方法：
+
+``` python
+import glob  
+  
+#父目录中的.py文件  
+f = glob.iglob(r'../*.py')  
+print(f) 
+for py in f:  
+    print(py)   
+```
+
+打印结果：
+
+``` xml
+<generator object _iglob at 0x000000000296EC50>
+..\a.py
+..\b.py
+```
+
+使用 glob 方法：
+
+``` python
+import glob
+#父目录中的.py文件  
+f = glob.glob(r'../*.py')
+print(f)
+for py in f:
+    print(py)
+```
+
+打印结果：
+
+``` xml
+['..\\a.py', '..\\b.py']
+..\a.py
+..\b.py
+```
 
 
 

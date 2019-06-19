@@ -23,7 +23,7 @@
 - [一、opencv-python](#一opencv-python)
 - [二、scikit-image](#二scikit-image)
 - [三、libtiff.TIFF](#三libtiffTIFF)
-- [四、开源栅格空间数据转换库GDAL](#四开源栅格空间数据读取转换库GDAL)
+- [四、开源栅格空间数据转换库GDAL](#开源栅格空间数据转换库GDAL)
 
 
 
@@ -1269,6 +1269,17 @@ plt.show()
 显示的图像信息：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190618190431.png)
+
+若要获取某个波段数值，可以使用 `ReadAsArray` 函数：
+
+``` python
+dataset = gdal.Open(r"E:\aa.tif", GA_ReadOnly)
+band_b = img3.GetRasterBand(4) #获取第4通道
+
+print(band_b.ReadAsArray())
+```
+
+具体用法参考：<https://www.osgeo.cn/pygis/gdal-gdalreadata.html> 或下面的函数详解。
 
 相关函数见原文：
 
