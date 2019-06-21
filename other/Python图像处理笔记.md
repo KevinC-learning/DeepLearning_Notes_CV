@@ -846,6 +846,10 @@ print(img.dtype.name)
 
 # 三、libtiff.TIFF
 
+tiff 文件是一种常用的图像文件格式，支持将多幅图像保存到一个文件中，极大得方便了图像的保存和处理。
+
+python 中支持 tiff 文件处理的是 libtiff 模块中的 TIFF 类（libtiff 下载链接https://pypi.python.org/pypi/libtiff/）。
+
 ## Python 下载安装 libtiff
 
 1、方法一
@@ -900,11 +904,57 @@ tif.write_image(image)
 常见函数的使用，个人小结：
 
 ``` python
-tif = TIFF.open()  打开图像
-image = tif.read_image() 读取图像，返回 TIFF 类型
+tif = TIFF.open()  打开图像，返回类型 TIFF
+image = tif.read_image() 读取图像，返回类型 ndarray 
 image.shape  形状，如(7200, 6800, 3)
 image[:, :, 0]  查看第一通道的矩阵数值
+TIFF.write()  写入图像
 ```
+
+【python图像处理】tiff文件的保存与解析：（——from：<https://unordered.org/timelines/5a232a93f1800000>）
+
+``` python
+from libtiff import TIFF
+from scipy import misc
+
+##tiff文件解析成图像序列
+##tiff_image_name: tiff文件名；
+##out_folder：保存图像序列的文件夹
+##out_type：保存图像的类型，如.jpg、.png、.bmp等
+def tiff_to_image_array(tiff_image_name, out_folder, out_type): 
+          
+    tif = TIFF.open(tiff_image_name, mode = "r")
+    idx = 0
+    for im in list(tif.iter_images()):
+		#
+        im_name = out_folder + str(idx) + out_type
+        misc.imsave(im_name, im)
+        print im_name, 'successfully saved!!!'
+        idx = idx + 1
+    return
+
+##图像序列保存成tiff文件
+##image_dir：图像序列所在文件夹
+##file_name：要保存的tiff文件名
+##image_type:图像序列的类型
+##image_num:要保存的图像数目
+def image_array_to_tiff(image_dir, file_name, image_type, image_num):
+
+    out_tiff = TIFF.open(file_name, mode = 'w')
+	
+	#这里假定图像名按序号排列
+    for i in range(0, image_num):
+        image_name = image_dir + str(i) + image_type
+        image_array = Image.open(image_name)
+		#缩放成统一尺寸
+        img = image_array.resize((480, 480), Image.ANTIALIAS)
+        out_tiff.write_image(img, compression = None, write_rgb = True)
+		
+    out_tiff.close()
+    return 
+```
+
+
 
 ##  python下tiff图像的读取和保存方法
 

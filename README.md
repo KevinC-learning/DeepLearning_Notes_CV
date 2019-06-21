@@ -2,64 +2,15 @@
 
 # 学习记录
 
-
-## 1. 资料索引
-
-学习来源：炼数成金的《深度学习框架TensorFlow学习与应用》视频 + 网上博客内容  。
-
-视频目录：
-
-``` xml
-第 1周 Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装
-第 2周 Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作
-第 3周 Tensorflow线性回归以及分类的简单使用
-第 4周 softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍
-第 5周 卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题
-第 6周 使用Tensorboard进行结构可视化，以及网络运算过程可视化
-第 7周 递归神经网络LSTM的讲解，以及LSTM网络的使用
-第 8周 保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别
-第 9周 Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别
-第10周 使用Tensorflow进行验证码识别
-第11周 Tensorflow在NLP中的使用(一)
-第12周 Tensorflow在NLP中的使用(二)
-```
-
-> 说明：实际第 5 周讲的是 Tensorborad 结构可视化，第 6 周讲的是 CNN，下面视频中链接里的文件夹顺序，我已修正。
-
-(1) 在线观看：
-
-- YouTube：[tensorflow教程（十课）](https://www.youtube.com/watch?v=eAtGqz8ytOI&list=PLjSwXXbVlK6IHzhLOMpwHHLjYmINRstrk&index=2&t=0s)
-- 或 B 站：[《深度学习框架TensorFlow学习与应用》](https://www.bilibili.com/video/av20542427/)
-
-(2) 下载：
-
-- 《深度学习框架Tensorflow学习与应用》（含视频+代码+课件，视频总时长：13小时31分钟）  【[百度网盘下载](https://pan.baidu.com/s/16OINOrFiRXbqmqOFjCFzLQ )  密码: 1a8j】
-- 《深度学习框架Tensorflow学习与应用[只有videos-720p]》（该份资料只有视频文件） 【 [百度网盘下载](https://pan.baidu.com/s/1oQLgWFEBsVrcKJN4swEdzg)  密码: i3e2】
-
-*其他学习视频（觉得有必要可以看看~）：*  
-
-- 油管视频：[TF Girls 修炼指南](https://www.youtube.com/watch?v=TrWqRMJZU8A&list=PLwY2GJhAPWRcZxxVFpNhhfivuW0kX15yG&index=2)  或 B 站观看： [TF Girls 修炼指南](https://space.bilibili.com/16696495/#/channel/detail?cid=1588) 
-- 油管视频：51CTO视频 [深度学习框架-Tensorflow案例实战视频课程](https://www.youtube.com/watch?v=-pYU4ub7g0c&list=PL8LR_PrSuIRhpEYA3sJ-J5hYGYUSwZwdS)、或 B 站观看：[深度学习框架-Tensorflow案例实战视频课程](https://www.bilibili.com/video/av29663946/?p=1)
-- [Tensorflow 教程系列 | 莫烦Python](<https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/>)
-
-(3) 相关资料：
-
-- 郑泽宇/顾思宇：[《Tensorflow：实战Google深度学习框架》](https://book.douban.com/subject/26976457/) 出版时间 2017-2-10
-  - 官方维护的书中的 TensorFlow 不同版本的示例程序仓库：<https://github.com/caicloud/tensorflow-tutorial>；
-  - GitHub 有人写了笔记：[TensorFlow_learning_notes](https://github.com/cookeem/TensorFlow_learning_notes)
-- 黄文坚/唐源：[《TensorFlow实战》](https://book.douban.com/subject/26974266/) 出版时间 2017-2-1
-  - 源码实现：<https://github.com/terrytangyuan/tensorflow-in-practice-code>
-- 掘金翻译：[TensorFlow 最新官方文档中文版 V1.10 ](https://github.com/xitu/tensorflow-docs)
-- 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
-- [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
+深度学习、计算机视觉学习过程。
 
 
 
-## 2. 学习之路
+## 一、基础学习
 
-### (1) Python基础
+### 1. Python基础
 
-学习 TensorFlow 之前，先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
+先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
 
 - [IDE之PyCharm的设置和Debug入门](./other/IDE之PyCharm的设置和Debug入门.md)
 - [Python基础入门笔记（一）](./other/Python/Python基础入门笔记（一）.md)
@@ -72,9 +23,8 @@
   - 
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
-- [深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
 
-### (2) 科学计数库、Python图像处理库及其他
+### 2. 科学计数库、Python图像处理库及其他
 
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)  | 更详细的学习见：
   - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
@@ -94,7 +44,15 @@
 - [python的Tqdm模块](<https://blog.csdn.net/langb2014/article/details/54798823>) - 可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器。
 - ……
 
-### (3) tensorflow笔记
+
+
+## 二、框架学习
+
+### 1. tensorflow1.x 笔记
+
+tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
+
+#### 1.1 学习笔记
 
 《深度学习框架Tensorflow学习与应用》笔记索引（其中会有补充一些内容）：
 
@@ -134,12 +92,83 @@
 笔记补充：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：:mag_right: ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) 【荐】 ，另外，这里没记录和没记全的内容通过下面【<a href="#bowen">网上博文</a>】找找看！！！
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：🔎 ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) 【荐】 ，另外，这里没记录和没记全的内容通过下面【<a href="#bowen">网上博文</a>】找找看！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
+#### 1.2 学习来源
+
+学习来源：炼数成金的《深度学习框架TensorFlow学习与应用》视频 + 网上博客内容  。
+
+视频目录：
+
+```xml
+第 1周 Tensorflow简介，Anaconda安装，Tensorflow的CPU版本安装
+第 2周 Tensorflow的基础使用，包括对图(graphs),会话(session),张量(tensor),变量(Variable)的一些解释和操作
+第 3周 Tensorflow线性回归以及分类的简单使用
+第 4周 softmax，交叉熵(cross-entropy)，dropout以及Tensorflow中各种优化器的介绍
+第 5周 卷积神经网络CNN的讲解，以及用CNN解决MNIST分类问题
+第 6周 使用Tensorboard进行结构可视化，以及网络运算过程可视化
+第 7周 递归神经网络LSTM的讲解，以及LSTM网络的使用
+第 8周 保存和载入模型，使用Google的图像识别网络inception-v3进行图像识别
+第 9周 Tensorflow的GPU版本安装。设计自己的网络模型，并训练自己的网络模型进行图像识别
+第10周 使用Tensorflow进行验证码识别
+第11周 Tensorflow在NLP中的使用(一)
+第12周 Tensorflow在NLP中的使用(二)
+```
+
+> 说明：实际第 5 周讲的是 Tensorborad 结构可视化，第 6 周讲的是 CNN，下面视频中链接里的文件夹顺序，我已修正。
+
+(1) 在线观看：
+
+- YouTube：[tensorflow教程（十课）](https://www.youtube.com/watch?v=eAtGqz8ytOI&list=PLjSwXXbVlK6IHzhLOMpwHHLjYmINRstrk&index=2&t=0s)
+- 或 B 站：[《深度学习框架TensorFlow学习与应用》](https://www.bilibili.com/video/av20542427/)
+
+(2) 下载：
+
+- 《深度学习框架Tensorflow学习与应用》（含视频+代码+课件，视频总时长：13小时31分钟）  【[百度网盘下载](https://pan.baidu.com/s/16OINOrFiRXbqmqOFjCFzLQ )  密码: 1a8j】
+- 《深度学习框架Tensorflow学习与应用[只有videos-720p]》（该份资料只有视频文件） 【 [百度网盘下载](https://pan.baidu.com/s/1oQLgWFEBsVrcKJN4swEdzg)  密码: i3e2】
+
+#### 1.3 相关资料
+
+其他学习视频，觉得有必要可以看看：
+
+- 油管视频：[TF Girls 修炼指南](https://www.youtube.com/watch?v=TrWqRMJZU8A&list=PLwY2GJhAPWRcZxxVFpNhhfivuW0kX15yG&index=2)  或 B 站观看： [TF Girls 修炼指南](https://space.bilibili.com/16696495/#/channel/detail?cid=1588) 
+- 油管视频：51CTO视频 [深度学习框架-Tensorflow案例实战视频课程](https://www.youtube.com/watch?v=-pYU4ub7g0c&list=PL8LR_PrSuIRhpEYA3sJ-J5hYGYUSwZwdS)、或 B 站观看：[深度学习框架-Tensorflow案例实战视频课程](https://www.bilibili.com/video/av29663946/?p=1)
+- [Tensorflow 教程系列 | 莫烦Python](<https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/>)
+
+(3) 相关资料：
+
+- 郑泽宇/顾思宇：[《Tensorflow：实战Google深度学习框架》](https://book.douban.com/subject/26976457/) 出版时间 2017-2-10
+  - 官方维护的书中的 TensorFlow 不同版本的示例程序仓库：<https://github.com/caicloud/tensorflow-tutorial>；
+  - GitHub 有人写了笔记：[TensorFlow_learning_notes](https://github.com/cookeem/TensorFlow_learning_notes)
+- 黄文坚/唐源：[《TensorFlow实战》](https://book.douban.com/subject/26974266/) 出版时间 2017-2-1
+  - 源码实现：<https://github.com/terrytangyuan/tensorflow-in-practice-code>
+- 掘金翻译：[TensorFlow 最新官方文档中文版 V1.10 ](https://github.com/xitu/tensorflow-docs)
+- 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
+- [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
+
+#### 1.4 快速入门
+
+参考「机器之心」编译文章：
+
+- [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
+- [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
 
 
-## 3. keras 学习(深度学习前端框架)
+
+### 2. tensorflow2.0 学习
+
+学习资料：
+
+- [czy36mengfei/tensorflow2_tutorials_chinese](<https://github.com/czy36mengfei/tensorflow2_tutorials_chinese>)
+
+  > tensorflow2中文教程，持续更新(当前版本:tensorflow2.0)
+
+
+
+### 3. keras 学习
+
+深度学习前端框架 keras 学习：
 
 - [Keras 学习笔记.md](./other/keras/keras-learning.md)
 
@@ -149,7 +178,7 @@
   >
   > 可以使用这个方法进行转换：
   >
-  > ``` python
+  > ```python
   > from keras.utils.np_utils import to_categorical
   > 
   > categorical_labels = to_categorical(int_labels, num_classes=None)
@@ -157,7 +186,7 @@
   >
   > 以 mnist 数据集为例：
   >
-  > ```  python
+  > ```python
   > from keras.datasets import mnist
   > 
   > (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -175,7 +204,7 @@
 
 <a name="bowen"></a>
 
-## 4. 网上博文
+### 4. 网上博文
 
 损失函数：
 
@@ -210,21 +239,10 @@ Batch Normalization：
 
 
 
-## 5. MNIST
+## 三、MNIST
 
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
-
-
-
-## 6. TF快速入门总结
-
-参考「机器之心」编译文章：
-
-- [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
-- [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
-
-
 
 <div align="right">
         <a href="#top">回到顶部</a>
