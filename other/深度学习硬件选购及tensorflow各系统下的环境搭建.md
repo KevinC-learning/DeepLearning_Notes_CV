@@ -22,21 +22,21 @@
 
 3）Anaconda 是一个开源的 Python 发行版本，其包含了 conda、Python 等 180 多个科学包及其依赖项。因为包含了大量的科学包，Anaconda 的下载文件比较大，如果只需要某些包，或者需要节省带宽或存储空间，也可以使用 Miniconda 这个较小的发行版（仅包含 conda 和 Python）。
 
-——from：<https://www.cnblogs.com/chamie/p/8707420.html>
+——from：<https://www.cnblogs.com/chamie/p/870742        0.html>
 
 
 
-## 2. Windows下安装TensorFlow
+## 2. Windows下安装tensorflow-gpu
 
-### 需要下载
+### 1）需要下载
 
-① NVIDIA 驱动程序下载地址：https://www.nvidia.cn/Download/index.aspx?lang=cn，进去会自动识别显卡型号
+① NVIDIA 驱动程序下载地址：<https://www.nvidia.cn/Download/index.aspx?lang=cn>，进去会自动识别显卡型号
 
-② CUDA 下载地址：https://developer.nvidia.com/cuda-toolkit-archive，如下（2019-06-21）：
+② CUDA 下载地址：<https://developer.nvidia.com/cuda-toolkit-archive>，如下（2019-06-21）：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190621191552.png)
 
-③ cuDNN 的下载地址：https://developer.nvidia.com/rdp/cudnn-download，如下（2019-06-21，需要注册账号才能下载）：
+③ cuDNN 的下载地址：<https://developer.nvidia.com/rdp/cudnn-download>，如下（2019-06-21，需要注册账号才能下载）：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190621192709.png)
 
@@ -44,11 +44,13 @@
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190621192413.png)
 
-注意1，担心在 windows 下安装软件出些幺蛾子，最好先安装好 **.Net Framework**。这是 .net framework 4.7.2 下载地址：[Download .NET Framework 4.7.2 | Free official downloads](https://dotnet.microsoft.com/download/dotnet-framework/net472)
 
-注意2，GPU 显卡计算能力大于3.0才支持 cuDNN，查看 GPU 计算能力【https://developer.nvidia.com/cuda-gpus】
 
-### 注意：版本问题
+**注意1：**担心在 windows 下安装软件出些幺蛾子，最好先安装好 **.Net Framework**。这是 .net framework 4.7.2 下载地址：[Download .NET Framework 4.7.2 | Free official downloads](https://dotnet.microsoft.com/download/dotnet-framework/net472)
+
+**注意2：**GPU 显卡计算能力大于 3.0 才支持 cuDNN，查看 GPU 计算能力【https://developer.nvidia.com/cuda-gpus】
+
+### 2）注意：版本问题
 
 #### 第一点：
 
@@ -108,27 +110,100 @@
 
 4、选择出 cuDNN 版本后，然后进【https://developer.nvidia.com/rdp/cudnn-download】选择 cuDNN for CUDA 版本。
 
-### 最后：命令安装 tensorflow
+### 3）最后：命令安装 tensorflow
 
 前面各个软件和工作的我就在此安装省略了。
 
 windows 下安装：
 
 - CPU版：`pip3 install --upgrade tensorflow`
-
 - GPU版：`pip3 install --upgrade tensorflow-gpu`
 
 
 
-#### 参考文章
+### 4）本人的一次安装实践记录（win7安装tensorflow-gpu）
 
-- [win7 64位+CUDA 9.0+cuDNN v7.0.5 安装](https://blog.csdn.net/shanglianlm/article/details/79404703)  [荐] 
-- [这是一份你们需要的Windows版深度学习软件安装指南](https://zhuanlan.zhihu.com/p/29903472)  [荐]
-- [深度学习环境搭建-CUDA9.0、cudnn7.3、tensorflow_gpu1.10的安装](<https://www.jianshu.com/p/4ebaa78e0233>)
+已有环境：
+
+- Windows7-64bit
+- Anconda3-5.1.0-Windows-x86_64.exe
+
+#### 1 安装CUDA 10.0
+
+首选我根据电脑显卡选择了 CUDA Toolkit 10.0： `cuda_10.0.130_411.31_windows.exe` 安装，但安装过程未成功，显示很多组件未安装，如下图（来源于网上）：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622134432.png)
+
+后来看了参考文章[4]中提到的这篇文章：<https://blog.csdn.net/leelitian3/article/details/83272272>，这里提到需要安装 **Visual Studio** 必须安装，CUDA 需要与其结合使用。
+
+> ①Visual Studio 2017 Community（必须安装，Cuda是与其结合使用的）
+>
+> - 下载地址：<https://visualstudio.microsoft.com/zh-hans/free-developer-offers/>
+> - 安装选项：勾选“C++的桌面开发”即可
+
+我这样照做了，下载了 Visual Studio，勾选了“C++的桌面开发”安装，最后解决了 CUDA 安装失败的问题。
+
+不过我这里安装的 VS 版本是： Visual Studio 2019 Community。我采用的是离线安装方式，参考：
+
+- [Visual Studio 2017离线安装包获取和安装教程](https://blog.csdn.net/WU9797/article/details/78456651)
+- [Microsoft Visual Studio 2019正式版离线安装包下载](https://www.bitecho.net/microsoft-visual-studio-2019.html)
+
+大概方式就是：
+
+1. 先去官网 <https://visualstudio.microsoft.com/zh-hans/downloads/> 下载所需版本的安装包获取程序，比如我下载 VS2019 社区版安装包获取程序：`vs_community__1035315853.1561183168.exe`
+
+2. 然后通过这个执行这个「获取程序」去下载 Visual Studio 安装包，命令参数有很多，如：
+
+   ``` xml
+   vs_community__1035315853.1561183168.exe --layout D:\VS2017社区版 --lang zh-CN 
+   ```
+
+   表示下载到到目录是：G:\VS2017专业版Offline；表示软件的语言包是：中文
+
+3. 然后下载完成之后，进入安装包目录，点击相应 exe 文件运行，后面会出来让你选择哪些 Visual Studio 组件安装。对于如上我安装 CUDA 失败的问题，我选择了“使用 C++ 的桌面开发”。
+
+补充：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方式是（做参考用）：
+
+> 我们只用选择 CUDA下面这 4 项就够了（默认时是全选的），**visual studio integration这一项别勾选**是因为可能我们电脑并没有使用 VS 环境,如下图所示。
+>
+> ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622141705.png)
 
 
 
-## 3. Ubuntu下安装TensorFlow
+安装完 CUDA，打开命令提示符，输入**nvcc -V**，出现如下类似信息即为成功：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622142002.png)
+
+#### 2 安装 cuDNN：cuDNN v7.6.0 for CUDA 10.0
+
+解压出来下载的 `cudnn-10.0-windows7-x64-v7.6.0.64.zip`，根据参考文章 [4] 中，把相应的文件拷贝到合适的目录即可。
+
+#### 3 命令安装 tensorflow-gpu
+
+进入你需要安装 tensorflow-gpu 到的那个环境，使用:
+
+``` python
+pip install --upgrade tensorflow-gpu
+```
+
+即可安装 tensorflow GPU 版。
+
+> 注：本人安装的时间为 2019-06-22，使用上面命令安装 tensorflow，默认给我安装的版本为 1.14.0
+
+你也可以指定想要安装的版本。
+
+
+
+### 5）参考文章
+
+- [1] [win7 64位+CUDA 9.0+cuDNN v7.0.5 安装](https://blog.csdn.net/shanglianlm/article/details/79404703)  [荐] 
+- [2] [这是一份你们需要的Windows版深度学习软件安装指南](https://zhuanlan.zhihu.com/p/29903472)  [荐]
+- [3] [深度学习环境搭建-CUDA9.0、cudnn7.3、tensorflow_gpu1.10的安装](<https://www.jianshu.com/p/4ebaa78e0233>)  [荐]
+- [4] [安装最新版tensorflow Cuda10.0 cuDNN Win10 VS 2017 - 知乎](https://zhuanlan.zhihu.com/p/49832216)  [荐]
+
+
+
+## 3. Ubuntu下安装tensorflow-gpu
 
 
 
