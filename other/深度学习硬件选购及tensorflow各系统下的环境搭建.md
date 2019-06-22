@@ -116,17 +116,22 @@
 
 windows 下安装：
 
-- CPU版：`pip3 install --upgrade tensorflow`
-- GPU版：`pip3 install --upgrade tensorflow-gpu`
+- CPU版：`pip install --upgrade tensorflow`
+- GPU版：`pip install --upgrade tensorflow-gpu`
 
 
 
 ### 4）本人的一次安装实践记录（win7安装tensorflow-gpu）
 
-已有环境：
+电脑配置和已有环境：
 
 - Windows7-64bit
-- Anconda3-5.1.0-Windows-x86_64.exe
+
+- GTX 1080ti 显卡
+
+- 已安装 `Anconda3-5.1.0-Windows-x86_64.exe`
+
+  
 
 #### 1 安装CUDA 10.0
 
@@ -190,7 +195,7 @@ pip install --upgrade tensorflow-gpu
 
 > 注：本人安装的时间为 2019-06-22，使用上面命令安装 tensorflow，默认给我安装的版本为 1.14.0
 
-你也可以指定想要安装的版本。
+你也可以指定想要安装的版本，如 `pip install tensorflow-gpu==1.2.1`， == 后面为所要安装的版本号。
 
 
 
