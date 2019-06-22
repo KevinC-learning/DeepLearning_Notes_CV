@@ -108,7 +108,7 @@
 
 3、然后根据你要安装的 tensorflow 查看所支持的 cuDNN 版本，比如 `tensorflow-gpu 2.0.0-alpha0` 支持 cuDNN 7.4.1 及更高版本
 
-4、选择出 cuDNN 版本后，然后进【https://developer.nvidia.com/rdp/cudnn-download】选择 cuDNN for CUDA 版本。
+4、选择出 cuDNN 版本后，然后进【<https://developer.nvidia.com/rdp/cudnn-download>】选择 cuDNN for CUDA 版本。
 
 ### 3）最后：命令安装 tensorflow
 
@@ -216,7 +216,14 @@ print(tf.__version__)
 2.0.0-alpha0
 ```
 
-即成功安装 tensorflow2.0。
+即成功安装 tensorflow2.0 到了 tf2 环境下。然后你也可以在该环境下安装别的库等。
+
+这里补充一点小技巧：对于安装各种 Python 库，每次都需要在 cmd 下，然后使用 activate 进入，我是真闲麻烦，这里我有个小技巧，你可以新建一个 `.bat` 文件，放在桌面，然后双击可以直接进入你的环境。bat 文件内容如下：
+
+``` bash
+@echo off
+cmd /k activate keras
+```
 
 ### 5）参考文章
 
