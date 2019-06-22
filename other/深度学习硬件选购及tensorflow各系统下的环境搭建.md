@@ -46,9 +46,9 @@
 
 
 
-**注意1：**担心在 windows 下安装软件出些幺蛾子，最好先安装好 **.Net Framework**。这是 .net framework 4.7.2 下载地址：[Download .NET Framework 4.7.2 | Free official downloads](https://dotnet.microsoft.com/download/dotnet-framework/net472)
+**注意1：** 担心在 windows 下安装软件出些幺蛾子，最好先安装好 **.Net Framework**。这是 .net framework 4.7.2 下载地址：[Download .NET Framework 4.7.2 | Free official downloads](https://dotnet.microsoft.com/download/dotnet-framework/net472)
 
-**注意2：**GPU 显卡计算能力大于 3.0 才支持 cuDNN，查看 GPU 计算能力【https://developer.nvidia.com/cuda-gpus】
+**注意2：** GPU 显卡计算能力大于 3.0 才支持 cuDNN，查看 GPU 计算能力【https://developer.nvidia.com/cuda-gpus】
 
 ### 2）注意：版本问题
 
@@ -88,7 +88,7 @@
 > - [cuDNN SDK](https://developer.nvidia.com/cudnn)（7.4.1 及更高版本）
 > - （可选）[TensorRT 5.0](https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html)，可缩短在某些模型上进行推断的延迟并提高吞吐量。
 
-可以看到：
+照文字意思我们可以理解为：
 
 1. 安装 cuda 某个版本，那安装 NVIDIA 驱动版本也有要求
 2. tensorflow 2.0.0-alpha0，支持 cuda 10.0，cuDNN 7.4.1 及以上。
@@ -197,7 +197,26 @@ pip install --upgrade tensorflow-gpu
 
 你也可以指定想要安装的版本，如 `pip install tensorflow-gpu==1.2.1`， == 后面为所要安装的版本号。
 
+后面，我有是有 conda 再新建了一个名为 tf2 的环境：`conda create -n tf2 python=3.6.4`，然后进入该环境，使用 pip 安装 tensorflow2.0：
 
+``` python
+pip install tensorflow-gpu==2.0.0-alpha0
+```
+
+成功安装好了 tensorflow2.0。测试：
+
+```
+import tensorflow as tf
+print(tf.__version__)
+```
+
+结果如下：
+
+``` xml
+2.0.0-alpha0
+```
+
+即成功安装 tensorflow2.0。
 
 ### 5）参考文章
 
