@@ -17,9 +17,11 @@
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Python内置库和函数使用及常见功能实现记录](./other/Python/Python内置库和函数使用及常见功能实现记录.md)
 - Python 网上博文：
+  - [PEP 8 Python编码风格指南概要](<https://juejin.im/post/58b129b32f301e006c035a62>)
   - [Python程序执行顺序](<https://blog.csdn.net/kunpengtingting/article/details/80178618>)  
   - [pyhton中`__pycache__`文件夹的产生与作用](<https://blog.csdn.net/yitiaodashu/article/details/79023987>)
   - [python自定义异常和主动抛出异常（raise）](<https://blog.csdn.net/skullFang/article/details/78820541>)
+  - [上传自己编写的包到PYPI](https://zhaoxuhui.top/blog/2017/12/17/%E4%B8%8A%E4%BC%A0%E8%87%AA%E5%B7%B1%E7%BC%96%E5%86%99%E7%9A%84%E5%8C%85%E5%88%B0PYPI.html)
   - 
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
@@ -33,20 +35,31 @@
   - [scikit-learn学习笔记](./other/科学计算库之scikit-learn的使用.md)
 - scikit-learn 学习，网上资料：
   - [Sklearn Universal Machine Learning Tutorial Series | 莫烦Python](https://morvanzhou.github.io/tutorials/machine-learning/sklearn/)
+  
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
+  
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
-  - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  - 可用于计算准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 等评价指标。 [荐] 
+  
+  - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  |  [分类模型评判指标（一） - 混淆矩阵(Confusion Matrix)](<https://blog.csdn.net/Orange_Spotty_Cat/article/details/80520839>)  |  [Kappa系数](<https://blog.csdn.net/xtingjie/article/details/72803029>)  -  准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 、f1_measure、kappa 系数等评价指标的计算。 
+  
+    > 注：要是碰到混淆矩阵中，某个类别的预测都是 0，precision=tp/(tp+fp)，那除数为 0 呢，代码通不过啊，怎么办？通过和他人交流，有大佬说一般类似这么写：`xx / (xx+1e-10)` 加上 1e-10 。ok，mark 了。
 - [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff/gdal库等等)](./other/Python图像处理笔记.md)  | 可能用到 matlab，同时学习下：[matlab的安装和学习](./other/matlab学习.md)
 
 其他：
 
-- [深度学习框架对比.md](./other/深度学习框架对比.md)
 - [python的Tqdm模块](<https://blog.csdn.net/langb2014/article/details/54798823>) - 可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器。
+- [远程连接工具小结](https://zhaoxuhui.top/blog/2018/04/14/RemoteConnection.html)
 - ……
 
 
 
 ## 二、框架学习
+
+### 0. 写在前面
+
+- [深度学习框架对比.md](./other/深度学习框架对比.md)
+
+
 
 ### 1. tensorflow1.x 笔记
 
@@ -198,6 +211,32 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
   > model.fit(X_train, y_train, epochs=100, batch_size=1, verbose=2)
   > ```
 
+- [keras中的keras.utils.to_categorical方法](<https://blog.csdn.net/nima1994/article/details/82468965>)
+
+  > `to_categorical(y, num_classes=None, dtype='float32')`
+  >
+  > 将整型标签转为 onehot。y 为 int 数组，num_classes 为标签类别总数，大于 max(y)（标签从0开始的）。
+  >
+  > 返回：如果 num_classes=None，返回 `len(y) * [max(y)+1]`（维度，m*n表示m行n列矩阵，下同），否则为 `len(y) * num_classes`。说出来显得复杂，请看下面实例。
+  >
+  > ``` python
+  > import keras
+  > 
+  > ohl=keras.utils.to_categorical([1,3])
+  > # ohl=keras.utils.to_categorical([[1],[3]])
+  > print(ohl)
+  > """
+  > [[0. 1. 0. 0.]
+  >  [0. 0. 0. 1.]]
+  > """
+  > ohl=keras.utils.to_categorical([1,3],num_classes=5)
+  > print(ohl)
+  > """
+  > [[0. 1. 0. 0. 0.]
+  >  [0. 0. 0. 1. 0.]]
+  > """
+  > ```
+  
 - [keras中的回调函数](<https://blog.csdn.net/jiandanjinxin/article/details/77097910>)  [荐]
 
 

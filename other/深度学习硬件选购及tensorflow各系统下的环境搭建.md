@@ -167,7 +167,7 @@ windows 下安装：
 
 3. 然后下载完成之后，进入安装包目录，点击相应 exe 文件运行，后面会出来让你选择哪些 Visual Studio 组件安装。对于如上我安装 CUDA 失败的问题，我选择了“使用 C++ 的桌面开发”。
 
-补充：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方式是（做参考用）：
+注1：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方式是（做参考用）：
 
 > 我们只用选择 CUDA下面这 4 项就够了（默认时是全选的），**visual studio integration这一项别勾选**是因为可能我们电脑并没有使用 VS 环境,如下图所示。
 >
@@ -178,6 +178,8 @@ windows 下安装：
 安装完 CUDA，打开命令提示符，输入**nvcc -V**，出现如下类似信息即为成功：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622142002.png)
+
+注2：本人有在显卡为 MX150 的笔记本尝试安装 tensorflow-gpu，下载了 cuda 9.0 进行安装，发现安装过程并没有出现组件未安装等问题，都是顺利进行，也没去安装 Visual Studio，然后安装 cuDNN，然后 `pip install tensorflow-gpu` 顺利完成了 tensorflow-gpu 安装过程。
 
 #### 2 安装 cuDNN：cuDNN v7.6.0 for CUDA 10.0
 
@@ -193,11 +195,11 @@ pip install --upgrade tensorflow-gpu
 
 即可安装 tensorflow GPU 版。
 
-> 注：本人安装的时间为 2019-06-22，使用上面命令安装 tensorflow，默认给我安装的版本为 1.14.0
+> 注：本人安装时间为 2019-06-22，使用上面命令安装 tensorflow，默认给我安装的版本为 1.14.0
 
 你也可以指定想要安装的版本，如 `pip install tensorflow-gpu==1.2.1`， == 后面为所要安装的版本号。
 
-后面，我有是有 conda 再新建了一个名为 tf2 的环境：`conda create -n tf2 python=3.6.4`，然后进入该环境，使用 pip 安装 tensorflow2.0：
+后面，本人有 conda 命令再新建了一个名为 tf2 的环境：`conda create -n tf2 python=3.6.4`，然后进入该环境，使用 pip 安装 tensorflow2.0：
 
 ``` python
 pip install tensorflow-gpu==2.0.0-alpha0
@@ -216,9 +218,9 @@ print(tf.__version__)
 2.0.0-alpha0
 ```
 
-即成功安装 tensorflow2.0 到了 tf2 环境下。然后你也可以在该环境下安装别的库等。
+即成功安装 tensorflow2.0 到了 tf2 环境下。然后你可以在该环境下安装你需要的库等。
 
-这里补充一点小技巧：对于安装各种 Python 库，每次都需要在 cmd 下，然后使用 activate 进入，我是真闲麻烦，这里我有个小技巧，你可以新建一个 `.bat` 文件，放在桌面，然后双击可以直接进入你的环境。bat 文件内容如下：
+这里提一个小技巧：对于安装各种 Python 库，每次都需要在 cmd 下，然后使用 activate 进入，我是真闲麻烦，这里我有个小技巧，你可以新建一个 `.bat` 文件，放在桌面，然后双击可以直接进入你的环境。bat 文件内容如下：
 
 ``` bash
 @echo off

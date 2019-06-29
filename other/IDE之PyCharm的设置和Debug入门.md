@@ -1,7 +1,18 @@
+
+
 ### PyCharm 设置
 
 - [pycharm快捷键及一些常用设置](http://blog.csdn.net/fighter_yy/article/details/40860949)
 - [配置PyCharm(背景色+字体大小+解释器选择)](http://blog.csdn.net/vernice/article/details/50934869)
+- [PyCharm选择性忽略PEP8代码风格警告信息](<https://blog.csdn.net/see_you_see_me/article/details/53837401>)
+
+本人对PyCharm一般会进行如下设置：
+
+- 主题更换为：`PyCharm-monokai.jar`。导入下载的主题方法是：File -> Import Settings 选择下载的主题 jar 文件即可导入。
+- View -> Toolbar 勾选
+- 字体设置：File -> Settings -> Editor -> Font：Size 设为 14 或 15。或使用 Color Scheme 下的导入的主题 `PyCharm-monokai.jar` 的字体的设置。
+
+
 
 
 ### PyCharm 调试
