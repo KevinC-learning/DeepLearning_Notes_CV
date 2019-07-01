@@ -947,3 +947,18 @@ pyinstaller dpython.py
 - [超详细Pyinstaller打包exe+反编译Pyinstaller打包的exe教程+防止反编译教程 - 知乎](<https://zhuanlan.zhihu.com/p/59442292>)
 - [pyinstaller简洁教程 | Legendtkl](<http://legendtkl.com/2015/11/06/pyinstaller/>)
 - [ 如何使用pyinstaller打包python脚本？ - 知乎](<https://www.zhihu.com/question/52660083>)
+
+
+
+## Python改变和获取当前工作目录
+
+代码：
+
+``` python
+import os
+
+os.chdir("目标目录")   #修改当前工作目录
+
+os.getcwd()    #获取当前工作目录
+```
+

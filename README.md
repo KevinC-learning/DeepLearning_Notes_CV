@@ -4,7 +4,21 @@
 
 深度学习、计算机视觉学习过程。
 
+## 人工智能社区
 
+人工智能最新学术研究和技术实现追寻，可关注：
+
+- [量子位 - 知乎 - 专栏](https://zhuanlan.zhihu.com/qbitai)
+- [机器之心 - 知乎 - 专栏](https://zhuanlan.zhihu.com/jiqizhixin)
+- [新智元 - 知乎](<https://zhuanlan.zhihu.com/aiera>)
+- [计算机视觉论文速递 - 知乎 - 专栏](https://zhuanlan.zhihu.com/c_172507674)
+- [PaperWeekly - 知乎 - 专栏](https://zhuanlan.zhihu.com/paperweekly)
+- [计算机视觉life - 知乎 - 专栏](https://zhuanlan.zhihu.com/c_150246914)
+- 相关网站：
+  - [专知 - 专知](http://www.zhuanzhi.ai)  [荐]
+  - [AI研习社](<https://ai.yanxishe.com/>)  [荐]
+  - [PaperWeekly](https://www.paperweekly.site/home)
+  - [论文投稿 - 学术交流区 - 小木虫论坛-学术科研互动平台](http://muchong.com/f-125-1)
 
 ## 一、基础学习
 
@@ -26,9 +40,10 @@
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 
-### 2. 科学计数库、Python图像处理库及其他
+### 2. 科学计数库
 
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)  | 更详细的学习见：
+  
   - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
   - [pandas学习笔记](./other/科学计算库之pandas的使用.md)
   - [matplotlib学习笔记](./other/科学计算库之matplotlib的使用.md)
@@ -40,12 +55,18 @@
   
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
   
-  - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  |  [分类模型评判指标（一） - 混淆矩阵(Confusion Matrix)](<https://blog.csdn.net/Orange_Spotty_Cat/article/details/80520839>)  |  [Kappa系数](<https://blog.csdn.net/xtingjie/article/details/72803029>)  -  准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 、f1_measure、kappa 系数等评价指标的计算。 
+  - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  |  [分类模型评判指标（一） - 混淆矩阵(Confusion Matrix)](<https://blog.csdn.net/Orange_Spotty_Cat/article/details/80520839>)  |  [深度学习F2-Score及其他(F-Score)](<https://blog.csdn.net/wangdongwei0/article/details/84669297>)  |  [Kappa系数](<https://blog.csdn.net/xtingjie/article/details/72803029>)  -  准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 、f1_measure、kappa 系数等评价指标的计算。 
   
     > 注：要是碰到混淆矩阵中，某个类别的预测都是 0，precision=tp/(tp+fp)，那除数为 0 呢，代码通不过啊，怎么办？通过和他人交流，有大佬说一般类似这么写：`xx / (xx+1e-10)` 加上 1e-10 。ok，mark 了。
-- [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff/gdal库等等)](./other/Python图像处理笔记.md)  | 可能用到 matlab，同时学习下：[matlab的安装和学习](./other/matlab学习.md)
 
-其他：
+### 3. Python图像处理库
+
+Python 图像处理常见库学习：
+
+- [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff/gdal库等等)](./other/Python图像处理笔记.md) 
+- 可能用到 matlab，同时学习下：[matlab的安装和学习](./other/matlab学习.md)
+
+### 4. 相关Python库及其他
 
 - [python的Tqdm模块](<https://blog.csdn.net/langb2014/article/details/54798823>) - 可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器。
 - [远程连接工具小结](https://zhaoxuhui.top/blog/2018/04/14/RemoteConnection.html)
@@ -58,6 +79,7 @@
 ### 0. 写在前面
 
 - [深度学习框架对比.md](./other/深度学习框架对比.md)
+- 
 
 
 
@@ -105,7 +127,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 笔记补充：
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
-- 对 TensorFlow 的 API 使用记录下来，方便查阅：🔎 ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) 【荐】 ，另外，这里没记录和没记全的内容通过下面【<a href="#bowen">网上博文</a>】找找看！！！
+- 对 TensorFlow 的 API 使用记录下来，方便查阅：🔎 ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) 【荐】 ，另外，这里没记录和没记全的内容通过下面【<a href="#bowen">相关阅读</a>】找找看！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
 
 #### 1.2 学习来源
@@ -243,34 +265,40 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 <a name="bowen"></a>
 
-### 4. 网上博文
+### 4. 相关阅读
 
-损失函数：
+#### 损失函数
 
 - 关于**损失函数(或代价函数)**：[Tensorflow基础知识---损失函数详解](https://sthsf.github.io/wiki/Algorithm/DeepLearning/Tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Tensorflow%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86---%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3.html)  | [深度学习中常用的损失函数有哪些（覆盖分类，回归，风格化，GAN等任务）？](<https://zhuanlan.zhihu.com/p/60302475>) [荐]  
 - 自定义损失函数：[tensorflow内置的四个损失函数](https://blog.csdn.net/limiyudianzi/article/details/80693695) [荐]  | [自定义损失函数](https://blog.csdn.net/limiyudianzi/article/details/80697711)  |  [二分类、多分类与多标签问题的区别,对应损失函数的选择,你知道吗？ - 掘金](<https://juejin.im/post/5b38971be51d4558b10aad26>)  [荐]
 - [损失函数loss大大总结](<https://blog.csdn.net/qq_14845119/article/details/80787753>)  |  [从loss处理图像分割中类别极度不均衡的状况---keras](<https://blog.csdn.net/m0_37477175/article/details/83004746#_1>)  |  [语义分割 各种loss实现 python](<https://blog.csdn.net/qq_21997625/article/details/87695961>)  |  [语义分割中常用的损失函数2（进阶篇）](<https://zhuanlan.zhihu.com/p/57008984>) 
 
-优化器：
+#### 优化器
 
 - 关于 **tensorflow 中优化器**：[个人笔记-优化器参数详解（learning rate、weight decay、momentum、滑动平均等）](./other/tensorflow优化器参数详解.md)  [荐]  |  [第三章（1.5）关于tensorflow优化器 optimizer 的选择](https://blog.csdn.net/lzc4869/article/details/78355132) [荐] | [深度学习——优化器算法Optimizer详解（BGD、SGD、MBGD、Momentum、NAG、Adagrad、Adadelta、RMSprop、Adam）](https://www.cnblogs.com/guoyaohua/p/8542554.html)  [荐]
 
-分类器：
+#### 分类器
 
 - [logict分类器和sigmoid分类器](<https://blog.csdn.net/piaodexin/article/details/77162623>)
 
-其他：
+#### 其他博文
 
 - CNN网络架构演进：[一文总览CNN网络架构演进：从LeNet到DenseNet](https://mp.weixin.qq.com/s/aJZ3T8EVaGDGfqxIs2av6A) [荐]
 - 学习使用 TensorBoard 可视化：[详解 TensorBoard－如何调参](https://blog.csdn.net/aliceyangxi1987/article/details/71716596) | [[干货|实践] TensorBoard可视化 - 知乎](https://zhuanlan.zhihu.com/p/33178205)
 - tensorflow 模型的保存和读取：[TensorFlow学习笔记（8）--网络模型的保存和读取](https://blog.csdn.net/lwplwf/article/details/62419087)
 - fine-tuning：[tensorflow从已经训练好的模型中，恢复(指定)权重(构建新变量、网络)并继续训练(finetuning)](<https://blog.csdn.net/ying86615791/article/details/76215363>)  [荐]
+- [训练神经网络时如何确定batch size？](https://zhuanlan.zhihu.com/p/27763696)
 - ……
 
-数学：
+
+
+## 三、数学
+
+文章和博客：
 
 - [one-hot 编码](<https://www.jianshu.com/p/a47a1c1fa3f1>)
 - [数据标准化/归一化normalization](<https://blog.csdn.net/pipisorry/article/details/52247379>)
+- [标准差和方差](<https://www.shuxuele.com/data/standard-deviation.html>)  [荐]
 
 Batch Normalization：
 
@@ -278,7 +306,7 @@ Batch Normalization：
 
 
 
-## 三、MNIST
+## 四、MNIST
 
 - [MNIST数据集二进制格式转换为图片](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解](./other/MNIST/手写数字识别MNIST讲解.md)
