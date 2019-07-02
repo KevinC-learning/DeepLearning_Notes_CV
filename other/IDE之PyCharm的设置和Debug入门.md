@@ -1,15 +1,17 @@
-
-
 ### PyCharm 设置
 
 - [pycharm快捷键及一些常用设置](http://blog.csdn.net/fighter_yy/article/details/40860949)
 - [配置PyCharm(背景色+字体大小+解释器选择)](http://blog.csdn.net/vernice/article/details/50934869)
 - [PyCharm选择性忽略PEP8代码风格警告信息](<https://blog.csdn.net/see_you_see_me/article/details/53837401>)
 
-本人对PyCharm一般会进行如下设置：
+本人对 PyCharm 一般会进行如下一些设置：
 
-- 主题更换为：`PyCharm-monokai.jar`。导入下载的主题方法是：File -> Import Settings 选择下载的主题 jar 文件即可导入。
+- 主题更换为 PyCharm-monokai。可以去下载：[PyCharm 2018.2.1 使用 sublime-monokai 配色方案](<https://blog.csdn.net/jpch89/article/details/81905505>)，源码地址：<https://github.com/spasserby/PyCharm-monokai>
+
+  导入下载的主题方法是：File -> Import Settings 选择下载的主题 jar 文件即可导入。
+
 - View -> Toolbar 勾选
+
 - 字体设置：File -> Settings -> Editor -> Font：Size 设为 14 或 15。或使用 Color Scheme 下的导入的主题 `PyCharm-monokai.jar` 的字体的设置。
 
 
@@ -54,4 +56,18 @@ Debug 相关功能
   按翻译是重启程序 ，实际是 下个断点，当打多个断点是，F9会到下一个断点
 
 常用：F8，F9，其次  Alt+shift+F7，或 F7，shift+F8
+
+
+
+### PyCharm 快捷键
+
+#### PyCharm for Windows
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190702172245.jpg)
+
+
+
+#### PyCharm for Mac
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190702171340.jpg)
 
