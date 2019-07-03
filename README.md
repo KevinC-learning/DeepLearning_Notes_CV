@@ -37,7 +37,8 @@
   - [pyhton中`__pycache__`文件夹的产生与作用](<https://blog.csdn.net/yitiaodashu/article/details/79023987>)
   - [python自定义异常和主动抛出异常（raise）](<https://blog.csdn.net/skullFang/article/details/78820541>)
   - [上传自己编写的包到PYPI](https://zhaoxuhui.top/blog/2017/12/17/%E4%B8%8A%E4%BC%A0%E8%87%AA%E5%B7%B1%E7%BC%96%E5%86%99%E7%9A%84%E5%8C%85%E5%88%B0PYPI.html)
-  - 
+  - [Python中的注解“@” - 简书](<https://www.jianshu.com/p/7a644520418b>)
+  - [Python--参数注解](<https://blog.csdn.net/weixin_41869526/article/details/80021061>)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 
@@ -86,7 +87,7 @@ Python 图像处理常见库学习：
 
 ### 1. tensorflow1.x 笔记
 
-tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)
+tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境搭建](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)  【荐】
 
 #### 1.1 学习笔记
 
@@ -129,7 +130,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 - 对 TensorFlow 的再次理解和总结：[TensorFlow的理解和总结](./other/[转]TensorFlow的理解和总结.md)
 - 对 TensorFlow 的 API 使用记录下来，方便查阅：🔎 ​[TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) 【荐】 ，另外，这里没记录和没记全的内容通过下面【<a href="#bowen">相关阅读</a>】找找看！！！
-- TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)
+- TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)  【荐】
 
 #### 1.2 学习来源
 

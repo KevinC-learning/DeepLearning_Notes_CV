@@ -1,3 +1,53 @@
+## 了解nvidia-smi
+
+nvidia-smi 简称 NVSMI，提供监控 GPU 使用情况和更改 GPU 状态的功能，是一个跨平台工具，它支持所有标准的 NVIDIA 驱动程序支持的 Linux 发行版以及从 WindowsServer 2008 R2 开始的 64 位的系统。该工具是 N 卡驱动附带的，只要安装好驱动后就会有它。
+
+Windows 下程序位置：`C:\Program Files\NVIDIACorporation\NVSMI\nvidia-smi.exe`。Linux 下程序位置：`/usr/bin/nvidia-smi`，若是已经加入 PATH 路径，可直接输入 `nvidia-smi` 运行，如果没有添加 PATH 中，先添加到 PATH 中。
+
+更多的 nvidia-smi 参数，见：[NVIDIA-SMI系列命令总结](https://www.cnblogs.com/omgasw/p/10218180.html)
+
+``` xml
+nvidia-smi –i xxx
+指定某个GPU
+
+nvidia-smi –l xxx
+动态刷新信息（默认5s刷新一次），按Ctrl+C停止，可指定刷新频率，以秒为单位
+
+nvidia-smi –f xxx
+将查询的信息输出到具体的文件中，不在终端显示
+
+nvidia-smi -q
+查询所有GPU的当前详细信息
+
+附加选项：
+    nvidia-smi –q –u
+    显示单元而不是GPU的属性
+
+    nvidia-smi –q –i xxx
+    指定具体的GPU或unit信息
+
+    nvidia-smi –q –f xxx
+    将查询的信息输出到具体的文件中，不在终端显示
+
+    nvidia-smi –q –x
+    将查询的信息以xml的形式输出
+
+    nvidia-smi -q –d xxx
+    指定显示GPU卡某些信息，xxx参数可以为MEMORY, UTILIZATION, ECC, TEMPERATURE, POWER,CLOCK, COMPUTE, PIDS, PERFORMANCE, SUPPORTED_CLOCKS, PAGE_RETIREMENT,ACCOUNTING
+
+    nvidia-smi –q –l xxx
+    动态刷新信息，按Ctrl+C停止，可指定刷新频率，以秒为单位
+
+    nvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version--format=csv
+    选择性查询选项，可以指定显示的属性选项
+
+	可查看的属性有：timestamp，driver_version，pci.bus，pcie.link.width.current等。（可查看nvidia-smi--help-query–gpu来查看有哪些属性）
+```
+
+
+
+
+
 ## 使用指定的 GPU
 
 1. 查看 GPU：nvidia-smi -L
@@ -96,15 +146,33 @@ nvidia-smi 是 Nvidia 显卡命令行管理套件，基于 NVML 库，旨在管�
 
 但是有时我们希望不仅知道那一固定时刻的 GPU 使用情况，我们希望一直掌握其动向，此时我们就希望周期性地输出，比如每 10s 就更新显示。 这时候就需要用到 watch命令，来周期性地执行 nvidia-smi 命令了。
 
+> watch 是一个非常实用的命令，基本所有的 Linux 发行版都带有这个小工具，如同名字一样，watch 可以帮你监测一个命令的运行结果，省得你一遍遍的手动运行。在 Linux 下，watch 是周期性的执行下个程序，并全屏显示执行结果。——from：[每天一个linux命令（48）：watch命令](https://www.cnblogs.com/peida/archive/2012/12/31/2840241.html)
+
 - watch的基本用法是：watch [options] command
 - 作用：周期性执行某一命令，并将输出显示。
 - 最常用的参数是 -n， 后面指定是每多少秒来执行一次命令。
 - 监视显存：我们设置为每 10s 显示一次显存的情况：watch -n 10 nvidia-smi
 - **测试发现：该 watch 为 Linux 下命令， windows 下不可用**
-- **或者直接该命令的一个选项 -l，通过该选项我们可以动态查看 GPU 使用情况: `nvidia-smi.exe -l 10`，表示10秒钟更新一次信息**
+- **或者我们也可以直接 nvidia-smi 的一个选项 -l，通过该选项我们可以动态查看 GPU 使用情况: `nvidia-smi -l 10`，表示10秒钟更新一次信息**
 
 显存占用和 GPU 利用率是两个不一样的东西，显卡是由 GPU 计算单元和显存等组成的，显存和 GPU 的关系有点类似于内存和 CPU 的关系。
 
 这里推荐一个好用的小工具：gpustat，直接 `pip install gpustat` 即可安装，gpustat 基于 nvidia-smi，可以提供更美观简洁的展示，结合 watch 命令，可以动态实时监控 GPU 的使用情况。`watch --color -n1 gpustat -cpu `
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190303155232.png)
+
+
+
+---
+
+---
+
+除了 nvidia-smi 命令，也可以使用 GPU-Z 软件查看显卡体质、状态等，见：[GPU-Z：显卡体质、显卡各传感器实时状态的查看](<https://blog.csdn.net/lanchunhui/article/details/71514958>)
+
+1、查看显卡体质
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190703200223.png)
+
+2、显卡传感器参数的实时性变化
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190703200232.png)

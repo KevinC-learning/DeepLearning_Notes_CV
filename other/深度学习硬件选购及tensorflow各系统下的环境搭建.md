@@ -8,9 +8,9 @@
 
 ## 1. 基本认识
 
-1.显卡（GPU）是否支持 CUDN
+1.查看显卡（GPU）是否支持 CUDA
 
-<https://developer.nvidia.com/cuda-gpus>
+<https://developer.nvidia.com/cuda-gpus>，不过貌似在这里找不到也不一定代表不支持 CUDA，本人在显卡 MX150 上就有成功安装了 CUDA。
 
 2.了解基础知识
 
@@ -70,7 +70,7 @@
 
 ---
 
-截止 2019-06-21 最新 tensorflow 版本为 2.0.0-alpha0。可以看到这里【[GPU 支持  |  TensorFlow](https://www.tensorflow.org/install/gpu?hl=zh-CN)】提到：
+截止 2019-06-21 本人看到官方最新 tensorflow 版本为 2.0.0-alpha0。并且可以看到这里【[GPU 支持  |  TensorFlow](https://www.tensorflow.org/install/gpu?hl=zh-CN)】提到：
 
 > TensorFlow 2.0 Alpha 可用于测试并支持 GPU。要进行安装，请运行以下命令：
 >
@@ -90,9 +90,9 @@
 
 照文字意思我们可以理解为：
 
-1. 安装 cuda 某个版本，那安装 NVIDIA 驱动版本也有要求
-2. tensorflow 2.0.0-alpha0，支持 cuda 10.0，cuDNN 7.4.1 及以上。
-3. tensorflow 1.13.0 及以上，都支持 cuda 10.0
+1. **安装 cuda 某个版本，那安装 NVIDIA 驱动版本也有要求**
+2. t**ensorflow 2.0.0-alpha0，支持 cuda 10.0，cuDNN 7.4.1 及以上。**
+3. **tensorflow 1.13.0 及以上，都支持 cuda 10.0**
 
 补充，查看已经安装的驱动的版本方法，在【设备管理器】找到要查看的驱动，右键驱动【属性】，切换到【驱动程序】，可以看到如下截图：
 
@@ -104,7 +104,7 @@
 
 1、先打开你电脑的【NVIDA 控制面板】->【系统信息】->【组件】查看 `NVCUDA.DLL` 这项的产品名称，其中名称中的版本表示你安装的 CUDA 不能超过它。
 
-2、然后根据你要安装的 tensorflow 版本所支持的 CUDA 版本。比如 `tensorflow-gpu 2.0.0-alpha0` 支持 CUDA 10.0
+2、然后根据你要安装的 tensorflow 版本所支持的 CUDA 版本。比如 `tensorflow-gpu 2.0.0-alpha0` 是支持 CUDA 10.0 的，那么你可以下载 CUDA 10.0，这里也要提下：安装 CUDA 也要和 GPU 驱动版本对应。可以见下文我的“第二次安装记录：win10+MX150下安装tensorflow-gpu”有遇到的问题。
 
 3、然后根据你要安装的 tensorflow 查看所支持的 cuDNN 版本，比如 `tensorflow-gpu 2.0.0-alpha0` 支持 cuDNN 7.4.1 及更高版本
 
@@ -121,7 +121,7 @@ windows 下安装：
 
 
 
-### 4）本人的一次安装实践记录（win7安装tensorflow-gpu）
+### 4）第一次的安装记录：win7+GTX 1080ti下安装tensorflow-gpu
 
 电脑配置和已有环境：
 
@@ -167,9 +167,9 @@ windows 下安装：
 
 3. 然后下载完成之后，进入安装包目录，点击相应 exe 文件运行，后面会出来让你选择哪些 Visual Studio 组件安装。对于如上我安装 CUDA 失败的问题，我选择了“使用 C++ 的桌面开发”。
 
-注1：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方式是（做参考用）：
+注：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方式是（做参考用）：
 
-> 我们只用选择 CUDA下面这 4 项就够了（默认时是全选的），**visual studio integration这一项别勾选**是因为可能我们电脑并没有使用 VS 环境,如下图所示。
+> 我们只用选择 CUDA下面这 4 项就够了（默认时是全选的），**visual studio integration这一项别勾选**是因为可能我们电脑并没有使用 VS 环境，如下图所示。
 >
 > ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622141705.png)
 
@@ -179,7 +179,9 @@ windows 下安装：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622142002.png)
 
-注2：本人有在显卡为 MX150 的笔记本尝试安装 tensorflow-gpu，下载了 cuda 9.0 进行安装，发现安装过程并没有出现组件未安装等问题，都是顺利进行，也没去安装 Visual Studio，然后安装 cuDNN，然后 `pip install tensorflow-gpu` 顺利完成了 tensorflow-gpu 安装过程。
+
+
+
 
 #### 2 安装 cuDNN：cuDNN v7.6.0 for CUDA 10.0
 
@@ -227,7 +229,57 @@ print(tf.__version__)
 cmd /k activate keras
 ```
 
-### 5）参考文章
+### 5）第二次的安装记录：win10+MX150下安装tensorflow-gpu
+
+本人有在显卡为 MX150 的笔记本尝试安装 tensorflow-gpu，下载了 cuda 9.0 进行安装，发现安装过程并没有出现组件未安装等问题，都是顺利进行，未安装 Visual Studio，直接是安装完 cuda 9.0 然后安装 cuDNN，然后 `pip install tensorflow-gpu`，顺利完成了 tensorflow-gpu 安装过程。使用过程中执行：
+
+```python
+import tensorflow as tf
+print(tf.__version__)
+```
+
+是没有报任何错误的，按理是表明安装成功了。但是后面运行如下代码：
+
+```python
+import tensorflow as tf
+
+a = [1.0, 2.0, 3.0, 4.0]
+with tf.Session() as sess:
+    print(sess.run(tf.nn.softmax(a)))
+```
+
+会报如下错误：
+
+```xml
+CUDA driver version is insufficient for CUDA runtime version
+```
+
+翻译过来意思是：CUDA驱动程序版本不足以用于CUDA运行时版本。
+
+遂，我查看了下我的笔记本显卡驱动版本，为如下：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190703205225.png)
+
+可以看到驱动版本为 `22.21.13.8554`。这里提一下查看显卡驱动的方法，有两种：
+
+> 1. Win+ R 组合键 -> 键入 `msinfo32` -> 按 Enter 键 -> 导航至"组件部分，并选择"显示"：列出的"驱动程序版本即为驱动程序版本。
+> 2. 右键“计算机” -> "属性" -> "设备管理器" -> "显示适配器" -> 选择对应的显卡驱动，右键 -> “属性” -> “驱动版本”，然后就可以看到驱动程序版本是多少。
+
+本人尝试去更新驱动版本，按照如上第二个方法，我在“驱动版本”界面，选择了“更新驱动程序(P)”，然后选择“自动搜索更新的驱动程序软件(S)”进行驱动更新。最后我的驱动版本为 `25.21.14.1972`，如下：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190703210313.png)
+
+驱动更新完，再去执行前面那段程序，运行成功。
+
+**如上问题，正说明 CUDA 版本对 GPU 的驱动版本也是有要求的。**这个时候可以再回头看下本人记录的“版本问题”第二点下面记录的。
+
+可参考下：[解决CUDA driver version is insufficient for CUDA runtime version](https://www.cnblogs.com/liaohuiqiang/p/9791365.html)  |  [CUDA、显卡驱动和Tensorflow版本之间的对应关系](<https://blog.csdn.net/IT_xiao_bai/article/details/88342921>)
+
+> 可以看到上面博文里的截图的显卡驱动版本都是 300 多的数值，我还没明白这个的版本是看的哪个值，我在 windows 下看显卡驱版本没看到这样的版本数值呢。
+
+
+
+### 6）参考文章
 
 - [1] [win7 64位+CUDA 9.0+cuDNN v7.0.5 安装](https://blog.csdn.net/shanglianlm/article/details/79404703)  [荐] 
 - [2] [这是一份你们需要的Windows版深度学习软件安装指南](https://zhuanlan.zhihu.com/p/29903472)  [荐]
