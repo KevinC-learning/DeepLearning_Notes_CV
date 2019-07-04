@@ -2,7 +2,7 @@
 
 ### 1. 简介
 
-Jupyter Notebook 是基于网页的用于交互计算的应用程序。其可被应用于全过程计算：开发、文档编写、运行代码和展示结果。——[Jupyter Notebook官方介绍](<https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)。
+Jupyter Notebook 是基于网页的用于交互计算的应用程序。其可被应用于全过程计算：开发、文档编写、运行代码和展示结果。——from：[Jupyter Notebook官方介绍](<https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)。
 
 简而言之，Jupyter Notebook 是以网页的形式打开，可以在网页页面中**直接编写代码**和**运行代码**，代码的**运行结果**也会直接在代码块下显示的程序。如在编程过程中需要编写说明文档，可在同一个页面中直接编写，便于作及时的说明和解释。
 
@@ -34,7 +34,7 @@ Jupyter Notebook 是基于网页的用于交互计算的应用程序。其可被
 
 ### 1. 安装
 
-安装 Jupyter Notebook 的前提是需要安装了Python（3.3版本及以上，或2.7版本）。
+安装 Jupyter Notebook 的前提是需要安装了 Python（3.3版本及以上，或2.7版本）。
 
 **（1）使用Anaconda安装**
 
@@ -115,6 +115,8 @@ c.NotebookApp.notebook_dir = u'D:\jupyter-code'
 ```
 
 保存。（注意：工作路径不能出现中文，否则无法打开 Jupyter Notebook）
+
+上面两步完成之后，打开 Jupyter，若没有成功更改工作目录，继续下面这一步。
 
 （3）修改 JupyterNotebook 快捷方式的目标属性
 

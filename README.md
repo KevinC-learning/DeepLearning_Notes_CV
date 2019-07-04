@@ -70,6 +70,7 @@ Python 图像处理常见库学习：
 
 ### 4. 相关Python库及其他
 
+- [Scikit-plot 画图神器 – Python量化投资](<https://www.lizenghai.com/archives/17197.html>)
 - [python的Tqdm模块](<https://blog.csdn.net/langb2014/article/details/54798823>) - 可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器。
 - [远程连接工具小结](https://zhaoxuhui.top/blog/2018/04/14/RemoteConnection.html)
 - ……
@@ -263,6 +264,8 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
   
 - [keras中的回调函数](<https://blog.csdn.net/jiandanjinxin/article/details/77097910>)  [荐]
 
+模型可视化(keras.utils.vis_utils 模块)：[模型可视化 - Keras中文文档](<https://keras-cn.readthedocs.io/en/latest/other/visualization/>)  |  [可视化 Visualization - Keras 中文文档](<https://keras.io/zh/visualization/>)
+
 
 
 <a name="bowen"></a>
@@ -298,8 +301,23 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 文章和博客：
 
+- [理解梯度下降](<http://liuchengxu.org/blog-cn/posts/dive-into-gradient-decent/>)  [荐]
+
+  > 于是我们可以得出结论：函数在某点的梯度是这样一个向量，它的方向与取得方向导数最大值的方向一致，而它的模为方向导数的最大值。
+  >
+  > 总结：
+  >
+  > |   概念   |                 物理意义                 |
+  > | :------: | :--------------------------------------: |
+  > |   导数   |          函数在该点的瞬时变化率          |
+  > |  偏导数  |        函数在坐标轴方向上的变化率        |
+  > | 方向导数 |     函数在某点沿某个特定方向的变化率     |
+  > |   梯度   | 函数在该点沿所有方向变化率最大的那个方向 |
+
 - [one-hot 编码](<https://www.jianshu.com/p/a47a1c1fa3f1>)
+
 - [数据标准化/归一化normalization](<https://blog.csdn.net/pipisorry/article/details/52247379>)
+
 - [标准差和方差](<https://www.shuxuele.com/data/standard-deviation.html>)  [荐]
 
 Batch Normalization：

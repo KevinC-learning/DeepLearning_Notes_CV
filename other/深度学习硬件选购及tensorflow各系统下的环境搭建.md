@@ -4,9 +4,7 @@
 
 
 
-# 二、tensorflow环境搭建
-
-## 1. 基本认识
+# 二、基本认识
 
 1.查看显卡（GPU）是否支持 CUDA
 
@@ -22,13 +20,13 @@
 
 3）Anaconda 是一个开源的 Python 发行版本，其包含了 conda、Python 等 180 多个科学包及其依赖项。因为包含了大量的科学包，Anaconda 的下载文件比较大，如果只需要某些包，或者需要节省带宽或存储空间，也可以使用 Miniconda 这个较小的发行版（仅包含 conda 和 Python）。
 
-——from：<https://www.cnblogs.com/chamie/p/870742        0.html>
+——from：<https://www.cnblogs.com/chamie/p/8707420.html>
 
 
 
-## 2. Windows下安装tensorflow-gpu
+# 三、Windows下安装tensorflow-gpu
 
-### 1）需要下载
+## 1）需要下载
 
 ① NVIDIA 驱动程序下载地址：<https://www.nvidia.cn/Download/index.aspx?lang=cn>，进去会自动识别显卡型号
 
@@ -50,9 +48,9 @@
 
 **注意2：** GPU 显卡计算能力大于 3.0 才支持 cuDNN，查看 GPU 计算能力【https://developer.nvidia.com/cuda-gpus】
 
-### 2）注意：版本问题
+## 2）注意：版本问题
 
-#### 第一点：
+### 第一点：
 
 注意：要知道自己电脑的 CUDA 版本号，则可以选择合适版本的 **CUDA Toolkit**，例如下图的 CUDA 版本号为 9.2（如何查看参考：[Windows系统查看CUDA版本号](https://www.jianshu.com/p/d3b9419a0f89)）：
 
@@ -60,7 +58,7 @@
 
 则可以安装 CUDA Toolkit 9.2、CUDA Toolkit 9.0、CUDA Toolkit 9.1、CUDA Toolkit 8.0 等（我的理解：即安装的版本不能超过截图看到的版本。）
 
-#### 第二点：
+### 第二点：
 
 我们来看一篇文章的作者说的：
 
@@ -100,7 +98,7 @@
 
 
 
-#### 我个人的理解和小结（仅参考）
+### 我个人的理解和小结（仅参考）
 
 1、先打开你电脑的【NVIDA 控制面板】->【系统信息】->【组件】查看 `NVCUDA.DLL` 这项的产品名称，其中名称中的版本表示你安装的 CUDA 不能超过它。
 
@@ -110,7 +108,7 @@
 
 4、选择出 cuDNN 版本后，然后进【<https://developer.nvidia.com/rdp/cudnn-download>】选择 cuDNN for CUDA 版本。
 
-### 3）最后：命令安装 tensorflow
+## 3）最后：命令安装 tensorflow
 
 前面各个软件和工作的我就在此安装省略了。
 
@@ -121,7 +119,7 @@ windows 下安装：
 
 
 
-### 4）第一次的安装记录：win7+GTX 1080ti下安装tensorflow-gpu
+## 4）第一次安装记录：win7+GTX 1080ti下安装tensorflow-gpu
 
 电脑配置和已有环境：
 
@@ -133,27 +131,27 @@ windows 下安装：
 
   
 
-#### 1 安装CUDA 10.0
+### 1 安装CUDA 10.0
 
 首选我根据电脑显卡选择了 CUDA Toolkit 10.0： `cuda_10.0.130_411.31_windows.exe` 安装，但安装过程未成功，显示很多组件未安装，如下图（来源于网上）：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622134432.png)
 
-后来看了参考文章[4]中提到的这篇文章：<https://blog.csdn.net/leelitian3/article/details/83272272>，这里提到需要安装 **Visual Studio** 必须安装，CUDA 需要与其结合使用。
+后来看了参考文章[4]中提到的这篇文章：<https://blog.csdn.net/leelitian3/article/details/83272272>，这里提到必须安装 **Visual Studio**，CUDA 需要与其结合使用。
 
 > ①Visual Studio 2017 Community（必须安装，Cuda是与其结合使用的）
 >
 > - 下载地址：<https://visualstudio.microsoft.com/zh-hans/free-developer-offers/>
 > - 安装选项：勾选“C++的桌面开发”即可
 
-我这样照做了，下载了 Visual Studio，勾选了“C++的桌面开发”安装，最后解决了 CUDA 安装失败的问题。
+于是我照做了，下载了 Visual Studio，勾选了“C++的桌面开发”安装，最后解决了 CUDA 安装失败的问题。
 
-不过我这里安装的 VS 版本是： Visual Studio 2019 Community。我采用的是离线安装方式，参考：
+这里我提下，我安装的 VS 版本是： Visual Studio 2019 Community，采用的是离线安装方式，如何离线安装请参考：
 
 - [Visual Studio 2017离线安装包获取和安装教程](https://blog.csdn.net/WU9797/article/details/78456651)
 - [Microsoft Visual Studio 2019正式版离线安装包下载](https://www.bitecho.net/microsoft-visual-studio-2019.html)
 
-大概方式就是：
+大概就是：
 
 1. 先去官网 <https://visualstudio.microsoft.com/zh-hans/downloads/> 下载所需版本的安装包获取程序，比如我下载 VS2019 社区版安装包获取程序：`vs_community__1035315853.1561183168.exe`
 
@@ -167,27 +165,59 @@ windows 下安装：
 
 3. 然后下载完成之后，进入安装包目录，点击相应 exe 文件运行，后面会出来让你选择哪些 Visual Studio 组件安装。对于如上我安装 CUDA 失败的问题，我选择了“使用 C++ 的桌面开发”。
 
-注：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方式是（做参考用）：
+注：对于如上 CUDA 安装过程组件未安装的问题，我看到这篇文章也提到：[windows安装CUDA 10自定义安装出现错误组件未安装解决方案](https://blog.csdn.net/weixin_44146276/article/details/86703067)，它的解决方法是：
 
 > 我们只用选择 CUDA下面这 4 项就够了（默认时是全选的），**visual studio integration这一项别勾选**是因为可能我们电脑并没有使用 VS 环境，如下图所示。
 >
 > ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622141705.png)
 
+上面该解决方法做参考用。
 
-
-安装完 CUDA，打开命令提示符，输入**nvcc -V**，出现如下类似信息即为成功：
+安装完 CUDA，最后，打开命令提示符，输入**nvcc -V**，出现如下类似信息即为成功：
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190622142002.png)
 
+##### 安装CUDA这里提下这篇文章，做参考
+
+[TensorFlow2.0 系列开篇： Windows下GPU版本详细安装教程 - 知乎](<https://zhuanlan.zhihu.com/p/71030147>)
+
+上面这篇文章有写道如何安装 CUDA：
+
+官网链接：<https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal>，下载完成后，打开下载的驱动，取勾 GeForce Experience
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190704102016.png)
+
+如果电脑上本身就有 Visual Studio Integration，要将这个取消勾选，避免冲突了：
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190704102034.png)
+
+点开 Driver comonents，Display Driver 这一行，前面显示的是 CUDA 本身包含的驱动版本是 `411.31`
+
+如果你电脑目前安装的驱动版本号新于 CUDA 本身自带的驱动版本号，那一定要把这个勾去掉。否则会安装失败(相同的话，就不用去取勾了)
+
+![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190704102113.png)
+
+接下来需要几分钟的时间安装。
+
+------------------------分割线------------------------------
+
+**从如上这篇文章我们似乎可以看到，安装 CUDA 好像其实并不需要安装 Visual Studio。另外，下载的 CUDA 默认是有显卡驱动的。可以不用去单独下载显卡驱动安装。**
+
+------------------------分割线------------------------------
+
+安装完 CUDA，那基本快完成了。接下来安装好 cuDNN 即可，其实也就是拷贝几个文件到 CUDA 安装目录对应的文件夹下即可。请看下面内容。最后命令安装 tensorflow-gpu，完成！
 
 
 
-
-#### 2 安装 cuDNN：cuDNN v7.6.0 for CUDA 10.0
+### 2 安装 cuDNN：cuDNN v7.6.0 for CUDA 10.0
 
 解压出来下载的 `cudnn-10.0-windows7-x64-v7.6.0.64.zip`，根据参考文章 [4] 中，把相应的文件拷贝到合适的目录即可。
 
-#### 3 命令安装 tensorflow-gpu
+这里最简便的方法是，解压出来 cuDNN 的 zip 文件，会看到有 3 个文件夹：**bin、include、lib**，和 1 个文件**NVIDIA_SLA_cuDNN_Support.txt**，选中这 4 个文件夹和文件，然后复制，找到 CUDA 安装目录，粘贴到对应的 CUDA 目录，即可完成 cuDNN 的安装。
+
+
+
+### 3 命令安装 tensorflow-gpu
 
 进入你需要安装 tensorflow-gpu 到的那个环境，使用:
 
@@ -229,7 +259,7 @@ print(tf.__version__)
 cmd /k activate keras
 ```
 
-### 5）第二次的安装记录：win10+MX150下安装tensorflow-gpu
+## 5）第二次安装记录：win10+MX150下安装tensorflow-gpu
 
 本人有在显卡为 MX150 的笔记本尝试安装 tensorflow-gpu，下载了 cuda 9.0 进行安装，发现安装过程并没有出现组件未安装等问题，都是顺利进行，未安装 Visual Studio，直接是安装完 cuda 9.0 然后安装 cuDNN，然后 `pip install tensorflow-gpu`，顺利完成了 tensorflow-gpu 安装过程。使用过程中执行：
 
@@ -276,10 +306,14 @@ CUDA driver version is insufficient for CUDA runtime version
 可参考下：[解决CUDA driver version is insufficient for CUDA runtime version](https://www.cnblogs.com/liaohuiqiang/p/9791365.html)  |  [CUDA、显卡驱动和Tensorflow版本之间的对应关系](<https://blog.csdn.net/IT_xiao_bai/article/details/88342921>)
 
 > 可以看到上面博文里的截图的显卡驱动版本都是 300 多的数值，我还没明白这个的版本是看的哪个值，我在 windows 下看显卡驱版本没看到这样的版本数值呢。
+>
+> update：2019-07-04 我现在知道了，上面博文里显卡的驱动版本的数值其实就是上面看到的驱动版本对应的后五位数。如 `22.21.13.8554`，对应的版本是 `385.54`，这个版本值在 `NVIDIA` 控制面板可以看到。
 
 
 
-### 6）参考文章
+
+
+## 6）参考文章
 
 - [1] [win7 64位+CUDA 9.0+cuDNN v7.0.5 安装](https://blog.csdn.net/shanglianlm/article/details/79404703)  [荐] 
 - [2] [这是一份你们需要的Windows版深度学习软件安装指南](https://zhuanlan.zhihu.com/p/29903472)  [荐]
@@ -288,8 +322,7 @@ CUDA driver version is insufficient for CUDA runtime version
 
 
 
-## 3. Ubuntu下安装tensorflow-gpu
-
+# 四、Ubuntu下安装tensorflow-gpu
 
 
 参考：
