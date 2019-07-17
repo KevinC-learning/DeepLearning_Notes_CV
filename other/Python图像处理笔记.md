@@ -400,7 +400,7 @@ cv2.imwrite('examples_gray.png', img_gray)
 
 # 一、opencv-python
 
-## 1. opencv-python安装
+## opencv-python安装
 
 **（1）Windows 下的安装**
 
@@ -434,11 +434,18 @@ import cv2
 
 
 
-## 2. opencv-python 图像处理
+## opencv-python 图像处理
 
-### OpenCV API 详解
+### 0、学习资源
 
-#### 1）cv2.imread() 和cv2.imwrite()
+- GitHub：<https://github.com/1zlab/1ZLAB_OpenCV_Tutorial> - OpenCV基础入门。
+- 
+
+
+
+### 1. OpenCV API 详解
+
+#### 图片读取(cv2.imread)和写入(cv2.imwrite)
 
 （1）
 
@@ -537,9 +544,36 @@ Flags指定了所读取图片的颜色类型
 
 （暂时理解到这个进步。。。以后在探究。。。
 
+#### 图片设置透明度并叠加(cv2.addWeighted)
+
+API：`cv2.addWeighted(src1, alpha, src2, beta, gamma[, dst[, dtype]]) → dst.`
+
+其中，`alpha` 为 `src1` 透明度，`beta` 为 `src2` 透明度。
+
+``` python
+# coding=utf-8
+
+# 底板图案
+bottom_pic = 'elegent.jpg'
+# 上层图案
+top_pic = 'lena.jpg'
+
+import cv2
+bottom = cv2.imread(bottom_pic)
+top = cv2.imread(top_pic)
+# 权重越大，透明度越低
+overlapping = cv2.addWeighted(bottom, 0.8, top, 0.2, 0)
+# 保存叠加后的图片
+cv2.imwrite('overlap(8:2).jpg', overlapping)
+```
+
+——from：<https://blog.csdn.net/JNingWei/article/details/78241973>
 
 
-### 图像处理代码随记
+
+
+
+### 2. 图像处理代码随记
 
 （1）设置 500x500x3 图像 的 100x100 区域为蓝色：
 
@@ -582,7 +616,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
-### RGB 转为灰度图像
+### 3. RGB 转为灰度图像
 
 RGB 彩色图像中，一种彩色由R（红色），G（绿色），B（蓝色）三原色按比例混合而成。
 
@@ -602,7 +636,7 @@ RGB 值和灰度的转换，实际上是人眼对于彩色的感觉到亮度感�
 
 ——from：[RGB图像转为灰度图](https://blog.csdn.net/u010312937/article/details/71305714)
 
-### 代码生成的图像
+### 4. 代码生成的图像
 
 先看这样的代码：
 
@@ -676,7 +710,7 @@ print(ann_img)
 >
 > 注：可以使用颜色空间转换函数 cv2.cvtColor 设置 cv2 的默认读取和写入通道顺序。关于该函数讲解见：[opencv中颜色空间转换函数 cv2.cvtColor()](<https://blog.csdn.net/u012193416/article/details/79312798>)
 
-### label图像上色
+### 5. label图像上色
 
 先看代码：
 
@@ -757,7 +791,7 @@ print(img)
 >   [255 255]]
 > ```
 
-### 给lable上色
+### 6. 给lable上色
 
 代码：
 
@@ -785,7 +819,7 @@ def color_annotation(label_path, output_path):
 
 **注意：**这里赋值顺序是先 BGR 顺序，即 [139, 69, 19] 赋值的分别是 B 通道、G 通道、R 通道。具体原因网上查找下资料。
 
-### 图像归一化：/255.0 和/127.5 -1
+### 7. 图像归一化：/255.0 和/127.5 -1
 
 在代码中看到图像的2种处理方式：
 
@@ -802,9 +836,7 @@ def color_annotation(label_path, output_path):
 
 同样，其直方图的分布规律相同，第二种分布相对稀疏。——from：[图像处理/255.0 和/127.5 -1](<https://blog.csdn.net/u011276025/article/details/76050377>)
 
-
-
-## 3. 图像数据类型及转换
+### 8. 图像数据类型及转换
 
 在 skimage 中，一张图片就是一个简单的 numpy 数组，数组的数据类型有很多种，相互之间也可以转换。这些数据类型及取值范围如下表所示：
 
