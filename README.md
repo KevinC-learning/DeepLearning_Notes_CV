@@ -27,9 +27,7 @@
 文章和博客：
 
 - [标准差和方差](<https://www.shuxuele.com/data/standard-deviation.html>)  [荐]★★★
-
 - [理解梯度下降](<http://liuchengxu.org/blog-cn/posts/dive-into-gradient-decent/>)  [荐]★★★
-
   > 于是我们可以得出结论：函数在某点的梯度是这样一个向量，它的方向与取得方向导数最大值的方向一致，而它的模为方向导数的最大值。
   >
   > 总结：
@@ -40,12 +38,8 @@
   > |  偏导数  |        函数在坐标轴方向上的变化率        |
   > | 方向导数 |     函数在某点沿某个特定方向的变化率     |
   > |   梯度   | 函数在该点沿所有方向变化率最大的那个方向 |
-
 - [one-hot 编码](<https://www.jianshu.com/p/a47a1c1fa3f1>)
-
 - [数据标准化/归一化normalization](<https://blog.csdn.net/pipisorry/article/details/52247379>)  [荐] 
-
-- 
 
 ### 1. Python基础
 
@@ -70,7 +64,6 @@
 ### 2. 科学计数库
 
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)  | 更详细的学习见：
-  
   - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
   - [pandas学习笔记](./other/科学计算库之pandas的使用.md)
   - [matplotlib学习笔记](./other/科学计算库之matplotlib的使用.md)
@@ -80,7 +73,7 @@
   - [scikit-learn教程 -  scikit-learn 0.20.2文档](https://www.studyai.cn/tutorial/index.html)
   - [scikit-learn（sklearn） 中文文档 - ApacheCN](https://github.com/apachecn/scikit-learn-doc-zh)
   - [混淆矩阵及confusion_matrix函数的使用](<https://blog.csdn.net/m0_38061927/article/details/77198990>)  |  [分类模型评判指标（一） - 混淆矩阵(Confusion Matrix)](<https://blog.csdn.net/Orange_Spotty_Cat/article/details/80520839>)  |  [深度学习F2-Score及其他(F-Score)](<https://blog.csdn.net/wangdongwei0/article/details/84669297>)  |  [Kappa系数](<https://blog.csdn.net/xtingjie/article/details/72803029>)  -  准确率 Accuracy、精确率 Precision、召回率 Recall、IoU 、f1_measure、kappa 系数等评价指标的计算。 
-  
+    
     > 注：要是碰到混淆矩阵中，某个类别的预测都是 0，precision=tp/(tp+fp)，那除数为 0 呢，代码通不过啊，怎么办？通过和他人交流，有大佬说一般类似这么写：`xx / (xx+1e-10)` 加上 1e-10 。ok，mark 了。
 
 ### 3. Python图像处理库<a name="image"></a>
@@ -90,10 +83,25 @@ Python 图像处理常见库学习：
 - [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff/gdal库等等).md](./other/Python图像处理笔记.md) 
 - 可能用到 matlab，同时学习下：[matlab的安装和学习,md](./other/matlab学习.md)
 
-### 4. 相关Python库及其他
+### 4. 相关Python库
 
 - [Scikit-plot 画图神器 – Python量化投资](<https://www.lizenghai.com/archives/17197.html>)
 - [python的Tqdm模块](<https://blog.csdn.net/langb2014/article/details/54798823>) - 可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器。
+
+### 5. 其他知识点
+
+机器学习中在线训练和离线训练？
+
+- [机器学习中的在线学习与离线学习 - CSDN博客](<https://blog.csdn.net/a133521741/article/details/79221015>)
+- [请问在神经网络算法当中提到的在线训练和离线训练分别是什么意思？ - 知乎](<https://www.zhihu.com/question/35607456>) - 其中一个回答：
+  
+  1. online training：你有一个样本，你把第一条带入训练，调整权重，再把这一条带进去一次，重复多次，直至误差率很小，然后再带入下一条，直至跑完整个样本。
+  2. offline training：你有一个样本，你把第一条带入训练，调整权重，然后带入下一条，直至跑完整个样本，这个时候的误差率可能不让你满意，于是你把整个样本又做了上述操作，直到误差很小。
+  
+  offline 其实和 batch 更相似，假定这个样本有 m 条记录，offline 会训练 m 的整数倍次数，online 不知道会训练多少次 可能以一条记录训练了 10 次 第二条 8 次，第三条 1 次……
+
+其他知识：
+
 - [远程连接工具小结](https://zhaoxuhui.top/blog/2018/04/14/RemoteConnection.html)
 - ……
 
@@ -110,7 +118,14 @@ Python 图像处理常见库学习：
 
 tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境搭建.md](./other/深度学习硬件选购及tensorflow各系统下的环境搭建.md)  【荐】
 
-#### 1.1 学习笔记
+#### 1.1 快速入门
+
+参考「机器之心」编译文章：
+
+- [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
+- [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
+
+#### 1.2 学习笔记
 
 《深度学习框架Tensorflow学习与应用》笔记索引（其中会有补充一些内容）：
 
@@ -166,7 +181,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 - 对 TensorFlow 的 API 使用记录下来，方便查阅：🔎 [TensorFlow的API详解和记录](./other/[整理]TensorFlow的API详解和记录.md) ★★★ 【荐】，另外这里没记录和没记全的内容通过下面【<a href="#bowen">相关阅读</a>】找找看！！！
 - TensorFlow 使用指定的 GPU 以及显存分析：[tensorflow中使用指定的GPU及显存分析](./other/tensorflow中使用指定的GPU及显存分析.md)  【荐】
 
-#### 1.2 学习来源
+#### 1.3 学习来源
 
 学习来源：炼数成金的《深度学习框架TensorFlow学习与应用》视频 + 网上博客内容  。
 
@@ -199,7 +214,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 - 《深度学习框架Tensorflow学习与应用》（含视频+代码+课件，视频总时长：13小时31分钟）  【[百度网盘下载](https://pan.baidu.com/s/16OINOrFiRXbqmqOFjCFzLQ )  密码: 1a8j】
 - 《深度学习框架Tensorflow学习与应用[只有videos-720p]》（该份资料只有视频文件） 【 [百度网盘下载](https://pan.baidu.com/s/1oQLgWFEBsVrcKJN4swEdzg)  密码: i3e2】
 
-#### 1.3 相关资料
+#### 1.4 相关资料
 
 其他学习视频，觉得有必要可以看看：
 
@@ -218,13 +233,6 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 - 极客学院：[TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
 - [TensorFlow 官方文档中文版](http://www.tensorfly.cn/tfdoc/get_started/introduction.html)
 
-#### 1.4 快速入门
-
-参考「机器之心」编译文章：
-
-- [令人困惑的TensorFlow！](https://zhuanlan.zhihu.com/p/38812133)
-- [令人困惑的 TensorFlow！(II)](https://zhuanlan.zhihu.com/p/46008208)
-
 
 
 ### 2. tensorflow2.x 学习
@@ -239,6 +247,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 1）深度学习前端框架 keras 学习
 
 - [Keras 学习笔记.md](./other/keras/keras-learning.md)  [荐]★★★
+- [主页 - Keras 中文文档](<https://keras.io/zh/>)
 
 2）模型可视化
 
@@ -247,30 +256,27 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 3）相关文章
 
 - [Keras中的多分类损失函数categorical_crossentropy](<https://blog.csdn.net/u010412858/article/details/76842216>)
-
-  注意：当使用`categorical_crossentropy`损失函数时，你的标签应为多类模式，例如如果你有 10 个类别，每一个样本的标签应该是一个 10 维的向量，该向量在对应有值的索引位置为 1 其余为 0。
-  
-  可以使用这个方法进行转换：
-  
-  ``` python
-  from keras.utils.np_utils import to_categorical
-  
-  categorical_labels = to_categorical(int_labels, num_classes=None)
-  ```
+  > 注意：当使用`categorical_crossentropy`损失函数时，你的标签应为多类模式，例如如果你有 10 个类别，每一个样本的标签应该是一个 10 维的向量，该向量在对应有值的索引位置为 1 其余为 0。
+  >
+  > 可以使用这个方法进行转换：
+  >
+  > ``` python
+  > from keras.utils.np_utils import to_categorical
+  > 
+  > categorical_labels = to_categorical(int_labels, num_classes=None)
+  > ```
   
 - [keras中的keras.utils.to_categorical方法](<https://blog.csdn.net/nima1994/article/details/82468965>) - `to_categorical(y, num_classes=None, dtype='float32')`
-
-  将整型标签转为 onehot。y 为 int 数组，num_classes 为标签类别总数，大于 max(y)（标签从0开始的）。
-  
-  返回：如果 num_classes=None，返回 `len(y) * [max(y)+1]`（维度，m*n表示m行n列矩阵，下同），否则为 `len(y) * num_classes`。说出来显得复杂，请看下面实例。
+  > 将整型标签转为 onehot。y 为 int 数组，num_classes 为标签类别总数，大于 max(y)（标签从0开始的）。
+  >
+  > 返回：如果 num_classes=None，返回 `len(y) * [max(y)+1]`（维度，m*n表示m行n列矩阵，下同），否则为 `len(y) * num_classes`。说出来显得复杂，请看下面实例。
   
 - [keras中的回调函数](<https://blog.csdn.net/jiandanjinxin/article/details/77097910>)
-
 - [为何Keras中的CNN是有问题的，如何修复它们？ - 知乎](<https://zhuanlan.zhihu.com/p/73549089>) - 关于参数初始化的问题。
+  
+  > 我们证明，初始化是模型中特别重要的一件事情，这一点你可能经常忽略。此外，文章还证明，即便像 Keras 这种卓越的库中的默认设置，也不能想当然拿来就用。
 
-  我们证明，初始化是模型中特别重要的一件事情，这一点你可能经常忽略。此外，文章还证明，即便像 Keras 这种卓越的库中的默认设置，也不能想当然拿来就用。
-
-### 4. MNIST
+### 4. “HelloWord”：MNIST
 
 - [MNIST数据集二进制格式转换为图片.md](./other/MNIST/MNIST数据集二进制格式转换为图片.md)
 - [手写数字识别MNIST讲解.md](./other/MNIST/手写数字识别MNIST讲解.md)
@@ -302,7 +308,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 - [个人笔记-优化器参数详解（learning rate、weight decay、momentum、滑动平均等）](./other/tensorflow优化器参数详解.md)
 - [10个梯度下降优化算法+备忘单-图文外翻-AI研习社](<https://ai.yanxishe.com/page/TextTranslation/1603?from=timeline>) - 值得看看。  [荐]★★★
 
-#### 炼丹
+#### 炼丹技巧
 
 1）批归一化(Batch Normalization)：
 
@@ -312,7 +318,14 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 2）批大小(Batch Size)
 
 - [训练神经网络时如何确定batch size？](https://zhuanlan.zhihu.com/p/27763696)
-- 
+
+3）学习率(Learning Rate)
+
+- [探索学习率设置技巧以提高Keras中模型性能 | 炼丹技巧](https://mp.weixin.qq.com/s/VA8nKtZ4QZ7RgWTlqcWfgw) - GitHub 链接：https://github.com/gunchagarg/learning-rate-techniques-keras
+
+  1. 差分学习（Differential learning)  2. 具有热启动的随机梯度下降（SGDR）
+
+  
 
 #### 其他文章
 
@@ -329,7 +342,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 ### 1. 数据预处理
 
-网上博文：
+1）网上博文
 
 ★★★[CS231n课程笔记翻译：神经网络笔记 2](<https://zhuanlan.zhihu.com/p/21560667>)，内容如下：
 
@@ -344,7 +357,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190717214008.png)
 
-一般数据预处理流程：**左边：**原始的2维输入数据。**中间：**在每个维度上都减去平均值后得到零中心化数据，现在数据云是以原点为中心的。**右边：**每个维度都除以其标准差来调整其数值范围。红色的线指出了数据各维度的数值范围，在中间的零中心化数据的数值范围不同，但在右边归一化数据中数值范围相同。
+一般数据预处理流程：**左边：** 原始的2维输入数据。**中间：** 在每个维度上都减去平均值后得到零中心化数据，现在数据云是以原点为中心的。**右边：** 每个维度都除以其标准差来调整其数值范围。红色的线指出了数据各维度的数值范围，在中间的零中心化数据的数值范围不同，但在右边归一化数据中数值范围相同。
 
 ▶我的补充：常在代码中看到，如下：
 
@@ -363,9 +376,22 @@ img = np.expand_dims(img, axis=0)
 
 另外也常看到代码是 `X = X /255.0` 这样处理。
 
-**PCA 和白化（Whitening）**是另一种预处理形式。在这种处理中，先对数据进行零中心化处理，然后计算协方差矩阵，它展示了数据中的相关性结构。
+**PCA 和白化（Whitening）** 是另一种预处理形式。在这种处理中，先对数据进行零中心化处理，然后计算协方差矩阵，它展示了数据中的相关性结构。
 
 (余下内容略...
+
+2）Data Augmentation - Python 代码
+
+[image——Data Augmentation的代码  - CSDN博客](<https://blog.csdn.net/u014365862/article/details/78086604>)
+
+``` xml
+- 切片（crop）
+- 左右上下翻转
+- 图像旋转
+- 图像归一化处理
+- 图像平移
+- 调整光照
+```
 
 
 
@@ -373,11 +399,41 @@ img = np.expand_dims(img, axis=0)
 
 见：<a href="#image">3. Python图像处理库</a>
 
-### 3. 训练的问题
+网上博文：
+
+- [OpenCV探索之路（十三）：详解掩膜mask](https://www.cnblogs.com/skyfsm/p/6894685.html)
+- [OpenCV探索之路（二十三）：特征检测和特征匹配方法汇总](https://www.cnblogs.com/skyfsm/p/7401523.html)
+- [OpenCV探索之路（二十四）图像拼接和图像融合技术](https://www.cnblogs.com/skyfsm/p/7411961.html)
+- 
+
+优质专栏：
+
+- [OpenCV探索之路 - 冠军的试炼](<https://www.cnblogs.com/skyfsm/category/1000207.html>)
+- 
+
+### 3. 存在的问题
 
 #### 样本不均衡
 
 
+
+### 4. 方向：图像分割(Image Segmentation)
+
+
+
+
+
+### 5. 方向：目标检测(Object Detection)
+
+
+
+
+
+### 6. 方向：光学字符识别(OCR)
+
+优质专栏：
+
+- [OCR技术系列 - Madcola - 博客园](<https://www.cnblogs.com/skyfsm/category/1123384.html>)
 
 <div align="right">
         <a href="#top">回到顶部</a>
