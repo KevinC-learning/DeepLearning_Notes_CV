@@ -4,7 +4,7 @@
 
 深度学习、计算机视觉学习过程。
 
-## 人工智能社区
+## 写在前面
 
 人工智能最新学术研究和技术实现追寻，可关注：
 
@@ -19,6 +19,11 @@
   - [AI研习社](<https://ai.yanxishe.com/>)
   - [PaperWeekly](https://www.paperweekly.site/home)
   - [论文投稿 - 学术交流区 - 小木虫论坛-学术科研互动平台](http://muchong.com/f-125-1)
+
+学习经验参考：
+
+- [关于学习机器学习算法的一些建议（忠告） - 知乎](<https://zhuanlan.zhihu.com/p/69104881>)
+- [深度学习的一些经验总结和建议| To do v.s Not To Do](https://mp.weixin.qq.com/s/5WpdUrv8caCMYSEEt5hS9w)
 
 ## 一、基础学习
 
