@@ -87,7 +87,7 @@ VALID PADDING：不会超出平面外部，卷积窗口采样后得到一个比�
 - 使用 SAME PADDING 的方式，得到`1x2`的平面
 - 使用 VALID PADDING 的方式，得到`1x1`的平面
 
-①补充1：以上关于 padding 的解释看看就好，不要深究！还是看看在 TensorFlow 中 padding 的实现。——**关于卷积核池化及 padding 在 TensorFlow 中的操作是怎样的**，请阅读本文 【[补充内容：关于TensorFlow中的CNN卷积和池化的操作](#补充内容关于tensorflow中的cnn卷积和池化的操作)】小节以及 [TensorFlow的API详解和记录.md](…/other/[总结]TensorFlow的API详解和记录.md) 中的内容。
+①补充1：以上关于 padding 的解释看看就好，不要深究！还是看看在 TensorFlow 中 padding 的实现。——**关于卷积核池化及 padding 在 TensorFlow 中的操作是怎样的**，请阅读本文 【[补充内容：关于TensorFlow中的CNN卷积和池化的操作](#补充内容关于tensorflow中的cnn卷积和池化的api详解)】小节以及 [TensorFlow的API详解和记录.md](.../other/[整理]TensorFlow的API详解和记录.md) 中的内容。
 
 ②补充2： 关于 CNN 中的 padding，表示有在网上找了些博客看看，现摘入如下，以便随时查阅。
 
@@ -533,13 +533,27 @@ def max_pool(value,
       out_width = ceil(float(in_width - filter_width + 1) / float(strides[2]))
   ```
 
-  根据文章[1]中讲到的，对于`VALID`，输出的形状可以这样计算：![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229200804.png)
+  根据文章[1]中讲到的，对于`VALID`，输出的形状可以这样计算：（「 为向上取整。）![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229200804.png)
 
 - 在 TensorFlow 中，对于 “SAME” 方式的 padding，按照指定步伐滑动的过程中，一个完整的卷积核覆盖不到余下窗口覆盖，则补充 0 使得能覆盖到。计算方式，官方定义在上面。根据文章[1]中讲到的，对于`SAME`，输出的形状可以这样计算：![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229201052.png)
 
-  对于 “SAME” 方式的 padding，我要补充说明的是，也是我的理解：在 TensorFlow 的实现中，比如左右 padding 多少圈 0  不一定是对称的，可能是只有右边 padding 了 0，可能左右都 padding  了 0，但数量不对称。
+**!!!注：本人在使用代码亲自实践得出的结果，和使用上面公式计算结果是一致的。** 所以计算卷积后得到的尺寸按照公式计算即可。
 
-  可以看下文章[2]中例子：Input width=13，Filter width=6，Stride=5，不同的 padding 方式如下图：
+``` python
+#keras 代码
+from keras.layers import Input, Conv2D
+def Test():
+    input = Input([513, 513, 3])
+    con1 = Conv2D(32, (5, 5), strides=(2, 2), activation="relu", padding="same")(input)
+    con2 = Conv2D()(con1)
+    
+if __name__ == '__main__':
+    Test()
+```
+
+​		对于 “SAME” 方式的 padding，我要补充说明的是，也是我的理解：在 TensorFlow 的实现中，比如左右 padding 多少圈 0  不一定是对称的，可能是只有右边 padding 了 0，可能左右都 padding  了 0，但数量不对称。
+
+  	可以看下文章[2]中例子：Input width=13，Filter width=6，Stride=5，不同的 padding 方式如下图：
 
   ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20181229202012.png)
 

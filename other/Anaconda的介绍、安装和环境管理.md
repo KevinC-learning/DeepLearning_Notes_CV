@@ -19,6 +19,12 @@
 安装 Anaconda ：点击 [这里](https://www.anaconda.com/distribution/) 下载对应自己想要安装的 python 版本的 Anaconda ，然后下一步下一步安装就行。
 
 > 注意：因为 anaconda 是自带 Python 的，所以不需要自己再去下载安装 Python 了，当然，如果你已经安装了 Python 也不要紧，不会发生冲突的。
+>
+> 这里提下，下载的 Anaconda 和 Python 版本对应情况，图片来源网络：
+>
+> ![](https://img-1256179949.cos.ap-shanghai.myqcloud.com/20190723213904.png)
+>
+> 解释一下上表，anaconda 在每次发布新版本的时候都会给 python3 和 python2 都发布一个包，版本号是一样的。假设你想安装 `python3.6.5`，就去下载 `anaconda3-5.2.0`；假设你想安装 `python2.7.14`，就去下载 `anaconda2-5.2.0`。
 
 在安装过程有遇到的问题和注意的地方，在这记录下：
 

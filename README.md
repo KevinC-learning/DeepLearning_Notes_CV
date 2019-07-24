@@ -46,7 +46,25 @@
 - [one-hot 编码](<https://www.jianshu.com/p/a47a1c1fa3f1>)
 - [数据标准化/归一化normalization](<https://blog.csdn.net/pipisorry/article/details/52247379>)  [荐] 
 
-### 1. Python基础
+### 1. 深度学习
+
+入门：
+
+- [神经网络入门 - 阮一峰的网络日志](<http://www.ruanyifeng.com/blog/2017/07/neural-network.html>)  [荐]
+- [从入门到精通：卷积神经网络初学者指南 | 机器之心](<https://www.jiqizhixin.com/articles/2016-08-01-3>)
+- [能否对卷积神经网络工作原理做一个直观的解释？ - YJango的回答 - 知乎](<https://www.zhihu.com/question/39022858/answer/194996805>)
+
+基础：
+
+- [李理：详解卷积神经网络 - qunnie_yi的博客 - CSDN博客](<https://blog.csdn.net/qunnie_yi/article/details/80127218>)
+- [神经网络激励函数的作用是什么？有没有形象的解释？ - 忆臻的回答 - 知乎](https://www.zhihu.com/question/22334626/answer/147543436)  [荐]
+- [为什么都说神经网络是个黑箱？ - mileistone的回答 - 知乎](https://www.zhihu.com/question/263672028/answer/430179912)
+- [【深度学习系列】卷积神经网络CNN原理详解(一)——基本原理](https://www.cnblogs.com/charlotte77/p/7759802.html)  [荐]
+- [一文弄懂神经网络中的反向传播法——BackPropagation](https://www.cnblogs.com/charlotte77/p/5629865.html)  [荐]
+- [如何直观地解释 backpropagation 算法？ - Anonymous的回答 - 知乎](https://www.zhihu.com/question/27239198/answer/89853077)
+
+
+### 2. Python基础
 
 先学习掌握以下内容，包括 Python 基础、Anconada 安装等等：
 
@@ -55,7 +73,7 @@
 - [Python基础入门笔记（二）](./other/Python/Python基础入门笔记（二）.md)
 - [Python内置库和函数使用及常见功能实现记录](./other/Python/Python内置库和函数使用及常见功能实现记录.md)
 - [一键安装所有第三方库](./other/Python/Python一键安装所有第三方库.md)
-- Python 网上博文：
+- 关于 Python 的博文：
   - [PEP 8 Python编码风格指南概要](<https://juejin.im/post/58b129b32f301e006c035a62>)
   - [Python程序执行顺序](<https://blog.csdn.net/kunpengtingting/article/details/80178618>) 
   - [pyhton中`__pycache__`文件夹的产生与作用](<https://blog.csdn.net/yitiaodashu/article/details/79023987>)
@@ -64,11 +82,14 @@
   - [Python中的注解“@” - 简书](<https://www.jianshu.com/p/7a644520418b>)
   - [Python--参数注解](<https://blog.csdn.net/weixin_41869526/article/details/80021061>)
 - [Anaconda的介绍、安装和环境管理](./other/Anaconda的介绍、安装和环境管理.md)
+  - [conda和pip常用命令速查.md](./other/conda和pip常用命令速查.md)
+- [python包管理工具：Conda和pip比较](<https://china-testing.github.io/conda_pip_compare.html>)  |  [Ubuntu下python选择pip install还是conda install更加合适？ - 知乎](<https://www.zhihu.com/question/279152320>)
 - [Jupyter Notebook的介绍、安装及使用](./other/Jupyter的介绍、安装及使用.md)
 
-### 2. 科学计数库
+### 3. 科学计数库
 
 - [Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn)](./other/Python常用科学计算库快速入门(NumPy、SciPy、Pandas、Matplotlib、Scikit-learn).md)  | 更详细的学习见：
+  
   - [numpy学习笔记](./other/科学计算库之numpy的使用.md)
   - [pandas学习笔记](./other/科学计算库之pandas的使用.md)
   - [matplotlib学习笔记](./other/科学计算库之matplotlib的使用.md)
@@ -88,12 +109,12 @@ Python 图像处理常见库学习：
 - [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff/gdal库等等).md](./other/Python图像处理笔记.md) 
 - 可能用到 matlab，同时学习下：[matlab的安装和学习,md](./other/matlab学习.md)
 
-### 4. 相关Python库
+### 5. Python常用库
 
 - [Scikit-plot 画图神器 – Python量化投资](<https://www.lizenghai.com/archives/17197.html>)
 - [python的Tqdm模块](<https://blog.csdn.net/langb2014/article/details/54798823>) - 可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器。
 
-### 5. 其他知识点
+### 6. 其他知识点
 
 机器学习中在线训练和离线训练？
 
@@ -231,7 +252,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 - 郑泽宇/顾思宇：[《Tensorflow：实战Google深度学习框架》](https://book.douban.com/subject/26976457/) 出版时间 2017-2-10
   - 官方维护的书中的 TensorFlow 不同版本的示例程序仓库：<https://github.com/caicloud/tensorflow-tutorial>；
-  - GitHub 有人写了笔记：[TensorFlow_learning_notes](https://github.com/cookeem/TensorFlow_learning_notes)
+  - 有人在 GitHub 上写了笔记：[TensorFlow_learning_notes](https://github.com/cookeem/TensorFlow_learning_notes)
 - 黄文坚/唐源：[《TensorFlow实战》](https://book.douban.com/subject/26974266/) 出版时间 2017-2-1
   - 源码实现：<https://github.com/terrytangyuan/tensorflow-in-practice-code>
 - 掘金翻译：[TensorFlow 最新官方文档中文版 V1.10 ](https://github.com/xitu/tensorflow-docs)
@@ -419,6 +440,8 @@ img = np.expand_dims(img, axis=0)
 ### 3. 存在的问题
 
 #### 样本不均衡
+
+
 
 
 
