@@ -17,6 +17,7 @@
 - 相关网站：
   - [专知 - 专知](http://www.zhuanzhi.ai)
   - [AI研习社](<https://ai.yanxishe.com/>)
+  - [极市开发者社区](<http://bbs.cvmart.net/>)
   - [PaperWeekly](https://www.paperweekly.site/home)
   - [论文投稿 - 学术交流区 - 小木虫论坛-学术科研互动平台](http://muchong.com/f-125-1)
 
@@ -46,13 +47,34 @@
 - [one-hot 编码](<https://www.jianshu.com/p/a47a1c1fa3f1>)
 - [数据标准化/归一化normalization](<https://blog.csdn.net/pipisorry/article/details/52247379>)  [荐] 
 
-### 1. 深度学习
+### 1. 深度学习★
+
+#### 1.1. 基础入门
 
 入门：
 
 - [神经网络入门 - 阮一峰的网络日志](<http://www.ruanyifeng.com/blog/2017/07/neural-network.html>)  [荐]
+
 - [从入门到精通：卷积神经网络初学者指南 | 机器之心](<https://www.jiqizhixin.com/articles/2016-08-01-3>)
+
 - [能否对卷积神经网络工作原理做一个直观的解释？ - YJango的回答 - 知乎](<https://www.zhihu.com/question/39022858/answer/194996805>)
+
+- [深度学习入门指南：25个初学者要知道的概念 - 知乎](<https://zhuanlan.zhihu.com/p/27186569>)  [荐]
+
+  ``` 
+  神经网络中的基础概念
+  1.神经元(Neuron)		2.加权/权重(Weights)		3.偏置/偏倚(Bias)
+  4.激活函数		5.神经网络		6.输入层/输出层/隐藏层		7.多层感知器(MLP-Multi Layer Perceptron)		8.正向传播(forward propagation)
+  9.成本函数(cost function)		10.梯度下降(gradient descent)
+  11.学习速率(learning rate)		12.反向传播(back propagation)
+  13.分批(Batches)	14.周期(epochs)		15.Dropout方法	16.分批标准化(Batch Normalization)	
+  
+  卷积神经网络
+  17.过滤器/滤波器(Filter)	18.CNN(卷积神经网络)		19.池化(pooling)		20.补白(padding)	21.数据增强(Data Augmentation)	
+  
+  递归神经网络
+  22.递归神经元(Recurrent Neural Network)	23.递归神经网络(RNN-Recurrent Neural Network)	24.梯度消失问题		25.梯度爆炸问题
+  ```
 
 基础：
 
@@ -62,6 +84,85 @@
 - [【深度学习系列】卷积神经网络CNN原理详解(一)——基本原理](https://www.cnblogs.com/charlotte77/p/7759802.html)  [荐]
 - [一文弄懂神经网络中的反向传播法——BackPropagation](https://www.cnblogs.com/charlotte77/p/5629865.html)  [荐]
 - [如何直观地解释 backpropagation 算法？ - Anonymous的回答 - 知乎](https://www.zhihu.com/question/27239198/answer/89853077)
+
+#### 1.2 迁移学习
+
+以下几篇值得看看：
+
+- [一文看懂迁移学习：怎样用预训练模型搞定深度神经网络？ - 知乎](<https://zhuanlan.zhihu.com/p/27657264>)  [荐] 
+- [pytorch-handbook/chapter4/4.1-fine-tuning.ipynb](<https://github.com/zergtant/pytorch-handbook/blob/a95c3a28564050640676818adbfd75eb104e95ea/chapter4/4.1-fine-tuning.ipynb>)  [荐]
+  > 把别人现成的训练好了的模型拿过来，换成自己的数据，调整一下参数，再训练一遍，这就是微调（fine-tune）
+  >
+  > 。。。
+  >
+  > 其实 "Transfer Learning" 和 "Fine-tune" 并没有严格的区分，含义可以相互交换，只不过后者似乎更常用于形容迁移学习的后期微调中。 **我个人的理解，微调应该是迁移学习中的一部分。微调只能说是一个trick。**
+  >
+  > 下面只介绍下计算机视觉方向的微调，摘自 [cs231](http://cs231n.github.io/transfer-learning/)
+  >
+  > - ConvNet as fixed feature extractor
+  > - Fine-tuning the ConvNet：固定前几层的参数，只对最后几层进行 fine-tuning ...
+  > - Pretrained models：使用整个 pre-trained 的 model 作为初始化，然后 fine-tuning 整个网络而不是某些层，但是这个的计算量是非常大的，就只相当于做了一个初始化。
+- [预训练模型Application - Keras中文文档](<https://keras-cn-twkun.readthedocs.io/other/application/>)
+
+**为什么预训练？**
+
+深度网络存在以下缺点：
+
+- 网络越深，需要的训练样本数越多。若用监督则需大量标注样本，不然小规模样本容易造成过拟合。（深层网络意味着特征比较多，机器学习里面临多特征：1、多样本 2、规则化 3、特征选择）
+- 多层神经网络参数优化是个高阶非凸优化问题，常收敛较差的局部解。
+- 梯度扩散问题。BP 算法计算出的梯度随着深度向前而显著下降，导致前面网络参数贡献很小，更新速度慢。
+
+解决方法：逐层贪婪训练。无监督预训练（unsupervised pre-training）即训练网络的第一个隐藏层，再训练第二个…最后用这些训练好的网络参数值作为整体网络参数的初始值。无监督学习→参数初始值；监督学习→fine-tuning，即训练有标注样本。经过预训练最终能得到比较好的局部最优解。
+
+参考：[深度学习中的非线性激励函数以及unsupervised pre-training](<https://blog.csdn.net/elwangeij/article/details/51352964>)
+
+#### 1.3 强化学习/增强学习(Reinforce Learning)
+
+强化学习（Reinforcement Learning）的输入数据作为对模型的反馈，强调如何基于环境而行动，以取得最大化的预期利益。与监督式学习之间的区别在于，它并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。强化学习更加专注于在线规划，需要在探索（在未知的领域）和遵从（现有知识）之间找到平衡。——from：<https://feisky.xyz/machine-learning/reinforcement.html>
+
+强化学习是一类算法, 是让计算机实现从一开始什么都不懂, 脑袋里没有一点想法, 通过不断地尝试, 从错误中学习, 最后找到规律, 学会了达到目的的方法. 这就是一个完整的强化学习过程. 实际中的强化学习例子有很多. 比如近期最有名的 Alpha go, 机器头一次在围棋场上战胜人类高手, 让计算机自己学着玩经典游戏 Atari, 这些都是让计算机在不断的尝试中更新自己的行为准则, 从而一步步学会如何下好围棋, 如何操控游戏得到高分。——from：[什么是强化学习 - 知乎](https://zhuanlan.zhihu.com/p/24807239)
+
+#### 1.4 生成式对抗网络(GAN)
+
+GAN：一种概率生成模型。简单说， **概率生成模型的目的，就是找出给定观测数据内部的统计规律，并且能够基于所得到的概率分布模型，产生全新的，与观测数据类似的数据**。
+
+举个例子，概率生成模型可以用于自然图像的生成。假设给定1000万张图片之后，生成模型可以自动学习到其内部分布，能够解释给定的训练图片，并同时生成新的图片。
+
+与庞大的真实数据相比，概率生成模型的参数个数要远远小于数据的数量。因此，在训练过程中，生成模型会被强迫去发现数据背后更为简单的统计规律，从而能够生成这些数据。——from：[深度学习新星：GAN的基本原理、应用和走向 | 硬创公开课 | 雷锋网](https://www.leiphone.com/news/201701/Kq6FvnjgbKK8Lh8N.html)
+
+#### 1.x 新的研究方向和技术热点
+
+##### 自动机器学习（AutoML, Automated Machine Learning）
+
+AutoML 基本分以下几个方向：（——from：<https://zhuanlan.zhihu.com/p/75747814>）
+
+1. 自动数据清理（Auto Clean）
+
+2. 自动特征工程（AutoFE）
+
+3. 超参数优化（HPO）
+
+4. 元学习（meta learning）
+
+5. 神经网络架构搜索（NAS）
+
+   NAS 看作 AutoML 的子域，并且与 HPO 和元学习有重叠。根据三个维度，可以对 NAS 的现有方法进行分类：搜索空间，搜索策略和性能评估策略。
+
+   ``` 
+   - 搜索空间（Search Space）: 搜索空间原则上定义了可以代表哪些体系结构。结合适用于任务属性的先验知识可以减小搜索空间大小并简化搜索。然而，这也引入了人为偏见，可能会阻止找到超越当前人类知识的新颖架构构建块（building blocks）。
+   
+   - 搜索策略（Search strategy）：搜索策略说明了如何做空间搜索。它包含了经典的探索-开发（exploration-exploitation）之间的权衡。一方面，需要快速找到性能良好的架构，另一方面，避免过早收敛到次优架构（suboptimal architecture）区域。
+   
+   - 性能评估策略（Performance estimation strategy）：NAS的目标通常是找到在未知数据实现高预测性能的架构。性能评估是指评估此性能的过程：最简单的选择是对数据架构执行标准训练和验证，但遗憾的是，这种方法计算成本很高，限制了可以探索的体系结构量。因此，最近的研究大多集中在开发出方法去降低这些性能估计成本。
+   ```
+
+相关阅读：
+
+- [CVPR 2019 神经网络架构搜索进展综述-图文外翻-AI研习社](<https://ai.yanxishe.com/page/TextTranslation/1907?from=timeline>)  [荐]
+
+- [谷歌Auto-DeepLab：自动搜索图像语义分割架构算法开源实现](<https://mp.weixin.qq.com/s/4WIHo5UHi1yUlnNR8PUozQ>)
+
+  
 
 
 ### 2. Python基础
@@ -102,9 +203,9 @@
     
     > 注：要是碰到混淆矩阵中，某个类别的预测都是 0，precision=tp/(tp+fp)，那除数为 0 呢，代码通不过啊，怎么办？通过和他人交流，有大佬说一般类似这么写：`xx / (xx+1e-10)` 加上 1e-10 。ok，mark 了。
 
-### 3. Python图像处理库<a name="image"></a>
+### 3. Python图像处理(库)<a name="image"></a>
 
-Python 图像处理常见库学习：
+Python 图像处理库学习：
 
 - [Python图像处理笔记(含opencv-python/PIL/scikit-image/libtiff/gdal库等等).md](./other/Python图像处理笔记.md) 
 - 可能用到 matlab，同时学习下：[matlab的安装和学习,md](./other/matlab学习.md)
@@ -230,17 +331,17 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 > 说明：实际第 5 周讲的是 tensorborad 结构可视化，第 6 周讲的是 CNN，下面网盘该视频的文件夹顺序，我已修正。
 
-(1) 在线观看：
+在线观看：
 
 - YouTube：[tensorflow教程（十课）](https://www.youtube.com/watch?v=eAtGqz8ytOI&list=PLjSwXXbVlK6IHzhLOMpwHHLjYmINRstrk&index=2&t=0s)
 - 或 B 站：[《深度学习框架TensorFlow学习与应用》](https://www.bilibili.com/video/av20542427/)
 
-(2) 下载：
+视频下载：
 
 - 《深度学习框架Tensorflow学习与应用》（含视频+代码+课件，视频总时长：13小时31分钟）  【[百度网盘下载](https://pan.baidu.com/s/16OINOrFiRXbqmqOFjCFzLQ )  密码: 1a8j】
 - 《深度学习框架Tensorflow学习与应用[只有videos-720p]》（该份资料只有视频文件） 【 [百度网盘下载](https://pan.baidu.com/s/1oQLgWFEBsVrcKJN4swEdzg)  密码: i3e2】
 
-#### 1.4 相关资料
+#### 1.4 其他资料
 
 其他学习视频，觉得有必要可以看看：
 
@@ -248,7 +349,7 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 - 油管视频：51CTO视频 [深度学习框架-Tensorflow案例实战视频课程](https://www.youtube.com/watch?v=-pYU4ub7g0c&list=PL8LR_PrSuIRhpEYA3sJ-J5hYGYUSwZwdS)、或 B 站观看：[深度学习框架-Tensorflow案例实战视频课程](https://www.bilibili.com/video/av29663946/?p=1)
 - [Tensorflow 教程系列 | 莫烦Python](<https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/>)
 
-(3) 相关资料：
+相关资料：
 
 - 郑泽宇/顾思宇：[《Tensorflow：实战Google深度学习框架》](https://book.douban.com/subject/26976457/) 出版时间 2017-2-10
   - 官方维护的书中的 TensorFlow 不同版本的示例程序仓库：<https://github.com/caicloud/tensorflow-tutorial>；
@@ -270,16 +371,20 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
 ### 3. keras 学习
 
-1）深度学习前端框架 keras 学习
+#### keras 学习
 
 - [Keras 学习笔记.md](./other/keras/keras-learning.md)  [荐]★★★
 - [主页 - Keras 中文文档](<https://keras.io/zh/>)
 
-2）模型可视化
+#### keras - 模型可视化
 
 - [模型可视化 - Keras中文文档](<https://keras-cn.readthedocs.io/en/latest/other/visualization/>)  |  [可视化 Visualization - Keras 中文文档](<https://keras.io/zh/visualization/>)
 
-3）相关文章
+#### keras - 迁移学习/预训练
+
+- [预训练模型Application - Keras中文文档](<https://keras-cn-twkun.readthedocs.io/other/application/>)
+
+#### keras - 相关文章
 
 - [Keras中的多分类损失函数categorical_crossentropy](<https://blog.csdn.net/u010412858/article/details/76842216>)
   > 注意：当使用`categorical_crossentropy`损失函数时，你的标签应为多类模式，例如如果你有 10 个类别，每一个样本的标签应该是一个 10 维的向量，该向量在对应有值的索引位置为 1 其余为 0。
@@ -351,8 +456,6 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 
   1. 差分学习（Differential learning)  2. 具有热启动的随机梯度下降（SGDR）
 
-  
-
 #### 其他文章
 
 - [一文总览CNN网络架构演进：从LeNet到DenseNet](https://mp.weixin.qq.com/s/aJZ3T8EVaGDGfqxIs2av6A) - CNN网络架构演进。[荐]
@@ -362,7 +465,19 @@ tensorflow 安装：[深度学习硬件选购及tensorflow各系统下的环境�
 - [关于Padding实现的一些细节 - 知乎](<https://zhuanlan.zhihu.com/p/73118626>) - pytorch 采用的是第一种，即在卷积或池化时先确定 padding 数量，自动推导输出形状；tensorflow 和 caffe 采用的是更为人熟知的第二种，即先根据 Valid 还是 Same 确定输出大小，再自动确定 padding 的数量。
 - ……
 
+### 6. 一些问题
 
+**1、什么是基准测试？**
+
+基准测试是一种测量和评估软件性能指标的活动。你可以在某个时候通过基准测试建立一个已知的性能水平（称为基准线），当系统的软硬件环境发生变化之后再进行一次基准测试以确定那些变化对性能的影响。这是基准测试最常见的用途。其他用途包括测定某种负载水平下的性能极限、管理系统或环境的变化、发现可能导致性能问题的条件，等等。——from：<http://www.blogjava.net/qileilove/archive/2012/07/05/382241.html>
+
+**2、神经网络不收敛指的是什么？**
+
+①误差一直来回波动，进入不到容忍度内。②跟迭代不收敛或者系统不稳定差不多，上下波动不能趋近一个定值。
+
+**3、深度学习中的端对端？**
+
+端到端指的是输入是原始数据, 输出是最后的结果。
 
 ## 三、计算机视觉
 
@@ -443,25 +558,42 @@ img = np.expand_dims(img, axis=0)
 
 
 
+### 4. 注意力机制
 
+- [【AI不惑境】计算机视觉中注意力机制原理及其模型发展和应用 - 有三AI](https://mp.weixin.qq.com/s/G4mFW8cn-ho3KGmbw5sSTw) - 1. 空间注意力模型(spatial attention)；2. 通道注意力机制；3. 空间和通道注意力机制的融合。还有，残差注意力机制，多尺度注意力机制，递归注意力机制等。
 
-### 4. 方向：图像分割(Image Segmentation)
+### 5. 模型评价
 
-
-
-
-
-### 5. 方向：目标检测(Object Detection)
+- [模型评价 - GitHub-WiKi](<https://github.com/HGladiator/MyCodes/wiki/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7>)
 
 
 
 
 
-### 6. 方向：光学字符识别(OCR)
+### 方向：图像分割(Image Segmentation)
+
+- [史上最全语义分割综述（FCN,UNet,SegNet，Deeplab，ASPP...）](<https://blog.csdn.net/qq_41997920/article/details/96479243>)
+- [语义分割入门的一点总结 - 知乎](<https://zhuanlan.zhihu.com/p/74318967>)
+
+
+
+### 方向：目标检测(Object Detection)
+
+
+
+
+
+### 方向：光学字符识别(OCR)
 
 优质专栏：
 
 - [OCR技术系列 - Madcola - 博客园](<https://www.cnblogs.com/skyfsm/category/1123384.html>)
+
+
+
+
+
+
 
 <div align="right">
         <a href="#top">回到顶部</a>
